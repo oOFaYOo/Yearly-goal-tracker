@@ -1,11 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Tile from "../../components/Tile";
 import SortingPanel from "../../components/SortingPanel";
-import { Icon } from '@mui/material';
+import GoalCreationPanel from "../../components/GoalCreationPanel";
 
 const Main = () => {
 
+    const [openGoalCreationPanel, setOpenGoalCreationPanel] = useState(false);
+
     return (
+        <>
+        <GoalCreationPanel state={openGoalCreationPanel} closeFunction={setOpenGoalCreationPanel}/>
         <div className="absolute overflow-y-auto h-[100vh] w-[100vw] bg-slate-50">
             <header className="w-full shadow-md h-[5vh] flex items-center bg-white border-b-2 border-teal-500">
                 <p className='ml-4 text-xl font-sans font-semibold'>Yearly Goal Tracker</p>
@@ -15,7 +19,7 @@ const Main = () => {
                     <SortingPanel />
                 </div>
                 <div className='flex grow justify-center'>
-                    <button
+                    <button onClick={()=>setOpenGoalCreationPanel(true)}
                         className='select-none bg-teal-500 font-mono rounded-full h-16 w-16 text-white hover:scale-105 active:scale-100 text-3xl'>
                         <p className='rotate-45'>✕︎</p>
                     </button>
@@ -25,14 +29,15 @@ const Main = () => {
                 </div>
             </div>
             <div className='my-2 flex flex-row justify-center items-center'>
-                <div className='h-[1px] w-[40%] bg-black'></div>
+                <div className='h-[1px] w-[40%] bg-gray-500'/>
                 <div className='mx-8'>2023</div>
-                <div className='h-[1px] w-[40%] bg-black'></div>
+                <div className='h-[1px] w-[40%] bg-gray-500'/>
             </div>
             <div className='p-6 flex flex-wrap gap-4 '>
                 <Tile /><Tile /><Tile /><Tile /><Tile /><Tile /><Tile /><Tile />
             </div>
         </div>
+        </>
     );
 }
 
