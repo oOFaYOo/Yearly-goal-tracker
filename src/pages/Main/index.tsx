@@ -2,14 +2,17 @@ import React, {useState} from 'react';
 import Tile from "../../components/Tile";
 import SortingPanel from "../../components/SortingPanel";
 import GoalCreationPanel from "../../components/GoalCreationPanel";
+import GoalEditingPanel from "../../components/GoalEditingPanel";
 
 const Main = () => {
 
     const [openGoalCreationPanel, setOpenGoalCreationPanel] = useState(false);
+    const [openGoalEditingPanel, setOpenGoalEditingPanel] = useState(false);
 
     return (
         <>
         <GoalCreationPanel state={openGoalCreationPanel} closeFunction={setOpenGoalCreationPanel}/>
+        <GoalEditingPanel state={openGoalEditingPanel} closeFunction={setOpenGoalEditingPanel}/>
         <div className="absolute overflow-y-auto h-[100vh] w-[100vw] bg-slate-50">
             <header className="w-full shadow-md h-[5vh] flex items-center bg-white border-b-2 border-teal-500">
                 <p className='ml-4 text-xl font-sans font-semibold'>Yearly Goal Tracker</p>
@@ -34,7 +37,7 @@ const Main = () => {
                 <div className='h-[1px] w-[40%] bg-gray-500'/>
             </div>
             <div className='p-6 flex flex-wrap gap-4 '>
-                <Tile /><Tile /><Tile /><Tile /><Tile /><Tile /><Tile /><Tile />
+                <Tile name='' steps={['']} onClick={setOpenGoalEditingPanel}/>
             </div>
         </div>
         </>
