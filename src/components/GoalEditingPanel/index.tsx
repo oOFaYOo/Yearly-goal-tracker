@@ -1,5 +1,6 @@
 import React from "react";
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import PanoramaFishEyeRoundedIcon from '@mui/icons-material/PanoramaFishEyeRounded';
 
 const GoalEditingPanel = ({state, closeFunction}:{ state: boolean, closeFunction: React.Dispatch<React.SetStateAction<boolean>>}) => {
 
@@ -20,7 +21,7 @@ const GoalEditingPanel = ({state, closeFunction}:{ state: boolean, closeFunction
                 <div className='overflow-y-auto flex flex-col w-full gap-y-4'>
                     <div className='flex item-center flex-row'>
                         <div className='pt-1.5'>
-                            <CheckCircleOutlineIcon className='mr-2 hover:text-green-600 text-black/20 hover:cursor-pointer hover:scale-105 active:scale-100'/>
+                            <PanoramaFishEyeRoundedIcon className='mr-2 hover:text-green-600 text-black/20 hover:cursor-pointer hover:scale-105 active:scale-100' />
                         </div>
                         <div className='p-2 w-full'>Ghfkdjfh ghgjhgjhgjh jhgjhgjhgjhg jhgjhgjhgjhgj jhgjhgjh dkfhkdjhfk ппоппорпорпо орпорпопопопо орпорпорпо kjdhfkjfhk ksdjfhk</div>
                     </div>

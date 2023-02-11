@@ -80,21 +80,21 @@ const Main = () => {
                                     (()=>{
                                         if(sorting === 1){
                                             return data[v].filter((v)=>v.name.toLowerCase().includes(searchValue.toLowerCase())).map((v,i)=>{
-                                                return <Tile key={i} name={v.name} steps={v.steps}
+                                                return <Tile key={i} name={v.name} percent={getPercent(v.steps)} steps={v.steps}
                                                              onClick={setOpenGoalEditingPanel}/>
                                             });
                                         } else if(sorting === 2){
                                             return data[v].filter((v)=>v.name.toLowerCase().includes(searchValue.toLowerCase())).slice(0).sort((a, b)=>{
                                                 return getPercent(a.steps) - getPercent(b.steps)
                                             }).map((v,i)=>{
-                                                return <Tile key={i} name={v.name} steps={v.steps}
+                                                return <Tile key={i} name={v.name} percent={getPercent(v.steps)} steps={v.steps}
                                                              onClick={setOpenGoalEditingPanel}/>
                                             })
                                         }else if(sorting === 3){
                                             return data[v].filter((v)=>v.name.toLowerCase().includes(searchValue.toLowerCase())).slice(0).sort((a, b)=>{
                                                 return getPercent(b.steps) - getPercent(a.steps)
                                             }).map((v,i)=>{
-                                                return <Tile key={i} name={v.name} steps={v.steps}
+                                                return <Tile key={i} name={v.name} percent={getPercent(v.steps)} steps={v.steps}
                                                              onClick={setOpenGoalEditingPanel}/>
                                             })
                                         }
