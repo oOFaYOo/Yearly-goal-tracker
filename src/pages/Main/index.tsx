@@ -1,15 +1,40 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import Tile from "../../components/Tile";
 import SortingPanel from "../../components/SortingPanel";
 import GoalCreationPanel from "../../components/GoalCreationPanel";
 import GoalEditingPanel from "../../components/GoalEditingPanel";
+import {Api} from "../../App";
+import {Goals} from "../../types";
+import {CircularProgress} from "@mui/material";
 
 const Main = () => {
 
-    const [openGoalCreationPanel, setOpenGoalCreationPanel] = useState(false);
-    const [openGoalEditingPanel, setOpenGoalEditingPanel] = useState(false);
+    const api = useContext(Api)
+    const [openGoalCreationPanel, setOpenGoalCreationPanel] = useState<boolean>(false);
+    const [openGoalEditingPanel, setOpenGoalEditingPanel] = useState<boolean>(false);
+    const [data, setData] = useState<Goals|undefined>(undefined);
+    const [sorting, setSorting] = useState<number>(1);
 
-    return (
+    useEffect(()=>{
+        (async ()=>{
+            let response = await api.getGoals();
+            setData(response);
+        })()
+    },[data]);
+
+    function getPercent(arr: { name: string, state: boolean }[]) {
+        let completed = 0;
+        arr.forEach((v: { name: string, state: boolean }) => {
+            if (v.state) completed++
+        });
+        return Math.round((completed * 100) / arr.length);
+    }
+
+    if(!data){
+        return <div className='justify-center items-center  flex h-full w-full'>
+            <CircularProgress />
+        </div>
+    } else return (
         <>
         <GoalCreationPanel state={openGoalCreationPanel} closeFunction={setOpenGoalCreationPanel}/>
         <GoalEditingPanel state={openGoalEditingPanel} closeFunction={setOpenGoalEditingPanel}/>
@@ -19,7 +44,7 @@ const Main = () => {
             </header>
             <div className='flex justify-between items-center py-4 h-24'>
                 <div className='flex px-6 items-center justify-center relative w-[40%] h-full'>
-                    <SortingPanel />
+                    <SortingPanel setSorting={setSorting} years={Object.keys(data)} />
                 </div>
                 <div className='flex grow justify-center'>
                     <button onClick={()=>setOpenGoalCreationPanel(true)}
@@ -31,14 +56,45 @@ const Main = () => {
                     <input type={'text'} placeholder={'Search...'} className='outline-none w-[60%] h-[70%] rounded-full align-middle px-4 border-2 border-teal-500'/>
                 </div>
             </div>
-            <div className='my-2 flex flex-row justify-center items-center'>
-                <div className='h-[1px] w-[40%] bg-gray-500'/>
-                <div className='mx-8'>2023</div>
-                <div className='h-[1px] w-[40%] bg-gray-500'/>
-            </div>
-            <div className='p-6 flex flex-wrap gap-4 '>
-                <Tile name='' steps={['']} onClick={setOpenGoalEditingPanel}/>
-            </div>
+            {
+                data ? (
+                    Object.keys(data).sort((a,b)=>+b-(+a)).map((v, i) => {
+                        return <>
+                            <div key={i} className='my-2 flex flex-row justify-center items-center'>
+                                <div className='h-[1px] w-[40%] bg-gray-500'/>
+                                <div className='mx-8'>{v}</div>
+                                <div className='h-[1px] w-[40%] bg-gray-500'/>
+                            </div>
+                            <div key={i} className='p-6 flex flex-wrap gap-4 '>
+                                {
+                                    (()=>{
+                                        if(sorting === 1){
+                                            return data[v].map((v,i)=>{
+                                                return <Tile key={i} name={v.name} steps={v.steps}
+                                                             onClick={setOpenGoalEditingPanel}/>
+                                            });
+                                        } else if(sorting === 2){
+                                            return data[v].slice(0).sort((a, b)=>{
+                                                return getPercent(a.steps) - getPercent(b.steps)
+                                            }).map((v,i)=>{
+                                                return <Tile key={i} name={v.name} steps={v.steps}
+                                                             onClick={setOpenGoalEditingPanel}/>
+                                            })
+                                        }else if(sorting === 3){
+                                            return data[v].slice(0).sort((a, b)=>{
+                                                return getPercent(b.steps) - getPercent(a.steps)
+                                            }).map((v,i)=>{
+                                                return <Tile key={i} name={v.name} steps={v.steps}
+                                                             onClick={setOpenGoalEditingPanel}/>
+                                            })
+                                        }
+                                    })()
+                                }
+                            </div>
+                        </>
+                    })
+                ) : null
+            }
         </div>
         </>
     );

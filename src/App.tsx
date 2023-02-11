@@ -1,10 +1,15 @@
-import React from 'react';
+import React, {createContext} from 'react';
 import Main from "./pages/Main";
+import ApiClient from './ApiClient';
+
+const api = new ApiClient();
+export const Api = createContext<ApiClient>(api);
 
 function App() {
-
   return (
-    <Main />
+      <Api.Provider value={api}>
+          <Main />
+      </Api.Provider>
   );
 }
 

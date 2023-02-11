@@ -1,7 +1,7 @@
 import React from "react";
 import {FormControl, InputLabel, MenuItem, Select, Switch} from "@mui/material";
 
-const SortingPanel = ({years}:{years?:number[]}) => {
+const SortingPanel = ({years, setSorting}:{years:string[], setSorting:React.Dispatch<React.SetStateAction<number>>}) => {
 
     return (
         <div className='flex items-center justify-around relative w-full gap-2 h-full'>
@@ -19,12 +19,14 @@ const SortingPanel = ({years}:{years?:number[]}) => {
                     value={undefined}
                     label="Completed"
                     className='min-w-[70px]'
-                    onChange={() => {
+                    onChange={(e) => {
+                        // @ts-ignore
+                        setSorting(e.target.value)
                     }}
                 >
-                    <MenuItem value={10}>1 → 100</MenuItem>
-                    <MenuItem value={20}>100 ← 1</MenuItem>
-                    <MenuItem value={30}>not sorted</MenuItem>
+                    <MenuItem value={1}>not sorted</MenuItem>
+                    <MenuItem value={2}>1 → 100</MenuItem>
+                    <MenuItem value={3}>100 ← 1</MenuItem>
                 </Select>
             </FormControl>
             <FormControl className='w-[150px]'>
@@ -37,10 +39,12 @@ const SortingPanel = ({years}:{years?:number[]}) => {
                     className='min-w-[70px]'
                     onChange={() => {
                     }}
-                >
-                    <MenuItem value={10}>2023</MenuItem>
-                    <MenuItem value={20}>2022</MenuItem>
-                    <MenuItem value={30}>2021</MenuItem>
+                ><MenuItem value={years.length}>not filtered</MenuItem>
+                    {
+                    years.map((v,i)=>{
+                        return <MenuItem key={i} value={i}>{v}</MenuItem>
+                    })
+                }
                 </Select>
             </FormControl>
         </div>
