@@ -9,3 +9,35 @@ body {
 #root {
     height: 100vh;
 }
+
+.styled_scrollbar_notTransparent::-webkit-scrollbar,
+.styled_scrollbar::-webkit-scrollbar {
+    width: 10px;
+}
+
+.styled_scrollbar_notTransparent::-webkit-scrollbar-track {
+    background: rgb(214, 218, 222);
+}
+
+.styled_scrollbar_notTransparent::-webkit-scrollbar-thumb {
+    background-color: rgb(32, 196, 178);
+    border-radius: 20px;
+}
+
+.styled_scrollbar::-webkit-scrollbar-track {
+    border-radius: 20px;
+    background: rgba(107, 114, 128, 0.1);
+}
+
+.styled_scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(20, 184, 166, 0.2);
+    border-radius: 20px;
+}
+
+.styled_scrollbar_hovered:hover .styled_scrollbar::-webkit-scrollbar-track {
+    background: rgba(107, 114, 128, 0.3);
+}
+
+.styled_scrollbar_hovered:hover .styled_scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(20, 184, 166, 0.5);
+}

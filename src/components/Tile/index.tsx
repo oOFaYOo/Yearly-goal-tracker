@@ -1,6 +1,8 @@
-import React from "react";
+import React, {useContext} from "react";
 import {Tooltip} from "@mui/material";
 import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
+import {Api} from "../../App";
+import {Goals} from "../../types";
 
 function percentColor(percent: number) {
     if (percent < 80) {
@@ -15,18 +17,29 @@ const Tile = ({
                   steps,
                   percent,
                   onClick,
-                  deleteGoal
-              }: { name: string, percent:number, steps: { name: string, state: boolean }[],
-    onClick: React.Dispatch<React.SetStateAction<boolean>>,
-    deleteGoal?: () => {} }) => {
+                  onUpdate,
+                  id,
+                  year,
+              }: {
+    name: string,
+    onUpdate:React.Dispatch<React.SetStateAction<boolean>>,
+    percent: number, id: string, year: string, steps: { name: string, state: boolean }[],
+    onClick: React.Dispatch<React.SetStateAction<boolean>>
+}) => {
+
+    const api = useContext(Api);
 
     return (
         <div
-            className='hover:bg-white cursor-pointer shadow-md flex justify-between flex-col items-center grow min-w-[335px]
+            className='styled_scrollbar_hovered hover:bg-white cursor-pointer shadow-md flex justify-between flex-col items-center grow min-w-[335px]
              max-w-[500px] h-[300px] rounded-lg border-2 border-teal-500 p-4'>
             <div className='w-full flex flex-row justify-end'>
                 <Tooltip title={'Delete goal'} arrow placement={"top"}>
-                <CancelRoundedIcon className='text-gray-500/30 hover:text-rose-600 hover:scale-105 active:scale-100' />
+                <CancelRoundedIcon onClick={()=>{
+                        api.deleteGoal(id, year);
+                        onUpdate(true);
+                    }
+                } className='text-gray-500/30 hover:text-rose-600 hover:scale-105 active:scale-100' />
                 </Tooltip>
             </div>
             <div className='w-full h-full flex justify-between flex-col items-center' onClick={() => onClick(true)}>
@@ -46,7 +59,7 @@ const Tile = ({
                 </div>
                 <p>{`${percent}%`}</p>
             </div>
-            <div className={'items-center grow py-1 flex max-h-[130px] w-full flex flex-col gap-y-1 overflow-y-auto'}>
+            <div className={'styled_scrollbar items-center grow py-1 flex max-h-[130px] w-full flex flex-col gap-y-1 overflow-y-auto'}>
                 {steps.map((v, i) => {
                     return <Tooltip title={v.name} arrow placement={"top"} key={i}>
                         <p style={{

@@ -16,13 +16,15 @@ const Main = () => {
     const [sorting, setSorting] = useState<number>(1);
     const [filtering, setFiltering] = useState<number>(1);
     const [searchValue, setSearchValue] = useState('');
+    const [needUpdate, setNeedUpdate] = useState(false);
 
     useEffect(()=>{
         (async ()=>{
             let response = await api.getGoals();
             setData(response);
+            setNeedUpdate(false)
         })()
-    },[data]);
+    },[data, needUpdate]);
 
     function getPercent(arr: { name: string, state: boolean }[]) {
         let completed = 0;
@@ -40,7 +42,7 @@ const Main = () => {
         <>
         <GoalCreationPanel state={openGoalCreationPanel} closeFunction={setOpenGoalCreationPanel}/>
         <GoalEditingPanel state={openGoalEditingPanel} closeFunction={setOpenGoalEditingPanel}/>
-        <div className="absolute overflow-y-auto h-[100vh] w-[100vw] bg-slate-50">
+        <div className="styled_scrollbar_notTransparent absolute overflow-y-auto h-[100vh] w-[100vw] bg-slate-50">
             <header className="w-full shadow-md h-[5vh] flex items-center bg-white border-b-2 border-teal-500">
                 <p className='ml-4 text-xl font-sans font-semibold'>Yearly Goal Tracker</p>
             </header>
@@ -80,21 +82,21 @@ const Main = () => {
                                     (()=>{
                                         if(sorting === 1){
                                             return data[v].filter((v)=>v.name.toLowerCase().includes(searchValue.toLowerCase())).map((v,i)=>{
-                                                return <Tile key={i} name={v.name} percent={getPercent(v.steps)} steps={v.steps}
+                                                return <Tile onUpdate={setNeedUpdate} key={i} year={v.year} name={v.name} id={v.id} percent={getPercent(v.steps)} steps={v.steps}
                                                              onClick={setOpenGoalEditingPanel}/>
                                             });
                                         } else if(sorting === 2){
                                             return data[v].filter((v)=>v.name.toLowerCase().includes(searchValue.toLowerCase())).slice(0).sort((a, b)=>{
                                                 return getPercent(a.steps) - getPercent(b.steps)
                                             }).map((v,i)=>{
-                                                return <Tile key={i} name={v.name} percent={getPercent(v.steps)} steps={v.steps}
+                                                return <Tile onUpdate={setNeedUpdate} key={i} year={v.year} name={v.name} id={v.id} percent={getPercent(v.steps)} steps={v.steps}
                                                              onClick={setOpenGoalEditingPanel}/>
                                             })
                                         }else if(sorting === 3){
                                             return data[v].filter((v)=>v.name.toLowerCase().includes(searchValue.toLowerCase())).slice(0).sort((a, b)=>{
                                                 return getPercent(b.steps) - getPercent(a.steps)
                                             }).map((v,i)=>{
-                                                return <Tile key={i} name={v.name} percent={getPercent(v.steps)} steps={v.steps}
+                                                return <Tile onUpdate={setNeedUpdate} key={i} year={v.year} name={v.name} id={v.id} percent={getPercent(v.steps)} steps={v.steps}
                                                              onClick={setOpenGoalEditingPanel}/>
                                             })
                                         }

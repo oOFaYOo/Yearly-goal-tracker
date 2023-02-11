@@ -3,6 +3,8 @@ import {Goals} from "../types";
 const goals:Goals = {
     '2023': [
         {
+            id: Math.round(Date.now()+(Math.random()*1000)).toString(),
+            year:'2023',
             name:'Become a programmer',
             steps:[
                 { name:'Learn java script',
@@ -23,6 +25,8 @@ const goals:Goals = {
             ]
         },
         {
+            id: Math.round(Date.now()+(Math.random()*1000)).toString(),
+            year:'2023',
             name:'Move to another country',
             steps:[
                 { name:'Collect documents',
@@ -40,6 +44,8 @@ const goals:Goals = {
             ]
         },
         {
+            id: Math.round(Date.now()+(Math.random()*1000)).toString(),
+            year:'2023',
             name:'Athletic body',
             steps:[
                 { name:'Sign up for a gym',
@@ -59,6 +65,8 @@ const goals:Goals = {
     ],
     '2022': [
         {
+            id: Math.round(Date.now()+(Math.random()*1000)).toString(),
+            year:'2022',
             name:'Become a programmer',
             steps:[
                 { name:'Learn java script',
@@ -79,6 +87,8 @@ const goals:Goals = {
             ]
         },
         {
+            id: Math.round(Date.now()+(Math.random()*1000)).toString(),
+            year:'2022',
             name:'Move to another country',
             steps:[
                 { name:'Collect documents',
@@ -96,6 +106,8 @@ const goals:Goals = {
             ]
         },
         {
+            id: Math.round(Date.now()+(Math.random()*1000)).toString(),
+            year:'2022',
             name:'Athletic body',
             steps:[
                 { name:'Sign up for a gym',
@@ -115,6 +127,8 @@ const goals:Goals = {
     ],
     '2021': [
         {
+            id: Math.round(Date.now()+(Math.random()*1000)).toString(),
+            year:'2021',
             name:'Become a programmer',
             steps:[
                 { name:'Learn java script',
@@ -135,6 +149,8 @@ const goals:Goals = {
             ]
         },
         {
+            id: Math.round(Date.now()+(Math.random()*1000)).toString(),
+            year:'2021',
             name:'Move to another country',
             steps:[
                 { name:'Collect documents',
@@ -152,6 +168,8 @@ const goals:Goals = {
             ]
         },
         {
+            id: Math.round(Date.now()+(Math.random()*1000)).toString(),
+            year:'2021',
             name:'Athletic body',
             steps:[
                 { name:'Sign up for a gym',
