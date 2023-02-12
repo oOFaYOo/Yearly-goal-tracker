@@ -5,8 +5,10 @@ const SortingPanel = ({
                           years,
                           setSorting,
                           setFiltering
-                      }: { years: string[], setSorting: React.Dispatch<React.SetStateAction<number>>,
-    setFiltering: React.Dispatch<React.SetStateAction<number>> }) => {
+                      }: {
+    years: string[], setSorting: React.Dispatch<React.SetStateAction<number>>,
+    setFiltering: React.Dispatch<React.SetStateAction<number>>
+}) => {
 
     return (
         <div className='flex items-center justify-around relative w-full gap-2 h-full'>
@@ -25,8 +27,7 @@ const SortingPanel = ({
                     label="Completed"
                     className='min-w-[70px]'
                     onChange={(e) => {
-                        // @ts-ignore
-                        setSorting(e.target.value)
+                        if (e.target.value !== undefined) setSorting(+(e.target.value))
                     }}
                 >
                     <MenuItem value={1}>not sorted</MenuItem>
@@ -43,10 +44,10 @@ const SortingPanel = ({
                     label="Year"
                     className='min-w-[70px]'
                     onChange={(e) => {
-                        // @ts-ignore
-                        setFiltering(e.target.value)
+                        if (e.target.value !== undefined) setFiltering(+(e.target.value))
                     }}
-                ><MenuItem value={1}>not filtered</MenuItem>
+                >
+                    <MenuItem value={1}>not filtered</MenuItem>
                     {
                         years.map((v, i) => {
                             return <MenuItem key={i} value={v}>{v}</MenuItem>

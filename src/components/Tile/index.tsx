@@ -2,7 +2,7 @@ import React, {useContext} from "react";
 import {Tooltip} from "@mui/material";
 import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
 import {Api} from "../../App";
-import {Goals} from "../../types";
+import {IGoal} from "../../types";
 
 function percentColor(percent: number) {
     if (percent < 80) {
@@ -20,8 +20,7 @@ const Tile = ({
                   onUpdate,
                   id,
                   year,
-              }: {
-    name: string,
+              }:IGoal & {
     onUpdate:React.Dispatch<React.SetStateAction<boolean>>,
     percent: number, id: string, year: string, steps: { name: string, state: boolean }[],
     onClick: React.Dispatch<React.SetStateAction<boolean>>

@@ -1,6 +1,6 @@
-import {Goals} from "../types";
+import {IGoals} from "../types";
 
-const goals:Goals = {
+const goals:IGoals = {
     '2023': [
         {
             id: Math.round(Date.now()+(Math.random()*1000)).toString(),

@@ -4,7 +4,7 @@ import SortingPanel from "../../components/SortingPanel";
 import GoalCreationPanel from "../../components/GoalCreationPanel";
 import GoalEditingPanel from "../../components/GoalEditingPanel";
 import {Api} from "../../App";
-import {Goals} from "../../types";
+import {IGoals} from "../../types";
 import {CircularProgress} from "@mui/material";
 
 const Main = () => {
@@ -12,7 +12,7 @@ const Main = () => {
     const api = useContext(Api)
     const [openGoalCreationPanel, setOpenGoalCreationPanel] = useState<boolean>(false);
     const [openGoalEditingPanel, setOpenGoalEditingPanel] = useState<boolean>(false);
-    const [data, setData] = useState<Goals|undefined>(undefined);
+    const [data, setData] = useState<IGoals|undefined>(undefined);
     const [sorting, setSorting] = useState<number>(1);
     const [filtering, setFiltering] = useState<number>(1);
     const [searchValue, setSearchValue] = useState('');
@@ -21,10 +21,12 @@ const Main = () => {
     useEffect(()=>{
         (async ()=>{
             let response = await api.getGoals();
-            setData(response);
+            setData(response as IGoals);
             setNeedUpdate(false)
         })()
     },[data, needUpdate]);
+
+    setInterval(()=>setNeedUpdate(true), 300000)
 
     function getPercent(arr: { name: string, state: boolean }[]) {
         let completed = 0;
@@ -40,7 +42,7 @@ const Main = () => {
         </div>
     } else return (
         <>
-        <GoalCreationPanel state={openGoalCreationPanel} closeFunction={setOpenGoalCreationPanel}/>
+        <GoalCreationPanel setNeedUpdate={setNeedUpdate} state={openGoalCreationPanel} closeFunction={setOpenGoalCreationPanel}/>
         <GoalEditingPanel state={openGoalEditingPanel} closeFunction={setOpenGoalEditingPanel}/>
         <div className="styled_scrollbar_notTransparent absolute overflow-y-auto h-[100vh] w-[100vw] bg-slate-50">
             <header className="w-full shadow-md h-[5vh] flex items-center bg-white border-b-2 border-teal-500">
