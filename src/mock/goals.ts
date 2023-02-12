@@ -5,28 +5,6 @@ const goals:IGoals = {
         {
             id: Math.round(Date.now()+(Math.random()*1000)).toString(),
             year:'2023',
-            name:'Become a programmer',
-            steps:[
-                { name:'Learn java script',
-                  state: true
-                },
-                { name:'Learn sass',
-                    state: false
-                },
-                { name:'Learn algorithms',
-                  state: true
-                },
-                { name:'Learn react',
-                  state: true
-                },
-                { name:'Learn css',
-                  state: true
-                },
-            ]
-        },
-        {
-            id: Math.round(Date.now()+(Math.random()*1000)).toString(),
-            year:'2023',
             name:'Move to another country',
             steps:[
                 { name:'Collect documents',
@@ -62,46 +40,49 @@ const goals:IGoals = {
                 },
             ]
         },
+        {
+            id: Math.round(Date.now()+(Math.random()*1000)).toString(),
+            year:'2023',
+            name:'Find a job in an international company',
+            steps:[
+                { name:'Successfully pass an interview',
+                    state: false
+                },
+                { name:'Get hired for a good job',
+                    state: false
+                },
+                { name:'Prepare for an interview',
+                    state: true
+                },
+                { name:'Write a couple of small projects in the portfolio',
+                    state: true
+                },
+                { name:'Learn English up to B1',
+                    state: true
+                }
+            ]
+        },
     ],
     '2022': [
         {
             id: Math.round(Date.now()+(Math.random()*1000)).toString(),
             year:'2022',
-            name:'Become a programmer',
+            name:'Become a better specialist',
             steps:[
-                { name:'Learn java script',
+                { name:'Learn to write unit tests',
                     state: true
                 },
-                { name:'Learn algorithms',
+                { name:'Learn redux',
                     state: false
                 },
-                { name:'Learn react',
+                { name:'Learn tailwind',
                     state: true
                 },
-                { name:'Learn css',
+                { name:'Get commercial experience',
                     state: true
                 },
-                { name:'Learn sass',
+                { name:'Get review experience',
                     state: false
-                },
-            ]
-        },
-        {
-            id: Math.round(Date.now()+(Math.random()*1000)).toString(),
-            year:'2022',
-            name:'Move to another country',
-            steps:[
-                { name:'Collect documents',
-                    state: true
-                },
-                { name:'Prepare the cat',
-                    state: true
-                },
-                { name:'Pack your bags',
-                    state: true
-                },
-                { name:'Fly away',
-                    state: true
                 },
             ]
         },
@@ -151,25 +132,6 @@ const goals:IGoals = {
         {
             id: Math.round(Date.now()+(Math.random()*1000)).toString(),
             year:'2021',
-            name:'Move to another country',
-            steps:[
-                { name:'Collect documents',
-                    state: true
-                },
-                { name:'Prepare the cat',
-                    state: true
-                },
-                { name:'Pack your bags',
-                    state: true
-                },
-                { name:'Fly away',
-                    state: true
-                },
-            ]
-        },
-        {
-            id: Math.round(Date.now()+(Math.random()*1000)).toString(),
-            year:'2021',
             name:'Athletic body',
             steps:[
                 { name:'Sign up for a gym',
@@ -179,7 +141,7 @@ const goals:IGoals = {
                     state: false
                 },
                 { name:'Do the exercises',
-                    state: false
+                    state: true
                 },
                 { name:'Jog in the mornings',
                     state: false
