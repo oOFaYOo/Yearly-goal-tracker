@@ -13,6 +13,13 @@ class ApiClient {
     addGoal(goal:string, year:string, steps:string[]){
       goals[year].push(new Goal(goal, year, steps));
     }
+    editGoal(year:string, id:string, steps:{name:string, state:boolean}[]){
+      goals[year].forEach((v, i, arr)=>{
+          if(v.id === id){
+              arr[i].steps = steps
+          }
+      })
+    }
 }
 
 export default ApiClient;

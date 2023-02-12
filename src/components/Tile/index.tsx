@@ -23,7 +23,7 @@ const Tile = ({
               }:IGoal & {
     onUpdate:React.Dispatch<React.SetStateAction<boolean>>,
     percent: number, id: string, year: string, steps: { name: string, state: boolean }[],
-    onClick: React.Dispatch<React.SetStateAction<boolean>>
+    onClick: React.Dispatch<React.SetStateAction<{open:boolean, data:IGoal|undefined}>>
 }) => {
 
     const api = useContext(Api);
@@ -41,7 +41,14 @@ const Tile = ({
                 } className='text-gray-500/30 hover:text-rose-600 hover:scale-105 active:scale-100' />
                 </Tooltip>
             </div>
-            <div className='w-full h-full flex justify-between flex-col items-center' onClick={() => onClick(true)}>
+            <div className='w-full h-full flex justify-between flex-col items-center' onClick={
+                () => onClick({open:true, data:{
+                    id:id,
+                    year: year,
+                    name: name,
+                    steps: steps
+                    }})
+            }>
                 <Tooltip title={name} arrow placement={"top"}>
                 <p style={{
                     textOverflow: 'ellipsis',

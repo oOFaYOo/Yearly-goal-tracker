@@ -3,16 +3,15 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import {Api} from "../../App";
 
-const GoalCreationPanel = ({state, setNeedUpdate, closeFunction}:
-                               { state: boolean,
-                                 setNeedUpdate: React.Dispatch<React.SetStateAction<boolean>>,
+const GoalCreationPanel = ({setNeedUpdate, closeFunction}:
+                               { setNeedUpdate: React.Dispatch<React.SetStateAction<boolean>>,
                                  closeFunction: React.Dispatch<React.SetStateAction<boolean>>}) => {
 
     const [steps, setSteps] = useState<string[]>([]);
     const [newStep, setNewStep] = useState<string>('');
     const api = useContext(Api);
 
-    return state ? ( <div className='absolute h-[100vh] w-[100vw] flex justify-center items-center'>
+    return <div className='absolute h-[100vh] w-[100vw] flex justify-center items-center'>
             <div onClick={()=> {
                 closeFunction(false)
             }}  className='flex justify-center items-center z-10 bg-black/60 h-full w-full'></div>
@@ -90,7 +89,6 @@ const GoalCreationPanel = ({state, setNeedUpdate, closeFunction}:
                 </div>
             </form>
         </div>
-    ) : null
 };
 
 export default GoalCreationPanel;
