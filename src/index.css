@@ -10,18 +10,8 @@ body {
     height: 100vh;
 }
 
-.styled_scrollbar_notTransparent::-webkit-scrollbar,
 .styled_scrollbar::-webkit-scrollbar {
     width: 10px;
-}
-
-.styled_scrollbar_notTransparent::-webkit-scrollbar-track {
-    background: rgb(214, 218, 222);
-}
-
-.styled_scrollbar_notTransparent::-webkit-scrollbar-thumb {
-    background-color: rgb(32, 196, 178);
-    border-radius: 20px;
 }
 
 .styled_scrollbar::-webkit-scrollbar-track {

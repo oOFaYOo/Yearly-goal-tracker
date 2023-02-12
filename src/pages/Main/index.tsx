@@ -17,6 +17,7 @@ const Main = () => {
     const [filtering, setFiltering] = useState<number>(1);
     const [searchValue, setSearchValue] = useState('');
     const [needUpdate, setNeedUpdate] = useState(false);
+    const [theme, setTheme] = useState<'light'|'dark'>('light')
 
     useEffect(()=>{
         (async ()=>{
@@ -37,28 +38,34 @@ const Main = () => {
     }
 
     if(!data){
-        return <div className='justify-center items-center  flex h-full w-full'>
+        return <div className='justify-center items-center flex h-full w-full'>
             <CircularProgress />
         </div>
     } else return (
         <>
             {
                 openGoalCreationPanel
-                ? <GoalCreationPanel setNeedUpdate={setNeedUpdate} closeFunction={setOpenGoalCreationPanel}/>
+                ? <GoalCreationPanel theme={theme} setNeedUpdate={setNeedUpdate} closeFunction={setOpenGoalCreationPanel}/>
                 : null
             }
             {
                 stateOfEditingPanel.open
-                ? <GoalEditingPanel data={stateOfEditingPanel.data} setOpenState={setStateOfEditingPanel}/>
+                ? <GoalEditingPanel theme={theme} data={stateOfEditingPanel.data} setOpenState={setStateOfEditingPanel}/>
                 : null
             }
-        <div className="styled_scrollbar_notTransparent absolute overflow-y-auto h-[100vh] w-[100vw] bg-slate-50">
-            <header className="w-full shadow-md h-[5vh] flex items-center bg-white border-b-2 border-teal-500">
-                <p className='ml-4 text-xl font-sans font-semibold'>Yearly Goal Tracker</p>
+        <div className={theme === 'light'
+            ? 'bg-gray-50 styled_scrollbar absolute overflow-y-auto h-[100vh] w-[100vw]'
+            : 'bg-gray-900 text-gray-400 styled_scrollbar absolute overflow-y-auto h-[100vh] w-[100vw]'}>
+            <header className={theme === 'light'
+                ? 'bg-white border-teal-500 border-b-2 w-full shadow-md h-[5vh] flex items-center'
+                : 'w-full shadow-md h-[5vh] flex items-center bg-gray-800 border-teal-500 border-b-2'}>
+                <p className={theme === 'light'
+                    ? 'ml-4 text-xl font-sans font-semibold'
+                    : 'ml-4 text-xl font-sans font-semibold'}>Yearly Goal Tracker</p>
             </header>
             <div className='flex justify-between items-center py-4 h-24'>
                 <div className='flex px-6 items-center justify-center relative w-[40%] h-full'>
-                    <SortingPanel setFiltering={setFiltering} setSorting={setSorting} years={Object.keys(data)} />
+                    <SortingPanel theme={theme} setTheme={setTheme} setFiltering={setFiltering} setSorting={setSorting} years={Object.keys(data)} />
                 </div>
                 <div className='flex grow justify-center'>
                     <button onClick={()=>setOpenGoalCreationPanel(true)}
@@ -68,7 +75,10 @@ const Main = () => {
                 </div>
                 <div className='flex justify-center relative items-center w-[40%] h-full'>
                     <input type={'text'} placeholder={'Search...'}
-                           className='outline-none w-[60%] h-[70%] rounded-full align-middle px-4 border-2 border-teal-500'
+                           className={theme === 'light'
+                               ? 'outline-none w-[60%] h-[70%] rounded-full align-middle px-4 border-2 border-teal-500'
+                               : 'bg-gray-700 outline-none w-[60%] h-[70%] rounded-full align-middle px-4 border-2 border-teal-500'
+                    }
                     onChange={(e)=>{
                         setSearchValue(e.currentTarget.value)
                     }}
@@ -92,21 +102,21 @@ const Main = () => {
                                     (()=>{
                                         if(sorting === 1){
                                             return data[v].filter((v)=>v.name.toLowerCase().includes(searchValue.toLowerCase())).map((v,i)=>{
-                                                return <Tile onUpdate={setNeedUpdate} key={i} year={v.year} name={v.name} id={v.id} percent={getPercent(v.steps)} steps={v.steps}
+                                                return <Tile theme={theme} onUpdate={setNeedUpdate} key={i} year={v.year} name={v.name} id={v.id} percent={getPercent(v.steps)} steps={v.steps}
                                                              onClick={setStateOfEditingPanel}/>
                                             });
                                         } else if(sorting === 2){
                                             return data[v].filter((v)=>v.name.toLowerCase().includes(searchValue.toLowerCase())).slice(0).sort((a, b)=>{
                                                 return getPercent(a.steps) - getPercent(b.steps)
                                             }).map((v,i)=>{
-                                                return <Tile onUpdate={setNeedUpdate} key={i} year={v.year} name={v.name} id={v.id} percent={getPercent(v.steps)} steps={v.steps}
+                                                return <Tile theme={theme} onUpdate={setNeedUpdate} key={i} year={v.year} name={v.name} id={v.id} percent={getPercent(v.steps)} steps={v.steps}
                                                              onClick={setStateOfEditingPanel}/>
                                             })
                                         }else if(sorting === 3){
                                             return data[v].filter((v)=>v.name.toLowerCase().includes(searchValue.toLowerCase())).slice(0).sort((a, b)=>{
                                                 return getPercent(b.steps) - getPercent(a.steps)
                                             }).map((v,i)=>{
-                                                return <Tile onUpdate={setNeedUpdate} key={i} year={v.year} name={v.name} id={v.id} percent={getPercent(v.steps)} steps={v.steps}
+                                                return <Tile theme={theme} onUpdate={setNeedUpdate} key={i} year={v.year} name={v.name} id={v.id} percent={getPercent(v.steps)} steps={v.steps}
                                                              onClick={setStateOfEditingPanel}/>
                                             })
                                         }

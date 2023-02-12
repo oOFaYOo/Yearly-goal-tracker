@@ -20,8 +20,9 @@ const Tile = ({
                   onUpdate,
                   id,
                   year,
+                  theme
               }:IGoal & {
-    onUpdate:React.Dispatch<React.SetStateAction<boolean>>,
+    onUpdate:React.Dispatch<React.SetStateAction<boolean>>, theme: 'light'|'dark'
     percent: number, id: string, year: string, steps: { name: string, state: boolean }[],
     onClick: React.Dispatch<React.SetStateAction<{open:boolean, data:IGoal|undefined}>>
 }) => {
@@ -30,8 +31,10 @@ const Tile = ({
 
     return (
         <div
-            className='styled_scrollbar_hovered hover:bg-white cursor-pointer shadow-md flex justify-between flex-col items-center grow min-w-[335px]
-             max-w-[500px] h-[300px] rounded-lg border-2 border-teal-500 p-4'>
+            className={
+            theme === 'light'
+            ? 'styled_scrollbar_hovered hover:bg-white cursor-pointer shadow-md flex justify-between flex-col items-center grow min-w-[335px] max-w-[500px] h-[300px] rounded-lg border-2 border-teal-500 p-4'
+            : 'styled_scrollbar_hovered hover:bg-gray-800 cursor-pointer shadow-md flex justify-between flex-col items-center grow min-w-[335px] max-w-[500px] h-[300px] rounded-lg border-2 border-teal-500 p-4'}>
             <div className='w-full flex flex-row justify-end'>
                 <Tooltip title={'Delete goal'} arrow placement={"top"}>
                 <CancelRoundedIcon onClick={()=>{
