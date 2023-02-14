@@ -5,12 +5,15 @@ import GoalEditingPanel from "./index";
 let someGoal = {
     id: '123',
     year:'2023',
-    name:'Find a job in an international company',
+    name:'123',
     steps:[
-        { name:'Get hired for a good job',
+        { name:'1',
             state: false
         },
-        { name:'Prepare for an interview',
+        { name:'2',
+            state: false
+        },
+        { name:'3',
             state: true
         }
     ]
@@ -26,6 +29,8 @@ it('GoalEditingPanel test', ()=>{
 
     const {container, rerender} = render(<Comp theme={'light'}/>)
 
+    fireEvent.change(container.getElementsByClassName('underline p-2 w-full focus:border-teal-500 bg-white/0 outline-none rounded-lg border-2 border-teal-500/10')[0], {target:{value:'123'}});
+    fireEvent.change(container.getElementsByClassName('p-2 w-full bg-white/0 focus:border-teal-500 outline-none rounded-lg border-2 border-teal-500/10')[0], {target:{value:'1234'}});
     fireEvent.click(container.getElementsByClassName('mr-2 text-green-600 text-black/20 hover:cursor-pointer hover:scale-105 active:scale-100')[0]);
     fireEvent.click(container.getElementsByClassName('mr-2 hover:text-green-600 text-black/20 hover:cursor-pointer hover:scale-105 active:scale-100')[0]);
     fireEvent.click(screen.getByText('Confirm'));

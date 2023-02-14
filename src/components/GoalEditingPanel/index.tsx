@@ -76,7 +76,9 @@ const GoalEditingPanel = ({data, setOpenState, theme}:
                 <button className='hover:scale-105 text-black active:scale-100 h-[40px] rounded w-[100px] bg-teal-500'
                         onClick={(e)=>{
                             if(data && steps)
-                            api.editGoal(data?.year, data?.id, steps);
+                            api.editGoal(data?.year, data?.id, steps.filter((v)=> {
+                                return v.name !== ''
+                            }));
                             setOpenState({open: false, data: undefined});
                             e.preventDefault();
                         }}

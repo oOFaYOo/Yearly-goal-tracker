@@ -11,5 +11,10 @@ it('SortingPanel test', () => {
     }
 
     const {container, rerender} = render(<Comp theme={'light'} />)
+
+    fireEvent.click(container.getElementsByClassName('MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input')[0]);
+    // expect(container).toMatchSnapshot();
     rerender(<Comp theme={'dark'} />)
+
+
 })

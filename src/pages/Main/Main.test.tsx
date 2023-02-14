@@ -1,9 +1,11 @@
 import React from "react";
 import Main from "./index";
 import {Api} from "../../App";
-import {fireEvent, render} from "@testing-library/react";
+import {fireEvent, render, screen} from "@testing-library/react";
 
 it('Main test', async () => {
+
+    jest.useFakeTimers();
 
     const Comp = () => {
         return (
@@ -15,15 +17,24 @@ it('Main test', async () => {
                                         {
                                             id: '123',
                                             year:'2023',
-                                            name:'Move to another country',
+                                            name:'Some 1',
                                             steps:[
-                                               { name:'Collect documents',
+                                               { name:'Step 1',
                                                    state: true
                                                 },
-                                               { name:'Prepare the cat',
+                                               { name:'Step 2',
                                                     state: false
                                                 },
                                             ]
+                                        }
+                                    ],
+                                    '2022': [],
+                                    '2021': [
+                                        {
+                                            id: '123',
+                                            year:'2021',
+                                            name:'Some 2',
+                                            steps:[]
                                         }
                                     ]
                                 }
@@ -45,4 +56,12 @@ it('Main test', async () => {
     await Promise.resolve();
     await Promise.resolve();
     rerender(<Comp />)
+    fireEvent.change(screen.getByPlaceholderText('Search...'), {target:{value: 'Some'}});
+    fireEvent.click(screen.getByText('✕︎'));
+    rerender(<Comp />)
+    fireEvent.click(container.getElementsByClassName('w-full h-full flex justify-between flex-col items-center')[0]);
+    rerender(<Comp />)
+
+    jest.advanceTimersByTime(300000);
+
 })

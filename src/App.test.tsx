@@ -15,5 +15,4 @@ it('App test', ()=>{
     }
 
     const {container, rerender} = render(<Comp />)
-
 })
