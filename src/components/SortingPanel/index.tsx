@@ -16,7 +16,7 @@ const SortingPanel = ({
     return (
         <div className={'flex items-center justify-around relative w-full gap-2 h-full'}>
             <div className='flex flex-row items-center'><p>light</p>
-                <Switch color="default"
+                <Switch color="default" data-testid={'switch'}
                     onChange={(e)=>{
                         setTheme(e.currentTarget.checked ? 'dark' : 'light');
                     }}
@@ -27,7 +27,8 @@ const SortingPanel = ({
                 {/*<InputLabel id="demo-simple-select-label">Completed</InputLabel>*/}
                 <Select
                     labelId="demo-simple-select-label"
-                    id="demo-simple-select"
+                    id="demo-simple-select1"
+                    data-testid="select1"
                     value={undefined}
                     label="Completed"
                     className={theme === 'light' ? 'min-w-[70px]' : 'min-w-[70px] bg-gray-700'}
@@ -44,7 +45,8 @@ const SortingPanel = ({
                 <InputLabel focused={theme === 'dark' ? true : undefined} color={theme === 'dark' ? 'primary' : undefined} id="demo-simple-select-label">Year</InputLabel>
                 <Select
                     labelId="demo-simple-select-label"
-                    id="demo-simple-select"
+                    id="demo-simple-select2"
+                    data-testid="select2"
                     value={undefined}
                     label="Year"
                     className={theme === 'light' ? 'min-w-[70px]' : 'min-w-[70px] bg-gray-700'}

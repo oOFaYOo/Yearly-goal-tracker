@@ -1,5 +1,5 @@
 import React from "react";
-import {fireEvent, render, screen} from "@testing-library/react";
+import {fireEvent, render, screen, within} from "@testing-library/react";
 import SortingPanel from "./index";
 
 it('SortingPanel test', () => {
@@ -10,10 +10,18 @@ it('SortingPanel test', () => {
         )
     }
 
-    const {container, rerender} = render(<Comp theme={'light'} />)
+    const {container, rerender, getByRole, getByTestId} = render(<Comp theme={'light'} />)
 
-    fireEvent.click(container.getElementsByClassName('MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input')[0]);
-    // expect(container).toMatchSnapshot();
+    fireEvent.mouseDown( getByTestId("select1").childNodes[0]);
+    let listbox1 = within(getByRole('listbox'));
+    fireEvent.click(listbox1.getByText("100 ← 0"));
+
+    fireEvent.mouseDown( getByTestId("select2").childNodes[0]);
+    let listbox2 = within(getByRole('listbox'));
+    fireEvent.click(listbox2.getByText("2023"));
+
+    fireEvent.click( getByTestId("switch").childNodes[0]);
+
     rerender(<Comp theme={'dark'} />)
 
 

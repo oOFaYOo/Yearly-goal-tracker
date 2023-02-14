@@ -1,7 +1,7 @@
 import React from "react";
 import Main from "./index";
 import {Api} from "../../App";
-import {fireEvent, render, screen} from "@testing-library/react";
+import {fireEvent, render, screen, within} from "@testing-library/react";
 
 it('Main test', async () => {
 
@@ -51,16 +51,26 @@ it('Main test', async () => {
         )
     }
 
-    const {container, rerender} = render(<Comp/>)
+    const {container, rerender, getByTestId, getByRole} = render(<Comp/>)
 
     await Promise.resolve();
     await Promise.resolve();
     rerender(<Comp />)
+
+    fireEvent.mouseDown( getByTestId("select1").childNodes[0]);
+    let listbox1 = within(getByRole('listbox'));
+    fireEvent.click(listbox1.getByText("100 ← 0"));
+
+    fireEvent.mouseDown( getByTestId("select1").childNodes[0]);
+    let listbox2 = within(getByRole('listbox'));
+    fireEvent.click(listbox2.getByText("0 → 100"));
+
     fireEvent.change(screen.getByPlaceholderText('Search...'), {target:{value: 'Some'}});
     fireEvent.click(screen.getByText('✕︎'));
     rerender(<Comp />)
     fireEvent.click(container.getElementsByClassName('w-full h-full flex justify-between flex-col items-center')[0]);
     rerender(<Comp />)
+    fireEvent.click( getByTestId("switch").childNodes[0]);
 
     jest.advanceTimersByTime(300000);
 
