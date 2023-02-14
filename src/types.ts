@@ -9,3 +9,11 @@ export interface IGoal {
     name: string;
     steps: {name:string, state:boolean}[]
 }
+
+export interface IUsers {
+    [key: string]:{
+        id:string,
+        password:string
+    }
+}
+

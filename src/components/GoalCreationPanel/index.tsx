@@ -2,10 +2,11 @@ import React, {useContext, useState} from "react";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import {Api} from "../../App";
+import {Tooltip} from "@mui/material";
 
 const GoalCreationPanel = ({setNeedUpdate, closeFunction, theme}:
-                               { setNeedUpdate: React.Dispatch<React.SetStateAction<boolean>>, theme:'light'|'dark',
-                                 closeFunction: React.Dispatch<React.SetStateAction<boolean>>}) => {
+                           { setNeedUpdate: React.Dispatch<React.SetStateAction<boolean>>, theme:'light'|'dark',
+                           closeFunction: React.Dispatch<React.SetStateAction<boolean>>}) => {
 
     const [steps, setSteps] = useState<string[]>([]);
     const [newStep, setNewStep] = useState<string>('');
@@ -35,11 +36,11 @@ const GoalCreationPanel = ({setNeedUpdate, closeFunction, theme}:
                         e.currentTarget.setCustomValidity("Fill in the goal name");
                     }
                 }} className={theme ==='light'
-                    ? 'flex grow mr-2 p-2 rounded'
-                    : 'flex grow mr-2 p-2 rounded bg-gray-700'
+                    ? 'flex grow mr-2 p-2 rounded-lg'
+                    : 'flex grow mr-2 p-2 rounded-lg bg-gray-700'
                 } type={'text'} placeholder={'Goal...'}/>
-                <input name={'year'} className={theme === 'light' ? 'w-[100px] p-2 rounded' : 'w-[100px] p-2 rounded bg-gray-700'}
-                       type={'number'} min={1950} defaultValue={new Date().getFullYear()} placeholder={'Year...'}/>
+                <input name={'year'} className={theme === 'light' ? 'w-[100px] p-2 rounded-lg' : 'w-[100px] p-2 rounded-lg bg-gray-700'}
+                       type={'number'} defaultValue={new Date().getFullYear()} placeholder={'Year...'}/>
                 </div>
                 <div className='flex justify-between items-center'>
                     <div className='h-[1px] w-[30%] bg-gray-500'/>
@@ -48,10 +49,11 @@ const GoalCreationPanel = ({setNeedUpdate, closeFunction, theme}:
                 </div>
                 <div className='flex item-center flex-row'>
                     <div className='pt-1.5'>
+                        <Tooltip title={'Add new step'} arrow placement={'top'}>
                         <AddCircleOutlineIcon onClick={()=>{
                             if(newStep !== ''){
                                 const newSteps = [...steps];
-                                newSteps.push(newStep);
+                                newSteps.unshift(newStep);
                                 setNewStep('');
                                 setSteps(newSteps);
                             }
@@ -60,8 +62,9 @@ const GoalCreationPanel = ({setNeedUpdate, closeFunction, theme}:
                                 ? 'mr-2 hover:text-yellow-500 hover:cursor-pointer hover:scale-105 active:scale-100'
                                 : 'mr-2 hover:text-yellow-500 text-white/50 hover:cursor-pointer hover:scale-105 active:scale-100'
                         }/>
+                        </Tooltip>
                     </div>
-                    <input className={theme === 'light' ? 'rounded outline-none p-2 w-full' : 'rounded outline-none p-2 w-full bg-gray-700'}
+                    <input className={theme === 'light' ? 'rounded-lg outline-none p-2 w-full' : 'rounded-lg outline-none p-2 w-full bg-gray-700'}
                            value={newStep} type={'text'} placeholder={'Step...'}
                     onChange={(e)=> setNewStep(e.target.value)}
                     />
@@ -87,7 +90,7 @@ const GoalCreationPanel = ({setNeedUpdate, closeFunction, theme}:
                                                if (!e.currentTarget.validity.valid) {
                                                    e.currentTarget.setCustomValidity("Write goal step text or delete this step");
                                                }
-                                           }} className={theme === 'light' ? 'rounded outline-none p-2 w-full' : 'rounded bg-gray-700 outline-none p-2 w-full'}
+                                           }} className={theme === 'light' ? 'rounded-lg outline-none p-2 w-full' : 'rounded-lg bg-gray-700 outline-none p-2 w-full'}
                                            onChange={(e)=>{
                                             const newSteps = [...steps];
                                             newSteps[i] = e.target.value;
@@ -99,7 +102,7 @@ const GoalCreationPanel = ({setNeedUpdate, closeFunction, theme}:
                     }
                 </div>
                 <div className='flex justify-center'>
-                <button className='text-black hover:scale-105 active:scale-100 h-[40px] rounded w-[100px] bg-teal-500' type={'submit'}>Add</button>
+                <button className='text-black hover:scale-105 active:scale-100 h-[40px] rounded w-[150px] bg-teal-500' type={'submit'}>Add new goal</button>
                 </div>
             </form>
         </div>

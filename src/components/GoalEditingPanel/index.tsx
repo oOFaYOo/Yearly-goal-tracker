@@ -28,40 +28,50 @@ const GoalEditingPanel = ({data, setOpenState, theme}:
                     Steps to achieve
                     <div className='h-[1px] w-[30%] bg-gray-500'/>
                 </div>
-                <div className='styled_scrollbar overflow-y-auto flex flex-col w-full gap-y-4'>
-                    {
-                        steps?.map((v, i)=>{
-                            if(v.state){
-                                return <div className='flex item-center flex-row'>
-                                            <div className='pt-1.5'>
-                                                <CheckCircleOutlineIcon onClick={()=>{
-                                                    const newSteps = [...steps];
-                                                    newSteps[i].state = false;
-                                                    setSteps(newSteps);
-                                                }}
-                                                className='mr-2 text-green-600 text-black/20 hover:cursor-pointer hover:scale-105 active:scale-100'/>
-                                            </div>
-                                            <div className='underline p-2 w-full'>{v.name}</div>
-                                       </div>
-                            } else {
-                                return <div className='flex item-center flex-row'>
-                                            <div className='pt-1.5'>
-                                                <PanoramaFishEyeRoundedIcon onClick={()=>{
-                                                    const newSteps = [...steps];
-                                                    newSteps[i].state = true;
-                                                    setSteps(newSteps);
-                                                }}
-                                                className={theme === 'light'
-                                                    ? 'mr-2 hover:text-green-600 text-black/20 hover:cursor-pointer hover:scale-105 active:scale-100'
-                                                    : 'mr-2 hover:text-green-600 text-white/20 hover:cursor-pointer hover:scale-105 active:scale-100'
-                                                } />
-                                            </div>
-                                            <div className='p-2 w-full'>{v.name}</div>
-                                       </div>
-                            }
-                        })
-                    }
-                </div>
+                {steps?.length === 0 ? null :
+                    <div className='styled_scrollbar overflow-y-auto flex flex-col w-full gap-y-4'>
+                        {
+                            steps?.map((v, i)=>{
+                                if(v.state){
+                                    return <div className='flex item-center flex-row'>
+                                        <div className='pt-1.5'>
+                                            <CheckCircleOutlineIcon onClick={()=>{
+                                                const newSteps = [...steps];
+                                                newSteps[i].state = false;
+                                                setSteps(newSteps);
+                                            }}
+                                               className='mr-2 text-green-600 text-black/20 hover:cursor-pointer hover:scale-105 active:scale-100'/>
+                                        </div>
+                                        <input value={v.name} onChange={(e)=>{
+                                            const newSteps = [...steps];
+                                            newSteps[i].name = e.target.value;
+                                            setSteps(newSteps);
+                                        }} className='underline p-2 w-full focus:border-teal-500 bg-white/0 outline-none rounded-lg border-2 border-teal-500/10'/>
+                                    </div>
+                                } else {
+                                    return <div className='flex item-center flex-row'>
+                                        <div className='pt-1.5'>
+                                            <PanoramaFishEyeRoundedIcon onClick={()=>{
+                                                const newSteps = [...steps];
+                                                newSteps[i].state = true;
+                                                setSteps(newSteps);
+                                            }}
+                                              className={theme === 'light'
+                                               ? 'mr-2 hover:text-green-600 text-black/20 hover:cursor-pointer hover:scale-105 active:scale-100'
+                                               : 'mr-2 hover:text-green-600 text-white/20 hover:cursor-pointer hover:scale-105 active:scale-100'
+                                               } />
+                                        </div>
+                                        <input value={v.name} onChange={(e)=>{
+                                            const newSteps = [...steps];
+                                            newSteps[i].name = e.target.value;
+                                            setSteps(newSteps);
+                                        }} className='p-2 w-full bg-white/0 focus:border-teal-500 outline-none rounded-lg border-2 border-teal-500/10'/>
+                                    </div>
+                                }
+                            })
+                        }
+                    </div>
+                }
                 <div className='flex justify-center'>
                 <button className='hover:scale-105 text-black active:scale-100 h-[40px] rounded w-[100px] bg-teal-500'
                         onClick={(e)=>{

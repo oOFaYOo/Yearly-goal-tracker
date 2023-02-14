@@ -7,6 +7,15 @@ import {Api} from "../../App";
 import {IGoal, IGoals} from "../../types";
 import {CircularProgress} from "@mui/material";
 
+function getPercent(arr: { name: string, state: boolean }[]) {
+    if(arr.length === 0) return 0;
+    let completed = 0;
+    arr.forEach((v: { name: string, state: boolean }) => {
+        if (v.state) completed++
+    });
+    return Math.round((completed * 100) / arr.length);
+}
+
 const Main = () => {
 
     const api = useContext(Api)
@@ -20,22 +29,16 @@ const Main = () => {
     const [theme, setTheme] = useState<'light'|'dark'>('light')
 
     useEffect(()=>{
-        (async ()=>{
-            let response = await api.getGoals();
-            setData(response as IGoals);
-            setNeedUpdate(false)
-        })()
+        // if(!data) {
+            (async () => {
+                let response = await api.getGoals();
+                setData(response as IGoals);
+                setNeedUpdate(false)
+            })()
+        // }
     },[data, needUpdate]);
 
     setInterval(()=>setNeedUpdate(true), 300000)
-
-    function getPercent(arr: { name: string, state: boolean }[]) {
-        let completed = 0;
-        arr.forEach((v: { name: string, state: boolean }) => {
-            if (v.state) completed++
-        });
-        return Math.round((completed * 100) / arr.length);
-    }
 
     if(!data){
         return <div className='justify-center items-center flex h-full w-full'>
@@ -91,39 +94,45 @@ const Main = () => {
                         if(filtering === 1) return v;
                         if(+filtering === +v) return v;
                     }).map((v, i) => {
-                        return <>
-                            <div key={i} className='my-2 flex flex-row justify-center items-center'>
-                                <div className='h-[1px] w-[40%] bg-gray-500'/>
-                                <div className='mx-8'>{v}</div>
-                                <div className='h-[1px] w-[40%] bg-gray-500'/>
-                            </div>
-                            <div key={i} className='p-6 flex flex-wrap gap-4 '>
-                                {
-                                    (()=>{
-                                        if(sorting === 1){
-                                            return data[v].filter((v)=>v.name.toLowerCase().includes(searchValue.toLowerCase())).map((v,i)=>{
-                                                return <Tile theme={theme} onUpdate={setNeedUpdate} key={i} year={v.year} name={v.name} id={v.id} percent={getPercent(v.steps)} steps={v.steps}
-                                                             onClick={setStateOfEditingPanel}/>
-                                            });
-                                        } else if(sorting === 2){
-                                            return data[v].filter((v)=>v.name.toLowerCase().includes(searchValue.toLowerCase())).slice(0).sort((a, b)=>{
-                                                return getPercent(a.steps) - getPercent(b.steps)
-                                            }).map((v,i)=>{
-                                                return <Tile theme={theme} onUpdate={setNeedUpdate} key={i} year={v.year} name={v.name} id={v.id} percent={getPercent(v.steps)} steps={v.steps}
-                                                             onClick={setStateOfEditingPanel}/>
-                                            })
-                                        }else if(sorting === 3){
-                                            return data[v].filter((v)=>v.name.toLowerCase().includes(searchValue.toLowerCase())).slice(0).sort((a, b)=>{
-                                                return getPercent(b.steps) - getPercent(a.steps)
-                                            }).map((v,i)=>{
-                                                return <Tile theme={theme} onUpdate={setNeedUpdate} key={i} year={v.year} name={v.name} id={v.id} percent={getPercent(v.steps)} steps={v.steps}
-                                                             onClick={setStateOfEditingPanel}/>
-                                            })
-                                        }
-                                    })()
-                                }
-                            </div>
-                        </>
+                        return data[v].length === 0
+                            ? null
+                            : (
+                                data[v].filter((v)=>v.name.toLowerCase().includes(searchValue.toLowerCase())).length === 0
+                                    ? null
+                                    : <>
+                                        <div key={i} className='my-2 flex flex-row justify-center items-center'>
+                                            <div className='h-[1px] w-[40%] bg-gray-500'/>
+                                            <div className='mx-8'>{v}</div>
+                                            <div className='h-[1px] w-[40%] bg-gray-500'/>
+                                        </div>
+                                        <div key={i} className='p-6 flex flex-wrap gap-4 '>
+                                            {
+                                                (()=>{
+                                                    if(sorting === 1){
+                                                        return data[v].map((v,i)=>{
+                                                            return <Tile theme={theme} onUpdate={setNeedUpdate} key={i} year={v.year} name={v.name} id={v.id} percent={getPercent(v.steps)} steps={v.steps}
+                                                                         onClick={setStateOfEditingPanel}/>
+                                                        });
+                                                    } else if(sorting === 2){
+                                                        return data[v].slice(0).sort((a, b)=>{
+                                                            return getPercent(a.steps) - getPercent(b.steps)
+                                                        }).map((v,i)=>{
+                                                            return <Tile theme={theme} onUpdate={setNeedUpdate} key={i} year={v.year} name={v.name} id={v.id} percent={getPercent(v.steps)} steps={v.steps}
+                                                                         onClick={setStateOfEditingPanel}/>
+                                                        })
+                                                    }else if(sorting === 3){
+                                                        return data[v].slice(0).sort((a, b)=>{
+                                                            return getPercent(b.steps) - getPercent(a.steps)
+                                                        }).map((v,i)=>{
+                                                            return <Tile theme={theme} onUpdate={setNeedUpdate} key={i} year={v.year} name={v.name} id={v.id} percent={getPercent(v.steps)} steps={v.steps}
+                                                                         onClick={setStateOfEditingPanel}/>
+                                                        })
+                                                    }
+                                                })()
+                                            }
+                                        </div>
+                                    </>
+                            )
                     })
                 ) : null
             }

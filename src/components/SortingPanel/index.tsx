@@ -23,7 +23,8 @@ const SortingPanel = ({
                 />
                 <p>dark</p></div>
             <FormControl className='w-[150px]'>
-                <InputLabel id="demo-simple-select-label">Completed</InputLabel>
+                <InputLabel focused={theme === 'dark' ? true : undefined} color={theme === 'dark' ? 'primary' : undefined} id="demo-simple-select-label">Completed</InputLabel>
+                {/*<InputLabel id="demo-simple-select-label">Completed</InputLabel>*/}
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
@@ -40,7 +41,7 @@ const SortingPanel = ({
                 </Select>
             </FormControl>
             <FormControl className='w-[150px]'>
-                <InputLabel id="demo-simple-select-label">Year</InputLabel>
+                <InputLabel focused={theme === 'dark' ? true : undefined} color={theme === 'dark' ? 'primary' : undefined} id="demo-simple-select-label">Year</InputLabel>
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"

@@ -1,20 +1,48 @@
 import React from "react";
-import {render} from "@testing-library/react";
 import Main from "./index";
-
+import {Api} from "../../App";
+import {fireEvent, render} from "@testing-library/react";
 
 it('Main test', async () => {
-    jest.useFakeTimers()
 
     const Comp = () => {
         return (
-           <Main />
+           <Api.Provider value={{
+                    getGoals: jest.fn().mockImplementation(() => {
+                        return Promise.resolve(
+                            {
+                                    '2023':[
+                                        {
+                                            id: '123',
+                                            year:'2023',
+                                            name:'Move to another country',
+                                            steps:[
+                                               { name:'Collect documents',
+                                                   state: true
+                                                },
+                                               { name:'Prepare the cat',
+                                                    state: false
+                                                },
+                                            ]
+                                        }
+                                    ]
+                                }
+                            )
+                    }),
+                    deleteGoal: jest.fn(),
+                    addGoal: jest.fn(),
+                    editGoal: jest.fn(),
+                    signIn: jest.fn(),
+                }
+           }>
+            <Main />
+           </Api.Provider>
         )
     }
 
-    const {container, rerender} = render(<Comp />)
+    const {container, rerender} = render(<Comp/>)
 
     await Promise.resolve();
-    jest.advanceTimersByTime(2000);
-
+    await Promise.resolve();
+    rerender(<Comp />)
 })
