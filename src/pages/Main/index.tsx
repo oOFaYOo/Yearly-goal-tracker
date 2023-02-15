@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {createContext, useContext, useEffect, useState} from 'react';
 import Tile from "../../components/Tile";
 import SortingPanel from "../../components/SortingPanel";
 import GoalCreationPanel from "../../components/GoalCreationPanel";
@@ -17,12 +17,14 @@ function getPercent(arr: { name: string, state: boolean }[]) {
     return Math.round((completed * 100) / arr.length);
 }
 
+export const UserId = createContext('');
+
 const Main = ({id, setIsLoggedIn}:{id:string, setIsLoggedIn:React.Dispatch<React.SetStateAction<{state:boolean, id:string}>>}) => {
 
     const api = useContext(Api)
     const [openGoalCreationPanel, setOpenGoalCreationPanel] = useState<boolean>(false);
     const [stateOfEditingPanel, setStateOfEditingPanel] = useState<{open:boolean, data:IGoal|undefined}>({open:false, data:undefined});
-    const [data, setData] = useState<IGoals|undefined>(undefined);
+    const [data, setData] = useState<{[key: string]:IGoal[]}|undefined>(undefined);
     const [sorting, setSorting] = useState<number>(1);
     const [filtering, setFiltering] = useState<number>(1);
     const [searchValue, setSearchValue] = useState('');
@@ -34,8 +36,9 @@ const Main = ({id, setIsLoggedIn}:{id:string, setIsLoggedIn:React.Dispatch<React
     useEffect(()=>{
         // if(!data) {
             (async () => {
-                let response = await api.getGoals();
-                setData(response as IGoals);
+                let response = await api.getGoals(id);
+                console.log(response)
+                setData(response as {[key: string]: IGoal[]});
                 setNeedUpdate(false)
             })()
         // }
@@ -48,7 +51,7 @@ const Main = ({id, setIsLoggedIn}:{id:string, setIsLoggedIn:React.Dispatch<React
             <CircularProgress />
         </div>
     } else return (
-        <>
+        <UserId.Provider value={id}>
             {
                 openGoalCreationPanel
                 ? <GoalCreationPanel theme={theme} setNeedUpdate={setNeedUpdate} closeFunction={setOpenGoalCreationPanel}/>
@@ -147,7 +150,7 @@ const Main = ({id, setIsLoggedIn}:{id:string, setIsLoggedIn:React.Dispatch<React
                 ) : null
             }
         </div>
-        </>
+        </UserId.Provider>
     );
 }
 

@@ -1,9 +1,10 @@
 import {IUsers} from "../types";
 
-export const users:IUsers = {
+const users:IUsers = {
     '123': {
         id:'demouser',
-        password: '123'
+        password: '123',
     }
 };
 
+export default users;

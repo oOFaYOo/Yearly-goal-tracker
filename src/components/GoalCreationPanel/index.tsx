@@ -3,6 +3,7 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import {Api} from "../../App";
 import {Tooltip} from "@mui/material";
+import {UserId} from "../../pages/Main";
 
 const GoalCreationPanel = ({setNeedUpdate, closeFunction, theme}:
                            { setNeedUpdate: React.Dispatch<React.SetStateAction<boolean>>, theme:'light'|'dark',
@@ -11,6 +12,7 @@ const GoalCreationPanel = ({setNeedUpdate, closeFunction, theme}:
     const [steps, setSteps] = useState<string[]>([]);
     const [newStep, setNewStep] = useState<string>('');
     const api = useContext(Api);
+    const id = useContext(UserId);
 
     return <div className='absolute h-[100vh] w-[100vw] flex justify-center items-center'>
             <div onClick={()=> {
@@ -19,7 +21,7 @@ const GoalCreationPanel = ({setNeedUpdate, closeFunction, theme}:
             <form onSubmit={(e)=>{
                 const goal = (e.currentTarget.elements.namedItem('goal') as HTMLInputElement).value;
                 const year = (e.currentTarget.elements.namedItem('year') as HTMLInputElement).value;
-                api.addGoal(goal, year, steps);
+                api.addGoal(goal, id, year, steps);
                 setNeedUpdate(true);
                 setSteps([]);
                 closeFunction(false);

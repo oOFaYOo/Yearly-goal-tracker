@@ -1,6 +1,7 @@
 import React from "react";
 import {fireEvent, render, screen} from "@testing-library/react";
 import GoalEditingPanel from "./index";
+import { UserId } from "../../pages/Main";
 
 let someGoal = {
     id: '123',
@@ -23,7 +24,9 @@ it('GoalEditingPanel test', ()=>{
 
     const Comp = ({theme}:{theme:'light'|'dark'}) => {
         return (
-            <GoalEditingPanel data={someGoal} theme={theme} setOpenState={()=>{}} />
+            <UserId.Provider value={'demouser'}>
+                 <GoalEditingPanel data={someGoal} theme={theme} setOpenState={()=>{}} />
+            </UserId.Provider>
         )
     }
 

@@ -1,11 +1,13 @@
 import React from "react";
 import {fireEvent, render} from "@testing-library/react";
 import Tile from "./index";
+import {UserId} from "../../pages/Main";
 
 it('Tile test', () => {
 
     const Comp = ({percent, theme}:{percent:number, theme:'light'|'dark'}) => {
         return (
+            <UserId.Provider value={'demouser'}>
             <Tile name={'name'}
                   theme={theme}
                   year={'2023'}
@@ -14,6 +16,7 @@ it('Tile test', () => {
                   steps={[{name:'name', state:true}, {name:'name', state:false}]}
                   onClick={()=>{}}
                   onUpdate={()=>{}} />
+            </UserId.Provider>
         )
     }
 

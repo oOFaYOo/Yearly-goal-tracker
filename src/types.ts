@@ -1,6 +1,8 @@
 
 export interface IGoals {
-    [key: string]:IGoal[]
+    [key: string]:{
+        [key: string]:IGoal[]
+    }
 }
 
 export interface IGoal {
@@ -13,15 +15,15 @@ export interface IGoal {
 export interface IUsers {
     [key: string]:{
         id:string,
-        password:string
+        password:string,
     }
 }
 
 export interface IApiClient {
-    getGoals(): Promise<IGoals>;
-    deleteGoal(id:string, year:string) : Promise<void>;
-    addGoal(goal:string, year:string, steps:string[]) : Promise<void>;
-    editGoal(year:string, id:string, steps:{name:string, state:boolean}[]) : Promise<void>;
+    getGoals(id:string): Promise<{ [key: string]: IGoal[] }>;
+    deleteGoal(userId:string, goalId:string, year:string) : Promise<void>;
+    addGoal(goal:string, userId:string, year:string, steps:string[]) : Promise<void>;
+    editGoal(year:string, userId:string, goalId:string, steps:{name:string, state:boolean}[]) : Promise<void>;
     signIn(login: string, password: string) : Promise<{status: boolean, id?:string, message?:string}>;
     signUp(login: string, password: string) : Promise<{status: boolean, id?:string, message:string}>;
 }

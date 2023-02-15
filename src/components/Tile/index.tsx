@@ -3,6 +3,7 @@ import {Tooltip} from "@mui/material";
 import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
 import {Api} from "../../App";
 import {IGoal} from "../../types";
+import {UserId} from "../../pages/Main";
 
 function percentColor(percent: number) {
     if (percent < 80) {
@@ -28,6 +29,7 @@ const Tile = ({
 }) => {
 
     const api = useContext(Api);
+    const userId = useContext(UserId);
 
     return (
         <div
@@ -38,7 +40,7 @@ const Tile = ({
             <div className='w-full flex flex-row justify-end'>
                 <Tooltip title={'Delete goal'} arrow placement={"top"}>
                 <CancelRoundedIcon onClick={()=>{
-                        api.deleteGoal(id, year);
+                        api.deleteGoal(userId, id, year);
                         onUpdate(true);
                     }
                 } className='text-gray-500/30 hover:text-rose-600 hover:scale-105 active:scale-100' />

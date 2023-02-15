@@ -3,6 +3,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import PanoramaFishEyeRoundedIcon from '@mui/icons-material/PanoramaFishEyeRounded';
 import {IGoal} from "../../types";
 import {Api} from "../../App";
+import {UserId} from "../../pages/Main";
 
 const GoalEditingPanel = ({data, setOpenState, theme}:
                               {data:IGoal|undefined,
@@ -11,6 +12,7 @@ const GoalEditingPanel = ({data, setOpenState, theme}:
 
     const [steps, setSteps] = useState(data?.steps);
     const api = useContext(Api);
+    const id = useContext(UserId);
 
     return <div className='absolute h-[100vh] w-[100vw] flex justify-center items-center'>
         <div onClick={()=> {
@@ -76,7 +78,7 @@ const GoalEditingPanel = ({data, setOpenState, theme}:
                 <button className='hover:scale-105 text-black active:scale-100 h-[40px] rounded w-[100px] bg-teal-500'
                         onClick={(e)=>{
                             if(data && steps)
-                            api.editGoal(data?.year, data?.id, steps.filter((v)=> {
+                            api.editGoal(data?.year, id, data?.id, steps.filter((v)=> {
                                 return v.name !== ''
                             }));
                             setOpenState({open: false, data: undefined});

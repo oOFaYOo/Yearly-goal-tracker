@@ -1,12 +1,15 @@
 import React from "react";
 import GoalCreationPanel from "./index";
 import {fireEvent, render, screen} from "@testing-library/react";
+import { UserId } from "../../pages/Main";
 
 it('GoalCreationPanel test', ()=>{
 
     const Comp = ({theme}:{theme:'light'|'dark'}) => {
         return (
-            <GoalCreationPanel theme={theme} closeFunction={()=>{}} setNeedUpdate={()=>{}} />
+            <UserId.Provider value={'demouser'}>
+                <GoalCreationPanel theme={theme} closeFunction={()=>{}} setNeedUpdate={()=>{}} />
+            </UserId.Provider>
         )
     }
 

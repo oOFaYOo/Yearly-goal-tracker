@@ -59,6 +59,7 @@ if(message !== ''){
                 <button className='w-full h-[36px] border-t-2 border-teal-500 hover:bg-teal-500/30'
                 onClick={() => {
                         api.signIn('123', '123').then((result)=>{
+                            console.log(result.id)
                             setAuthState({state:result.status, id:result.id!});
                         })
                 }}
