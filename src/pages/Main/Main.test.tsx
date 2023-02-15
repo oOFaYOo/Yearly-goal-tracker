@@ -2,6 +2,8 @@ import React from "react";
 import Main from "./index";
 import {Api} from "../../App";
 import {fireEvent, render, screen, within} from "@testing-library/react";
+import 'regenerator-runtime/runtime';
+import {MemoryRouter} from "react-router-dom";
 
 it('Main test', async () => {
 
@@ -9,69 +11,74 @@ it('Main test', async () => {
 
     const Comp = () => {
         return (
-           <Api.Provider value={{
+            <MemoryRouter>
+                <Api.Provider value={{
                     getGoals: jest.fn().mockImplementation(() => {
                         return Promise.resolve(
                             {
-                                    '2023':[
-                                        {
-                                            id: '123',
-                                            year:'2023',
-                                            name:'Some 1',
-                                            steps:[
-                                               { name:'Step 1',
-                                                   state: true
-                                                },
-                                               { name:'Step 2',
-                                                    state: false
-                                                },
-                                            ]
-                                        }
-                                    ],
-                                    '2022': [],
-                                    '2021': [
-                                        {
-                                            id: '123',
-                                            year:'2021',
-                                            name:'Some 2',
-                                            steps:[]
-                                        }
-                                    ]
-                                }
-                            )
+                                '2023': [
+                                    {
+                                        id: '123',
+                                        year: '2023',
+                                        name: 'Some 1',
+                                        steps: [
+                                            {
+                                                name: 'Step 1',
+                                                state: true
+                                            },
+                                            {
+                                                name: 'Step 2',
+                                                state: false
+                                            },
+                                        ]
+                                    }
+                                ],
+                                '2022': [],
+                                '2021': [
+                                    {
+                                        id: '123',
+                                        year: '2021',
+                                        name: 'Some 2',
+                                        steps: []
+                                    }
+                                ]
+                            }
+                        )
                     }),
                     deleteGoal: jest.fn(),
                     addGoal: jest.fn(),
                     editGoal: jest.fn(),
                     signIn: jest.fn(),
+                    signUp: jest.fn(),
                 }
-           }>
-            <Main />
-           </Api.Provider>
+                }>
+                    <Main id={''} setIsLoggedIn={() => {
+                    }}/>
+                </Api.Provider>
+            </MemoryRouter>
         )
     }
 
     const {container, rerender, getByTestId, getByRole} = render(<Comp/>)
 
     await Promise.resolve();
-    await Promise.resolve();
-    rerender(<Comp />)
+    rerender(<Comp/>)
 
-    fireEvent.mouseDown( getByTestId("select1").childNodes[0]);
+    fireEvent.mouseDown(getByTestId("select1").childNodes[0]);
     let listbox1 = within(getByRole('listbox'));
     fireEvent.click(listbox1.getByText("100 ← 0"));
 
-    fireEvent.mouseDown( getByTestId("select1").childNodes[0]);
+    fireEvent.mouseDown(getByTestId("select1").childNodes[0]);
     let listbox2 = within(getByRole('listbox'));
     fireEvent.click(listbox2.getByText("0 → 100"));
 
-    fireEvent.change(screen.getByPlaceholderText('Search...'), {target:{value: 'Some'}});
+    fireEvent.change(screen.getByPlaceholderText('Search...'), {target: {value: 'Some'}});
     fireEvent.click(screen.getByText('✕︎'));
-    rerender(<Comp />)
+    rerender(<Comp/>)
     fireEvent.click(container.getElementsByClassName('w-full h-full flex justify-between flex-col items-center')[0]);
-    rerender(<Comp />)
-    fireEvent.click( getByTestId("switch").childNodes[0]);
+    rerender(<Comp/>)
+    fireEvent.click(getByTestId("switch").childNodes[0]);
 
     jest.advanceTimersByTime(300000);
-
+    fireEvent.click(screen.getByText('Log out'));
 })

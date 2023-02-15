@@ -6,6 +6,7 @@ import GoalEditingPanel from "../../components/GoalEditingPanel";
 import {Api} from "../../App";
 import {IGoal, IGoals} from "../../types";
 import {CircularProgress} from "@mui/material";
+import {useNavigate} from "react-router-dom";
 
 function getPercent(arr: { name: string, state: boolean }[]) {
     if(arr.length === 0) return 0;
@@ -16,7 +17,7 @@ function getPercent(arr: { name: string, state: boolean }[]) {
     return Math.round((completed * 100) / arr.length);
 }
 
-const Main = () => {
+const Main = ({id, setIsLoggedIn}:{id:string, setIsLoggedIn:React.Dispatch<React.SetStateAction<{state:boolean, id:string}>>}) => {
 
     const api = useContext(Api)
     const [openGoalCreationPanel, setOpenGoalCreationPanel] = useState<boolean>(false);
@@ -27,6 +28,8 @@ const Main = () => {
     const [searchValue, setSearchValue] = useState('');
     const [needUpdate, setNeedUpdate] = useState(false);
     const [theme, setTheme] = useState<'light'|'dark'>('light')
+
+    const nav = useNavigate();
 
     useEffect(()=>{
         // if(!data) {
@@ -60,11 +63,18 @@ const Main = () => {
             ? 'bg-gray-50 styled_scrollbar absolute overflow-y-auto h-[100vh] w-[100vw]'
             : 'bg-gray-900 text-gray-400 styled_scrollbar absolute overflow-y-auto h-[100vh] w-[100vw]'}>
             <header className={theme === 'light'
-                ? 'bg-white border-teal-500 border-b-2 w-full shadow-md h-[5vh] flex items-center'
-                : 'w-full shadow-md h-[5vh] flex items-center bg-gray-800 border-teal-500 border-b-2'}>
+                ? 'bg-white border-teal-500 border-b-2 w-full justify-between shadow-md h-[5vh] flex items-center'
+                : 'w-full shadow-md h-[5vh] flex justify-between items-center bg-gray-800 border-teal-500 border-b-2'}>
                 <p className={theme === 'light'
                     ? 'ml-4 text-xl font-sans font-semibold'
                     : 'ml-4 text-xl font-sans font-semibold'}>Yearly Goal Tracker</p>
+
+                <button className='mr-4 px-2 border-teal-500 border-l-2'
+                    onClick={()=>{
+                        setIsLoggedIn({state:false, id:''});
+                        nav('/yearly_goal_tracker/auth');
+                    }}
+                >Log out</button>
             </header>
             <div className='flex justify-between items-center py-4 h-24'>
                 <div className='flex px-6 items-center justify-center relative w-[40%] h-full'>
@@ -109,19 +119,19 @@ const Main = () => {
                                             {
                                                 (()=>{
                                                     if(sorting === 1){
-                                                        return data[v].map((v,i)=>{
+                                                        return data[v].filter((v)=>v.name.toLowerCase().includes(searchValue.toLowerCase())).map((v,i)=>{
                                                             return <Tile theme={theme} onUpdate={setNeedUpdate} key={i} year={v.year} name={v.name} id={v.id} percent={getPercent(v.steps)} steps={v.steps}
                                                                          onClick={setStateOfEditingPanel}/>
                                                         });
                                                     } else if(sorting === 2){
-                                                        return data[v].slice(0).sort((a, b)=>{
+                                                        return data[v].filter((v)=>v.name.toLowerCase().includes(searchValue.toLowerCase())).slice(0).sort((a, b)=>{
                                                             return getPercent(a.steps) - getPercent(b.steps)
                                                         }).map((v,i)=>{
                                                             return <Tile theme={theme} onUpdate={setNeedUpdate} key={i} year={v.year} name={v.name} id={v.id} percent={getPercent(v.steps)} steps={v.steps}
                                                                          onClick={setStateOfEditingPanel}/>
                                                         })
                                                     }else if(sorting === 3){
-                                                        return data[v].slice(0).sort((a, b)=>{
+                                                        return data[v].filter((v)=>v.name.toLowerCase().includes(searchValue.toLowerCase())).slice(0).sort((a, b)=>{
                                                             return getPercent(b.steps) - getPercent(a.steps)
                                                         }).map((v,i)=>{
                                                             return <Tile theme={theme} onUpdate={setNeedUpdate} key={i} year={v.year} name={v.name} id={v.id} percent={getPercent(v.steps)} steps={v.steps}

@@ -1,15 +1,7 @@
 import goals from "./mock/goals";
 import {Goal} from "./Goal";
 import {users} from "./mock/users";
-import {IGoals} from "./types";
-
-export interface IApiClient {
-    getGoals(): Promise<IGoals>;
-    deleteGoal(id:string, year:string) : Promise<void>;
-    addGoal(goal:string, year:string, steps:string[]) : Promise<void>;
-    editGoal(year:string, id:string, steps:{name:string, state:boolean}[]) : Promise<void>;
-    signIn(login: string, password: string) : Promise<{status: boolean, id?:string, errorMessage?:string}>;
-}
+import {IApiClient, IGoals} from "./types";
 
 class ApiClient implements IApiClient{
     getGoals():Promise<IGoals>{
@@ -36,18 +28,30 @@ class ApiClient implements IApiClient{
           }
       })
     }
-    signIn(login: string, password: string) : Promise<{status: boolean, id?:string, errorMessage?:string}> {
+    async signIn(login: string, password: string) : Promise<{status: boolean, id?:string, message?:string}> {
         if (users[login]) {
             if (users[login].password === password) {
                 return new Promise((resolve) => {
                     setTimeout(() => resolve({status: true, id: users[login].id}), 500);
                 })
             } else return new Promise((resolve, reject) => {
-                setTimeout(() => reject({status: false, errorMessage: 'Incorrect password'}), 500);
+                setTimeout(() => reject({status: false, message: 'Incorrect password'}), 500);
             })
         } else return new Promise((resolve,reject) => {
-            setTimeout(() => reject({status: false, errorMessage: 'User is not found'}), 500);
+            setTimeout(() => reject({status: false, message: 'User is not found'}), 500);
         })
+    }
+    async signUp(login: string, password: string): Promise<{status: boolean, id?:string, message:string}> {
+        if(users[login]){
+            return new Promise((resolve,reject) => {
+                setTimeout(() => reject({status: false, message: 'User already exists'}), 500);
+            })
+        } else {
+            users[login] = {id:Math.round(Date.now()+(Math.random()*1000)).toString(), password:password};
+            return new Promise((resolve) => {
+                setTimeout(() => resolve({status: false, message:'Successfully registered'}), 500);
+            })
+        }
     }
 }
 

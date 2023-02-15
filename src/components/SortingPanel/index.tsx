@@ -23,14 +23,14 @@ const SortingPanel = ({
                 />
                 <p>dark</p></div>
             <FormControl className='w-[150px]'>
-                <InputLabel focused={theme === 'dark' ? true : undefined} color={theme === 'dark' ? 'primary' : undefined} id="demo-simple-select-label">Completed</InputLabel>
-                {/*<InputLabel id="demo-simple-select-label">Completed</InputLabel>*/}
+                <InputLabel id="demo-simple-select-label" sx={theme === 'dark' ? {color:'rgb(156 163 175)'} : {}}>Completed</InputLabel>
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select1"
                     data-testid="select1"
                     value={undefined}
                     label="Completed"
+                    sx={theme === 'dark' ? {color:'rgb(156 163 175)'} : {}}
                     className={theme === 'light' ? 'min-w-[70px]' : 'min-w-[70px] bg-gray-700'}
                     onChange={(e) => {
                         if (e.target.value !== undefined) setSorting(+(e.target.value))
@@ -42,12 +42,13 @@ const SortingPanel = ({
                 </Select>
             </FormControl>
             <FormControl className='w-[150px]'>
-                <InputLabel focused={theme === 'dark' ? true : undefined} color={theme === 'dark' ? 'primary' : undefined} id="demo-simple-select-label">Year</InputLabel>
+                <InputLabel sx={theme === 'dark' ? {color:'rgb(156 163 175)'} : {}} id="demo-simple-select-label">Year</InputLabel>
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select2"
                     data-testid="select2"
                     value={undefined}
+                    sx={theme === 'dark' ? {color:'rgb(156 163 175)'} : {}}
                     label="Year"
                     className={theme === 'light' ? 'min-w-[70px]' : 'min-w-[70px] bg-gray-700'}
                     onChange={(e) => {
