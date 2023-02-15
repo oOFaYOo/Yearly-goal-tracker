@@ -22,7 +22,9 @@ const GoalCreationPanel = ({setNeedUpdate, closeFunction, theme}:
                 const goal = (e.currentTarget.elements.namedItem('goal') as HTMLInputElement).value;
                 const year = (e.currentTarget.elements.namedItem('year') as HTMLInputElement).value;
                 const newStepUnfinished = (e.currentTarget.elements.namedItem('newStep') as HTMLInputElement).value;
-                steps.push(newStepUnfinished);
+                if(newStepUnfinished !== ''){
+                    steps.push(newStepUnfinished);
+                }
                 api.addGoal(goal, id, year, steps);
                 setNeedUpdate(true);
                 setSteps([]);
