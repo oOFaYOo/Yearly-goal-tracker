@@ -37,7 +37,6 @@ const Main = ({id, setIsLoggedIn}:{id:string, setIsLoggedIn:React.Dispatch<React
         // if(!data) {
             (async () => {
                 let response = await api.getGoals(id);
-                console.log(response)
                 setData(response as {[key: string]: IGoal[]});
                 setNeedUpdate(false)
             })()
