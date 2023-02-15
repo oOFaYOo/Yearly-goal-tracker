@@ -21,6 +21,8 @@ const GoalCreationPanel = ({setNeedUpdate, closeFunction, theme}:
             <form onSubmit={(e)=>{
                 const goal = (e.currentTarget.elements.namedItem('goal') as HTMLInputElement).value;
                 const year = (e.currentTarget.elements.namedItem('year') as HTMLInputElement).value;
+                const newStepUnfinished = (e.currentTarget.elements.namedItem('newStep') as HTMLInputElement).value;
+                steps.push(newStepUnfinished);
                 api.addGoal(goal, id, year, steps);
                 setNeedUpdate(true);
                 setSteps([]);
@@ -55,7 +57,7 @@ const GoalCreationPanel = ({setNeedUpdate, closeFunction, theme}:
                         <AddCircleOutlineIcon onClick={()=>{
                             if(newStep !== ''){
                                 const newSteps = [...steps];
-                                newSteps.unshift(newStep);
+                                newSteps.push(newStep);
                                 setNewStep('');
                                 setSteps(newSteps);
                             }
@@ -67,7 +69,7 @@ const GoalCreationPanel = ({setNeedUpdate, closeFunction, theme}:
                         </Tooltip>
                     </div>
                     <input className={theme === 'light' ? 'rounded-lg outline-none p-2 w-full' : 'rounded-lg outline-none p-2 w-full bg-gray-700'}
-                           value={newStep} type={'text'} placeholder={'Step...'}
+                           value={newStep} type={'text'} name={'newStep'} placeholder={'New step...'}
                     onChange={(e)=> setNewStep(e.target.value)}
                     />
                 </div>

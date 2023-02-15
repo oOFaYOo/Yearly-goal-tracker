@@ -4,6 +4,8 @@ import PanoramaFishEyeRoundedIcon from '@mui/icons-material/PanoramaFishEyeRound
 import {IGoal} from "../../types";
 import {Api} from "../../App";
 import {UserId} from "../../pages/Main";
+import {Tooltip} from "@mui/material";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
 const GoalEditingPanel = ({data, setOpenState, theme}:
                               {data:IGoal|undefined,
@@ -11,6 +13,7 @@ const GoalEditingPanel = ({data, setOpenState, theme}:
                                setOpenState:React.Dispatch<React.SetStateAction<{open:boolean, data:IGoal|undefined}>>}) => {
 
     const [steps, setSteps] = useState(data?.steps);
+    const [newStep, setNewStep] = useState<string>('');
     const api = useContext(Api);
     const id = useContext(UserId);
 
@@ -29,6 +32,28 @@ const GoalEditingPanel = ({data, setOpenState, theme}:
                     <div className='h-[1px] w-[30%] bg-gray-500'/>
                     Steps to achieve
                     <div className='h-[1px] w-[30%] bg-gray-500'/>
+                </div>
+                <div className='flex item-center flex-row'>
+                    <div className='pt-1.5'>
+                        <Tooltip title={'Add new step'} arrow placement={'top'}>
+                            <AddCircleOutlineIcon onClick={()=>{
+                                if(newStep !== ''){
+                                    const newSteps = [...steps!];
+                                    newSteps.push({name: newStep, state:false});
+                                    setNewStep('');
+                                    setSteps(newSteps);
+                                }
+                            }}
+                                                  className={theme === 'light'
+                                                      ? 'mr-2 hover:text-yellow-500 hover:cursor-pointer hover:scale-105 active:scale-100'
+                                                      : 'mr-2 hover:text-yellow-500 text-white/50 hover:cursor-pointer hover:scale-105 active:scale-100'
+                                                  }/>
+                        </Tooltip>
+                    </div>
+                    <input className={theme === 'light' ? 'rounded-lg outline-none p-2 w-full' : 'rounded-lg outline-none p-2 w-full bg-gray-700'}
+                           value={newStep} type={'text'} name={'newStep'} placeholder={'New step...'}
+                           onChange={(e)=> setNewStep(e.target.value)}
+                    />
                 </div>
                 {steps?.length === 0 ? null :
                     <div className='styled_scrollbar overflow-y-auto flex flex-col w-full gap-y-4'>

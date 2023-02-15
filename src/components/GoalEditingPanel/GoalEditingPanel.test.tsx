@@ -38,8 +38,11 @@ it('GoalEditingPanel test', ()=>{
     fireEvent.click(container.getElementsByClassName('mr-2 hover:text-green-600 text-black/20 hover:cursor-pointer hover:scale-105 active:scale-100')[0]);
     fireEvent.click(screen.getByText('Confirm'));
 
-    rerender(<Comp theme={'dark'}/>)
+    rerender(<Comp theme={'dark'}/>);
     fireEvent.click(container.getElementsByClassName('flex justify-center items-center z-10 bg-black/60 h-full w-full')[0]);
 
+    rerender(<Comp theme={'light'}/>);
+    fireEvent.change(screen.getByPlaceholderText('New step...'), {target:{value: 'some'}});
+    fireEvent.click(container.getElementsByClassName('mr-2 hover:text-yellow-500 hover:cursor-pointer hover:scale-105 active:scale-100')[0]);
 
 })
