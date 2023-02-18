@@ -19,12 +19,18 @@ export interface IUsers {
     }
 }
 
-export interface IApiClient {
-    getGoals(id:string): Promise<{ [key: string]: IGoal[] }>;
-    deleteGoal(userId:string, goalId:string, year:string) : Promise<void>;
-    addGoal(goal:string, userId:string, year:string, steps:string[]) : Promise<void>;
-    editGoal(year:string, userId:string, goalId:string, steps:{name:string, state:boolean}[]) : Promise<void>;
-    signIn(login: string, password: string) : Promise<{status: boolean, id?:string, message?:string}>;
-    signUp(login: string, password: string) : Promise<{status: boolean, id?:string, message:string}>;
+export interface IApiClientResult<T> {
+    isSuccessful: boolean;
+    isAuthorized: boolean;
+    statusCode: number;
+    result?: T;
 }
 
+export interface IApiClient {
+    getGoals(): Promise<IApiClientResult<{ [key: string]: IGoal[] }>>;
+    deleteGoal(goalId:string) : Promise<IApiClientResult<void>>;
+    addGoal(goalName:string, year:string, steps:string[]) : Promise<IApiClientResult<void>>;
+    editGoal(goalId:string, steps:{name:string, state:boolean}[]) : Promise<IApiClientResult<void>>;
+    signIn(login: string, password: string) : Promise<IApiClientResult<string>>;
+    signUp(login: string, password: string) : Promise<IApiClientResult<string>>;
+}

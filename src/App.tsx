@@ -1,10 +1,12 @@
 import React, {createContext, useState} from 'react';
 import Main from "./pages/Main";
-import ApiClient from './ApiClient';
+// import FakeApiClient from './FakeApiClient';
 import AuthPage from "./pages/AuthPage";
 import {Navigate, Route, Routes} from "react-router-dom";
 import {IApiClient} from "./types";
+import ApiClient from "./ApiClient";
 
+// const api = new FakeApiClient();
 const api = new ApiClient();
 export const Api = createContext<IApiClient>(api);
 

@@ -4,7 +4,7 @@ const goals:IGoals = {
     demouser:{
         '2023': [
             {
-                id: Math.round(Date.now()+(Math.random()*1000)).toString(),
+                id: 'g456d5f6dg8rg6df5fd6fs3d2',
                 year:'2023',
                 name:'Move to another country',
                 steps:[
@@ -23,7 +23,7 @@ const goals:IGoals = {
                 ]
             },
             {
-                id: Math.round(Date.now()+(Math.random()*1000)).toString(),
+                id: 'we87w98d45s2d3e84s6c84xz65',
                 year:'2023',
                 name:'Athletic body',
                 steps:[
@@ -42,7 +42,7 @@ const goals:IGoals = {
                 ]
             },
             {
-                id: Math.round(Date.now()+(Math.random()*1000)).toString(),
+                id: '2mh0jmh0jmh5jm1h5j1h6',
                 year:'2023',
                 name:'Find a job in an international company',
                 steps:[
@@ -66,7 +66,7 @@ const goals:IGoals = {
         ],
         '2022': [
             {
-                id: Math.round(Date.now()+(Math.random()*1000)).toString(),
+                id: '2tr3et12rdefdvsbcnfngioyu',
                 year:'2022',
                 name:'Become a better specialist',
                 steps:[
@@ -88,7 +88,7 @@ const goals:IGoals = {
                 ]
             },
             {
-                id: Math.round(Date.now()+(Math.random()*1000)).toString(),
+                id: '76n76n5cg4x7i82y0g00d2ad',
                 year:'2022',
                 name:'Athletic body',
                 steps:[
@@ -109,7 +109,7 @@ const goals:IGoals = {
         ],
         '2021': [
             {
-                id: Math.round(Date.now()+(Math.random()*1000)).toString(),
+                id: 'evg3hveli8ilykf8e7ef000',
                 year:'2021',
                 name:'Become a programmer',
                 steps:[
@@ -131,7 +131,7 @@ const goals:IGoals = {
                 ]
             },
             {
-                id: Math.round(Date.now()+(Math.random()*1000)).toString(),
+                id: 'kfghflkghjd48374982347928lfjg',
                 year:'2021',
                 name:'Athletic body',
                 steps:[
@@ -151,7 +151,6 @@ const goals:IGoals = {
             },
         ],
     }
-
 };
 
 export default goals;

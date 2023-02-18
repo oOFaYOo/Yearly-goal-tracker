@@ -40,7 +40,7 @@ const Tile = ({
             <div className='w-full flex flex-row justify-end'>
                 <Tooltip title={'Delete goal'} arrow placement={"top"}>
                 <CancelRoundedIcon onClick={()=>{
-                        api.deleteGoal(userId, id, year);
+                        api.deleteGoal(id);
                         onUpdate(true);
                     }
                 } className='text-gray-500/30 hover:text-rose-600 hover:scale-105 active:scale-100' />

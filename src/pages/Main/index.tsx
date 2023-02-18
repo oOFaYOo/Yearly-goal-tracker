@@ -4,7 +4,7 @@ import SortingPanel from "../../components/SortingPanel";
 import GoalCreationPanel from "../../components/GoalCreationPanel";
 import GoalEditingPanel from "../../components/GoalEditingPanel";
 import {Api} from "../../App";
-import {IGoal, IGoals} from "../../types";
+import {IGoal} from "../../types";
 import {CircularProgress} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 
@@ -36,9 +36,19 @@ const Main = ({id, setIsLoggedIn}:{id:string, setIsLoggedIn:React.Dispatch<React
     useEffect(()=>{
         // if(!data) {
             (async () => {
-                let response = await api.getGoals(id);
-                setData(response as {[key: string]: IGoal[]});
-                setNeedUpdate(false)
+                let response = await api.getGoals();
+                console.log(response);
+
+                if (!response.isAuthorized){
+                    console.log(response);
+                    setIsLoggedIn({state: false, id: ""});
+                    return;
+                }
+
+                if (response.isSuccessful && response.result){
+                    setData(response.result as {[key: string]: IGoal[]});
+                    setNeedUpdate(false)
+                }
             })()
         // }
     },[data, needUpdate]);

@@ -25,7 +25,7 @@ const GoalCreationPanel = ({setNeedUpdate, closeFunction, theme}:
                 if(newStepUnfinished !== ''){
                     steps.push(newStepUnfinished);
                 }
-                api.addGoal(goal, id, year, steps);
+                api.addGoal(goal, year, steps);
                 setNeedUpdate(true);
                 setSteps([]);
                 closeFunction(false);
