@@ -14,8 +14,11 @@ it('Main test', async () => {
             <MemoryRouter>
                 <Api.Provider value={{
                     getGoals: jest.fn().mockImplementation(() => {
-                        return Promise.resolve(
-                            {
+                        return Promise.resolve({
+                            isSuccessful: true,
+                            isAuthorized: true,
+                            statusCode: 200,
+                            result: {
                                 '2023': [
                                     {
                                         id: '123',
@@ -43,7 +46,7 @@ it('Main test', async () => {
                                     }
                                 ]
                             }
-                        )
+                        })
                     }),
                     deleteGoal: jest.fn(),
                     addGoal: jest.fn(),
@@ -52,7 +55,7 @@ it('Main test', async () => {
                     signUp: jest.fn(),
                 }
                 }>
-                    <Main id={''} setIsLoggedIn={() => {
+                    <Main setIsLoggedIn={() => {
                     }}/>
                 </Api.Provider>
             </MemoryRouter>
@@ -81,4 +84,38 @@ it('Main test', async () => {
 
     jest.advanceTimersByTime(300000);
     fireEvent.click(screen.getByText('Log out'));
+})
+
+it('Main test failed request', async () => {
+
+    const Comp = () => {
+        return (
+            <MemoryRouter>
+                <Api.Provider value={{
+                    getGoals: jest.fn().mockImplementation(() => {
+                        return Promise.resolve({
+                            isSuccessful: false,
+                            isAuthorized: false,
+                            statusCode: 404,
+                            result: undefined
+                        })
+                    }),
+                    deleteGoal: jest.fn(),
+                    addGoal: jest.fn(),
+                    editGoal: jest.fn(),
+                    signIn: jest.fn(),
+                    signUp: jest.fn(),
+                }
+                }>
+                    <Main setIsLoggedIn={() => {
+                    }}/>
+                </Api.Provider>
+            </MemoryRouter>
+        )
+    }
+
+    const {container, rerender} = render(<Comp/>)
+
+    await Promise.resolve();
+    rerender(<Comp/>)
 })

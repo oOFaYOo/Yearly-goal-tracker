@@ -1,3 +1,4 @@
+import React from "react";
 
 export interface IGoals {
     [key: string]:{
@@ -34,3 +35,32 @@ export interface IApiClient {
     signIn(login: string, password: string) : Promise<IApiClientResult<string>>;
     signUp(login: string, password: string) : Promise<IApiClientResult<string>>;
 }
+
+export interface IGoalCreationPanel  {
+    theme: 'light' | 'dark',
+    setNeedUpdate: React.Dispatch<React.SetStateAction<boolean>>,
+    closeFunction: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export interface IGoalEditingPanel  {
+    data: IGoal | undefined,
+    theme: 'light' | 'dark',
+    setOpenState: React.Dispatch<React.SetStateAction<{ open: boolean, data: IGoal | undefined }>>
+}
+
+export interface ISortingPanel  {
+    years: string[],
+    setSorting: React.Dispatch<React.SetStateAction<number>>,
+    setFiltering: React.Dispatch<React.SetStateAction<number>>, theme: 'light' | 'dark',
+    setTheme: React.Dispatch<React.SetStateAction<'light' | 'dark'>>
+}
+
+export interface ITile extends IGoal{
+    theme: 'light' | 'dark',
+    onUpdate: React.Dispatch<React.SetStateAction<boolean>>,
+    percent: number,
+    onClick: React.Dispatch<React.SetStateAction<{ open: boolean, data: IGoal | undefined }>>
+}
+
+
+

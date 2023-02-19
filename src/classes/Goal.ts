@@ -1,4 +1,4 @@
-import {IGoal} from "./types";
+import {IGoal} from "../types";
 
 export class Goal implements IGoal{
     id = Math.round(Date.now()+(Math.random()*1000)).toString();

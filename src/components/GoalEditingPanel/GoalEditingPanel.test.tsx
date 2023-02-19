@@ -1,7 +1,7 @@
 import React from "react";
 import {fireEvent, render, screen} from "@testing-library/react";
 import GoalEditingPanel from "./index";
-import { UserId } from "../../pages/Main";
+import {Api} from '../../App'
 
 let someGoal = {
     id: '123',
@@ -24,9 +24,24 @@ it('GoalEditingPanel test', ()=>{
 
     const Comp = ({theme}:{theme:'light'|'dark'}) => {
         return (
-            <UserId.Provider value={'demouser'}>
+            <Api.Provider value={{
+                getGoals: jest.fn(),
+                deleteGoal: jest.fn(),
+                addGoal: jest.fn(),
+                editGoal: jest.fn().mockImplementation(() => {
+                    return Promise.resolve({
+                        isSuccessful: true,
+                        isAuthorized: true,
+                        statusCode: 200,
+                        result: undefined
+                    })
+                }),
+                signIn: jest.fn(),
+                signUp: jest.fn(),
+            }
+            }>
                  <GoalEditingPanel data={someGoal} theme={theme} setOpenState={()=>{}} />
-            </UserId.Provider>
+            </Api.Provider>
         )
     }
 
@@ -44,5 +59,9 @@ it('GoalEditingPanel test', ()=>{
     rerender(<Comp theme={'light'}/>);
     fireEvent.change(screen.getByPlaceholderText('New step...'), {target:{value: 'some'}});
     fireEvent.click(container.getElementsByClassName('mr-2 hover:text-yellow-500 hover:cursor-pointer hover:scale-105 active:scale-100')[0]);
+
+    rerender(<Comp theme={'light'}/>);
+    fireEvent.change(screen.getByPlaceholderText('New step...'), {target:{value: 'some'}});
+    fireEvent.click(screen.getByText('Confirm'));
 
 })

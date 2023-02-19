@@ -1,15 +1,30 @@
 import React from "react";
 import GoalCreationPanel from "./index";
 import {fireEvent, render, screen} from "@testing-library/react";
-import { UserId } from "../../pages/Main";
+import {Api} from '../../App'
 
 it('GoalCreationPanel test', ()=>{
 
     const Comp = ({theme}:{theme:'light'|'dark'}) => {
         return (
-            <UserId.Provider value={'demouser'}>
+            <Api.Provider value={{
+                getGoals: jest.fn(),
+                deleteGoal: jest.fn(),
+                addGoal: jest.fn().mockImplementation(() => {
+                    return Promise.resolve({
+                        isSuccessful: true,
+                        isAuthorized: true,
+                        statusCode: 200,
+                        result: undefined
+                    })
+                }),
+                editGoal: jest.fn(),
+                signIn: jest.fn(),
+                signUp: jest.fn(),
+            }
+            }>
                 <GoalCreationPanel theme={theme} closeFunction={()=>{}} setNeedUpdate={()=>{}} />
-            </UserId.Provider>
+            </Api.Provider>
         )
     }
 
@@ -29,5 +44,10 @@ it('GoalCreationPanel test', ()=>{
     fireEvent.change(screen.getByPlaceholderText('New step...'), {target:{value: 'some'}});
     fireEvent.click(container.getElementsByClassName('mr-2 hover:text-yellow-500 hover:cursor-pointer hover:scale-105 active:scale-100')[0]);
     fireEvent.click(container.getElementsByClassName('flex justify-center items-center z-10 bg-black/60 h-full w-full')[0]);
+
+    rerender(<Comp theme={'dark'}/>)
+    fireEvent.change(screen.getByPlaceholderText('Goal...'), {target:{value: 'Goal name'}});
+    fireEvent.change(screen.getByPlaceholderText('New step...'), {target:{value: 'some'}});
+    fireEvent.click(screen.getByText('Add new goal'));
 
 })
