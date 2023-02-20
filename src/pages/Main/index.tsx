@@ -1,4 +1,4 @@
-import React, {createContext, useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import Tile from "../../components/Tile";
 import SortingPanel from "../../components/SortingPanel";
 import GoalCreationPanel from "../../components/GoalCreationPanel";
@@ -15,6 +15,19 @@ function getPercent(arr: { name: string, state: boolean }[]) {
         if (v.state) completed++
     });
     return Math.round((completed * 100) / arr.length);
+}
+
+function formatGoals (goals: { [key: string]: IGoal }){
+    const result: { [key: string]: IGoal[] } = {};
+    const arrayOfGoals = Object.values(goals);
+    for(let goal of arrayOfGoals){
+        if(result[goal.year]){
+            result[goal.year].push(goal);
+        } else {
+            result[goal.year] = [goal]
+        }
+    }
+    return result;
 }
 
 const Main = ({setIsLoggedIn}: { setIsLoggedIn: React.Dispatch<React.SetStateAction<{ state: boolean }>> }) => {
@@ -45,7 +58,7 @@ const Main = ({setIsLoggedIn}: { setIsLoggedIn: React.Dispatch<React.SetStateAct
             }
 
             if (response.isSuccessful && response.result) {
-                setData(response.result as { [key: string]: IGoal[] });
+                setData(formatGoals(response.result));
                 setNeedUpdate(false)
             }
         })()
@@ -138,7 +151,7 @@ const Main = ({setIsLoggedIn}: { setIsLoggedIn: React.Dispatch<React.SetStateAct
                                                                 return <Tile theme={theme} onUpdate={setNeedUpdate} key={i}
                                                                              year={v.year} name={v.name} id={v.id}
                                                                              percent={getPercent(v.steps)} steps={v.steps}
-                                                                             onClick={setStateOfEditingPanel}/>
+                                                                             openEditingPanel={setStateOfEditingPanel}/>
                                                             });
                                                         } else if (sorting === 2) {
                                                             return data[v].filter((v) => v.name.toLowerCase().includes(searchValue.toLowerCase())).slice(0).sort((a, b) => {
@@ -147,7 +160,7 @@ const Main = ({setIsLoggedIn}: { setIsLoggedIn: React.Dispatch<React.SetStateAct
                                                                 return <Tile theme={theme} onUpdate={setNeedUpdate} key={i}
                                                                              year={v.year} name={v.name} id={v.id}
                                                                              percent={getPercent(v.steps)} steps={v.steps}
-                                                                             onClick={setStateOfEditingPanel}/>
+                                                                             openEditingPanel={setStateOfEditingPanel}/>
                                                             })
                                                         } else if (sorting === 3) {
                                                             return data[v].filter((v) => v.name.toLowerCase().includes(searchValue.toLowerCase())).slice(0).sort((a, b) => {
@@ -156,7 +169,7 @@ const Main = ({setIsLoggedIn}: { setIsLoggedIn: React.Dispatch<React.SetStateAct
                                                                 return <Tile theme={theme} onUpdate={setNeedUpdate} key={i}
                                                                              year={v.year} name={v.name} id={v.id}
                                                                              percent={getPercent(v.steps)} steps={v.steps}
-                                                                             onClick={setStateOfEditingPanel}/>
+                                                                             openEditingPanel={setStateOfEditingPanel}/>
                                                             })
                                                         }
                                                     })()
@@ -173,3 +186,5 @@ const Main = ({setIsLoggedIn}: { setIsLoggedIn: React.Dispatch<React.SetStateAct
 }
 
 export default Main;
+
+

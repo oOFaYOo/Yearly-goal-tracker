@@ -1,7 +1,7 @@
-import {Goal} from "./classes/Goal";
-import users from "./mock/users";
-import goals from './mock/goals';
-import {IApiClient, IApiClientResult, IGoal} from "./types";
+import {Goal} from "../classes/Goal";
+import users from "../mock/users";
+import goals from '../mock/goals';
+import {IApiClient, IApiClientResult, IGoal} from "../types";
 
 function delay(delayMs: number): Promise<void> {
     return new Promise(resolve => {
@@ -14,7 +14,7 @@ class FakeApiClient implements IApiClient {
         return document.cookie.split(";")[0].split("=")[1];
     }
 
-    async getGoals(): Promise<IApiClientResult<{ [key: string]: IGoal[] }>> {
+    async getGoals(): Promise<IApiClientResult<{ [key: string]: IGoal }>> {
         await delay(500);
         const userId = this.getUserFromCookies();
         return {
@@ -28,11 +28,7 @@ class FakeApiClient implements IApiClient {
     async deleteGoal(goalId: string): Promise<IApiClientResult<void>> {
         await delay(500);
         const userId = this.getUserFromCookies();
-        for (let year in goals[userId]) {
-            goals[userId][year] = goals[userId][year].filter(v => v.id !== goalId);
-            if (goals[userId][year].length === 0)
-                delete goals[userId][year];
-        }
+        delete goals[userId][goalId];
         return {
             isSuccessful: true,
             isAuthorized: true,
@@ -43,10 +39,8 @@ class FakeApiClient implements IApiClient {
     async addGoal(goal: string, year: string, steps: string[]): Promise<IApiClientResult<void>> {
         await delay(500);
         const userId = this.getUserFromCookies();
-
-        if (goals[userId][year]) {
-            goals[userId][year].push(new Goal(goal, year, steps));
-        } else goals[userId][year] = [new Goal(goal, year, steps)];
+        const goalId = Math.round(Date.now()+(Math.random()*1000)).toString();
+        goals[userId][goalId] = new Goal(goalId, goal, year, steps);
         return {
             isSuccessful: true,
             isAuthorized: true,
@@ -57,15 +51,7 @@ class FakeApiClient implements IApiClient {
     async editGoal(goalId: string, steps: { name: string, state: boolean }[]): Promise<IApiClientResult<void>> {
         await delay(500);
         const userId = this.getUserFromCookies();
-
-        for (let year in goals[userId]) {
-            goals[userId][year].forEach((v, i, arr) => {
-                if (v.id === goalId) {
-                    arr[i].steps = steps
-                }
-            })
-        }
-
+        goals[userId][goalId].steps = steps
         return {
             isSuccessful: true,
             isAuthorized: true,

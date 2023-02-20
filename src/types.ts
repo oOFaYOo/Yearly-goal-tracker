@@ -2,7 +2,7 @@ import React from "react";
 
 export interface IGoals {
     [key: string]:{
-        [key: string]:IGoal[]
+        [key: string]:IGoal
     }
 }
 
@@ -28,7 +28,7 @@ export interface IApiClientResult<T> {
 }
 
 export interface IApiClient {
-    getGoals(): Promise<IApiClientResult<{ [key: string]: IGoal[] }>>;
+    getGoals(): Promise<IApiClientResult<{ [key: string]: IGoal }>>;
     deleteGoal(goalId:string) : Promise<IApiClientResult<void>>;
     addGoal(goalName:string, year:string, steps:string[]) : Promise<IApiClientResult<void>>;
     editGoal(goalId:string, steps:{name:string, state:boolean}[]) : Promise<IApiClientResult<void>>;
@@ -59,7 +59,7 @@ export interface ITile extends IGoal{
     theme: 'light' | 'dark',
     onUpdate: React.Dispatch<React.SetStateAction<boolean>>,
     percent: number,
-    onClick: React.Dispatch<React.SetStateAction<{ open: boolean, data: IGoal | undefined }>>
+    openEditingPanel: React.Dispatch<React.SetStateAction<{ open: boolean, data: IGoal | undefined }>>
 }
 
 

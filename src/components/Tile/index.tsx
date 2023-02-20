@@ -2,7 +2,7 @@ import React, {useContext} from "react";
 import {Tooltip} from "@mui/material";
 import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
 import {Api} from "../../App";
-import {IGoal, ITile} from "../../types";
+import {ITile} from "../../types";
 
 function percentColor(percent: number) {
     if (percent < 80) {
@@ -16,7 +16,7 @@ const Tile = ({
                   name,
                   steps,
                   percent,
-                  onClick,
+                  openEditingPanel,
                   onUpdate,
                   id,
                   year,
@@ -41,7 +41,7 @@ const Tile = ({
                 </Tooltip>
             </div>
             <div className='w-full h-full flex justify-between flex-col items-center' onClick={
-                () => onClick({
+                () => openEditingPanel({
                     open: true, data: {
                         id: id,
                         year: year,

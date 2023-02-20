@@ -1,10 +1,10 @@
 import React, {createContext, useState} from 'react';
 import Main from "./pages/Main";
-import FakeApiClient from './FakeApiClient';
+import FakeApiClient from './api/FakeApiClient';
 import AuthPage from "./pages/AuthPage";
 import {Navigate, Route, Routes} from "react-router-dom";
 import {IApiClient} from "./types";
-import ApiClient from "./ApiClient";
+import ApiClient from "./api/ApiClient";
 
 const api = new FakeApiClient();
 // const api = new ApiClient();

@@ -29,7 +29,7 @@ it('Tile test', () => {
                   id={'123'}
                   percent={percent}
                   steps={[{name:'name', state:true}, {name:'name', state:false}]}
-                  onClick={()=>{}}
+                  openEditingPanel={()=>{}}
                   onUpdate={()=>{}} />
             </Api.Provider>
         )

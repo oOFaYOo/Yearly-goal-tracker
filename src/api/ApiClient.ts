@@ -1,4 +1,4 @@
-import {IApiClient, IApiClientResult, IGoal} from "./types";
+import {IApiClient, IApiClientResult, IGoal} from "../types";
 import axios from "axios";
 
 class ApiClient implements IApiClient {
@@ -7,7 +7,7 @@ class ApiClient implements IApiClient {
 
     // private apiUrl : string = "";
 
-    async getGoals(): Promise<IApiClientResult<{ [key: string]: IGoal[] }>> {
+    async getGoals(): Promise<IApiClientResult<{ [key: string]: IGoal }>> {
         const response = await axios.get(`${this.apiUrl}/api/goals`, {
             headers: {
                 "sessionId": document.cookie

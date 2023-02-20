@@ -19,32 +19,28 @@ it('Main test', async () => {
                             isAuthorized: true,
                             statusCode: 200,
                             result: {
-                                '2023': [
+                                ghdjmf: {
+                                    year: '2023',
+                                    id: 'ghdjmf',
+                                    name: 'Some 1',
+                                    steps: [
+                                        {
+                                            name: 'Step 1',
+                                            state: true
+                                        },
+                                        {
+                                            name: 'Step 2',
+                                            state: false
+                                        },
+                                    ]
+                                },
+                                hjkkgh:
                                     {
-                                        id: '123',
-                                        year: '2023',
-                                        name: 'Some 1',
-                                        steps: [
-                                            {
-                                                name: 'Step 1',
-                                                state: true
-                                            },
-                                            {
-                                                name: 'Step 2',
-                                                state: false
-                                            },
-                                        ]
-                                    }
-                                ],
-                                '2022': [],
-                                '2021': [
-                                    {
-                                        id: '123',
                                         year: '2021',
+                                        id: 'hjkkgh',
                                         name: 'Some 2',
                                         steps: []
                                     }
-                                ]
                             }
                         })
                     }),

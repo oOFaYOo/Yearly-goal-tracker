@@ -1,11 +1,12 @@
 import {IGoal} from "../types";
 
 export class Goal implements IGoal{
-    id = Math.round(Date.now()+(Math.random()*1000)).toString();
+    id: string;
     name:string;
     year:string;
     steps: {name:string, state:boolean}[];
-    constructor(name:string, year:string, steps:string[]) {
+    constructor(id:string, name:string, year:string, steps:string[]) {
+        this.id = id;
         this.name = name;
         this.year = year;
         this.steps = steps.map((v)=>{
