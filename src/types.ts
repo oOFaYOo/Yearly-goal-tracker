@@ -51,7 +51,7 @@ export interface IGoalEditingPanel  {
 export interface ISortingPanel  {
     years: string[],
     setSorting: React.Dispatch<React.SetStateAction<number>>,
-    setFiltering: React.Dispatch<React.SetStateAction<number>>, theme: 'light' | 'dark',
+    setFiltering: React.Dispatch<React.SetStateAction<string>>, theme: 'light' | 'dark',
     setTheme: React.Dispatch<React.SetStateAction<'light' | 'dark'>>
 }
 

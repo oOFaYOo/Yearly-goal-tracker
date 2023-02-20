@@ -51,10 +51,12 @@ const SortingPanel = ({
                     label="Year"
                     className={theme === 'light' ? 'min-w-[70px]' : 'min-w-[70px] bg-gray-700'}
                     onChange={(e) => {
-                        if (e.target.value !== undefined) setFiltering(+(e.target.value))
+                        if (e.target.value !== undefined){
+                            setFiltering(e.target.value)
+                        }
                     }}
                 >
-                    <MenuItem value={1}>not filtered</MenuItem>
+                    <MenuItem value={'not filtered'}>not filtered</MenuItem>
                     {
                         years.map((v, i) => {
                             return <MenuItem key={i} value={v}>{v}</MenuItem>
