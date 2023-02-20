@@ -1,4 +1,5 @@
 import React from "react";
+import YearBlock from "./components/YearBlock";
 
 export interface IGoals {
     [key: string]:{
@@ -62,5 +63,12 @@ export interface ITile extends IGoal{
     openEditingPanel: React.Dispatch<React.SetStateAction<{ open: boolean, data: IGoal | undefined }>>
 }
 
-
+export interface IYearBlock {
+    year: string,
+    goals: IGoal[],
+    sorting: number,
+    theme: 'light' | 'dark',
+    setNeedUpdate: React.Dispatch<React.SetStateAction<boolean>>,
+    setStateOfEditingPanel:React.Dispatch<React.SetStateAction<{ open: boolean, data: IGoal | undefined }>>
+}
 

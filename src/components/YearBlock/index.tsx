@@ -1,5 +1,5 @@
 import React from "react";
-import {IGoal} from "../../types";
+import {IGoal, IYearBlock} from "../../types";
 import Tile from "../Tile";
 
 function getPercent(arr: { name: string, state: boolean }[]) {
@@ -12,10 +12,7 @@ function getPercent(arr: { name: string, state: boolean }[]) {
 }
 
 const YearBlock = (
-    {year, goals, sorting, theme, setNeedUpdate, setStateOfEditingPanel}:
-        { year: string, goals: IGoal[], sorting: number, theme: 'light' | 'dark',
-            setNeedUpdate: React.Dispatch<React.SetStateAction<boolean>>,
-            setStateOfEditingPanel:React.Dispatch<React.SetStateAction<{ open: boolean, data: IGoal | undefined }>>}) => {
+    {year, goals, sorting, theme, setNeedUpdate, setStateOfEditingPanel} : IYearBlock) => {
 
     let sortedGoals;
 
