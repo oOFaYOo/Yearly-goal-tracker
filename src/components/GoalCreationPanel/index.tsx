@@ -14,7 +14,7 @@ const GoalCreationPanel = ({setNeedUpdate, closeFunction, theme} : IGoalCreation
     return <div className='absolute h-[100vh] w-[100vw] flex justify-center items-center'>
         <div onClick={() => {
             closeFunction(false)
-        }} className='flex justify-center items-center z-10 bg-black/60 h-full w-full'></div>
+        }} className='flex justify-center items-center z-10 bg-black/70 h-full w-full'></div>
         <form onSubmit={(e) => {
             (
                 async () => {
@@ -34,7 +34,7 @@ const GoalCreationPanel = ({setNeedUpdate, closeFunction, theme} : IGoalCreation
         }}
               className={theme === 'light'
                   ? 'styled_scrollbar_hovered w-[35vw] absolute z-20 h-[80vh] max-h-[700px] border-r-[24px] min-w-[400px] bg-slate-100 rounded border-teal-500 shadow-md flex flex-col pb-6 pt-12 px-4 gap-y-4'
-                  : 'styled_scrollbar_hovered w-[35vw] absolute z-20 h-[80vh] max-h-[700px] border-r-[24px] min-w-[400px] bg-gray-800 text-gray-400 rounded border-teal-500 shadow-md flex flex-col pb-6 pt-12 px-4 gap-y-4'
+                  : 'styled_scrollbar_hovered w-[35vw] absolute z-20 h-[80vh] max-h-[700px] border-r-[24px] min-w-[400px] bg-neutral-800 text-zinc-200 rounded border-teal-500 shadow-md flex flex-col pb-6 pt-12 px-4 gap-y-4'
               }>
             <div className='flex justify-between'>
                 <input name={'goal'} required onInvalid={(e) => {
@@ -44,10 +44,10 @@ const GoalCreationPanel = ({setNeedUpdate, closeFunction, theme} : IGoalCreation
                     }
                 }} className={theme === 'light'
                     ? 'flex grow mr-2 p-2 rounded-lg'
-                    : 'flex grow mr-2 p-2 rounded-lg bg-gray-700'
+                    : 'flex grow mr-2 p-2 rounded-lg bg-neutral-700/70'
                 } type={'text'} placeholder={'Goal...'}/>
                 <input name={'year'}
-                       className={theme === 'light' ? 'w-[100px] p-2 rounded-lg' : 'w-[100px] p-2 rounded-lg bg-gray-700'}
+                       className={theme === 'light' ? 'w-[100px] p-2 rounded-lg' : 'w-[100px] p-2 rounded-lg bg-neutral-700/70'}
                        type={'number'} defaultValue={new Date().getFullYear()} placeholder={'Year...'}/>
             </div>
             <div className='flex justify-between items-center'>
@@ -73,7 +73,7 @@ const GoalCreationPanel = ({setNeedUpdate, closeFunction, theme} : IGoalCreation
                     </Tooltip>
                 </div>
                 <input
-                    className={theme === 'light' ? 'rounded-lg outline-none p-2 w-full' : 'rounded-lg outline-none p-2 w-full bg-gray-700'}
+                    className={theme === 'light' ? 'rounded-lg outline-none p-2 w-full' : 'rounded-lg outline-none p-2 w-full bg-neutral-700/70'}
                     value={newStep} type={'text'} name={'newStep'} placeholder={'New step...'}
                     onChange={(e) => setNewStep(e.target.value)}
                 />
@@ -100,7 +100,7 @@ const GoalCreationPanel = ({setNeedUpdate, closeFunction, theme} : IGoalCreation
                                         e.currentTarget.setCustomValidity("Write goal step text or delete this step");
                                     }
                                 }}
-                                       className={theme === 'light' ? 'rounded-lg outline-none p-2 w-full' : 'rounded-lg bg-gray-700 outline-none p-2 w-full'}
+                                       className={theme === 'light' ? 'rounded-lg outline-none p-2 w-full' : 'rounded-lg bg-neutral-700/70 outline-none p-2 w-full'}
                                        onChange={(e) => {
                                            const newSteps = [...steps];
                                            newSteps[i] = e.target.value;

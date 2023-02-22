@@ -30,14 +30,14 @@ const Tile = ({
             className={
                 theme === 'light'
                     ? 'styled_scrollbar_hovered hover:bg-white cursor-pointer shadow-md flex justify-between flex-col items-center grow min-w-[335px] max-w-[500px] h-[300px] rounded-lg border-2 border-teal-500 p-4'
-                    : 'styled_scrollbar_hovered hover:bg-gray-800 cursor-pointer shadow-md flex justify-between flex-col items-center grow min-w-[335px] max-w-[500px] h-[300px] rounded-lg border-2 border-teal-500 p-4'}>
+                    : 'styled_scrollbar_hovered hover:bg-neutral-700/30 cursor-pointer shadow-md flex justify-between flex-col items-center grow min-w-[335px] max-w-[500px] h-[300px] rounded-lg border-teal-500 border-2 p-4'}>
             <div className='w-full flex flex-row justify-end'>
                 <Tooltip title={'Delete goal'} arrow placement={"top"}>
                     <CancelRoundedIcon onClick={async () => {
                         const response = await api.deleteGoal(id);
                         if (response.isSuccessful) onUpdate(true);
                     }
-                    } className='text-gray-500/30 hover:text-rose-600 hover:scale-105 active:scale-100'/>
+                    } className='text-zinc-500/30 hover:text-rose-600 hover:scale-105 active:scale-100'/>
                 </Tooltip>
             </div>
             <div className='w-full h-full flex justify-between flex-col items-center' onClick={

@@ -15,10 +15,10 @@ const GoalEditingPanel = ({data, setOpenState, theme}: IGoalEditingPanel) => {
     return <div className='absolute h-[100vh] w-[100vw] flex justify-center items-center'>
         <div onClick={() => {
             setOpenState({open: false, data: undefined});
-        }} className='flex justify-center items-center z-10 bg-black/60 h-full w-full'></div>
+        }} className='flex justify-center items-center z-10 bg-black/70 h-full w-full'></div>
         <form className={theme === 'light'
             ? 'styled_scrollbar_hovered w-[35vw] absolute z-20 h-[80vh] max-h-[700px] border-r-[24px] min-w-[400px] bg-slate-100 rounded border-teal-500 shadow-md flex flex-col pb-6 pt-12 px-4 gap-y-4'
-            : 'styled_scrollbar_hovered w-[35vw] absolute z-20 h-[80vh] max-h-[700px] border-r-[24px] min-w-[400px] bg-gray-800 text-gray-400 rounded border-teal-500 shadow-md flex flex-col pb-6 pt-12 px-4 gap-y-4'
+            : 'styled_scrollbar_hovered w-[35vw] absolute z-20 h-[80vh] max-h-[700px] border-r-[24px] min-w-[400px] bg-neutral-800 text-zinc-200 rounded border-teal-500 shadow-md flex flex-col pb-6 pt-12 px-4 gap-y-4'
         }>
             <div className='flex justify-between'>
                 <p className='text-lg font-semibold text-center font-sans w-full p-2'>{data?.name}</p>
@@ -46,7 +46,7 @@ const GoalEditingPanel = ({data, setOpenState, theme}: IGoalEditingPanel) => {
                     </Tooltip>
                 </div>
                 <input
-                    className={theme === 'light' ? 'rounded-lg outline-none p-2 w-full' : 'rounded-lg outline-none p-2 w-full bg-gray-700'}
+                    className={theme === 'light' ? 'rounded-lg outline-none p-2 w-full' : 'rounded-lg outline-none p-2 w-full bg-neutral-700/70'}
                     value={newStep} type={'text'} name={'newStep'} placeholder={'New step...'}
                     onChange={(e) => setNewStep(e.target.value)}
                 />

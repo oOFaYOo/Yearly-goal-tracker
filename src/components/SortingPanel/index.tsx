@@ -29,7 +29,7 @@ const SortingPanel = ({
                     value={undefined}
                     label="Completed"
                     sx={theme === 'dark' ? {color: 'rgb(156 163 175)'} : {}}
-                    className={theme === 'light' ? 'min-w-[70px]' : 'min-w-[70px] bg-gray-700'}
+                    className={theme === 'light' ? 'min-w-[70px]' : 'min-w-[70px] bg-neutral-700/30'}
                     onChange={(e) => {
                         if (e.target.value !== undefined) setSorting(+(e.target.value))
                     }}
@@ -49,7 +49,7 @@ const SortingPanel = ({
                     value={undefined}
                     sx={theme === 'dark' ? {color: 'rgb(156 163 175)'} : {}}
                     label="Year"
-                    className={theme === 'light' ? 'min-w-[70px]' : 'min-w-[70px] bg-gray-700'}
+                    className={theme === 'light' ? 'min-w-[70px]' : 'min-w-[70px] bg-neutral-700/30'}
                     onChange={(e) => {
                         if (e.target.value !== undefined){
                             setFiltering(e.target.value)
