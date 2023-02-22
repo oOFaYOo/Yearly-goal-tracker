@@ -6,7 +6,7 @@ Using: React, TypeScript, Tailwind, React Testing Library, Jest, Material UI.
 Tested only on Google Chrome.
 
 ### Hosted instance:
-yearly-goal-tracker.vercel.app
+https://yearly-goal-tracker.vercel.app/yearly_goal_tracker/auth
 
 ### Demonstration:
 ![demo](https://github.com/oOFaYOo/Yearly-goal-tracker/blob/main/public/demo.gif)
