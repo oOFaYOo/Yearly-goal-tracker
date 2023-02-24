@@ -28,7 +28,7 @@ const Tile = ({
     return (
         <div
             className={`styled_scrollbar_hovered cursor-pointer shadow-md flex justify-between flex-col items-center
-             grow min-w-[335px] max-w-[500px] h-[300px] rounded-lg border-2 border-teal-500 p-4 
+             grow min-w-[335px] max-w-[500px] h-[300px] rounded-lg border-2 border-teal-500 p-4 max-sm:max-w-[90vw] 
              ${theme === 'light' ? 'hover:bg-white' : 'hover:bg-neutral-700/30'}`}>
             <div className='w-full flex flex-row justify-end'>
                 <Tooltip title={'Delete goal'} arrow placement={"top"}>
@@ -36,7 +36,7 @@ const Tile = ({
                         const response = await api.deleteGoal(id);
                         if (response.isSuccessful) onUpdate(true);
                     }
-                    } className='text-zinc-500/30 hover:text-rose-600 hover:scale-105 active:scale-100'/>
+                    } className='text-zinc-500/30 absolute hover:text-rose-600 hover:scale-105 active:scale-100'/>
                 </Tooltip>
             </div>
             <div className='w-full h-full flex justify-between flex-col items-center' onClick={
@@ -55,18 +55,18 @@ const Tile = ({
                         overflow: 'hidden',
                         whiteSpace: 'nowrap',
                     }}
-                       className={'max-w-[300px] text-lg font-semibold font-sans'}>
+                       className={'max-w-[300px] text-lg font-semibold font-sans max-sm:text-2xl'}>
                         {name}
                     </p>
                 </Tooltip>
-                <div className={'px-2 flex-row justify-between items-center flex h-[24px] w-full'}>
+                <div className={'px-2 max-sm:text-xl flex-row justify-between items-center flex h-[24px] w-full'}>
                     <div className='h-1 mr-4 w-full bg-gray-600'>
                         <div className={'h-full ' + percentColor(percent)} style={{width: `${percent}%`}}></div>
                     </div>
                     <p>{`${percent}%`}</p>
                 </div>
                 <div
-                    className={'styled_scrollbar items-center grow py-1 flex max-h-[130px] w-full flex flex-col gap-y-1 overflow-y-auto'}>
+                    className={'styled_scrollbar max-sm:text-xl items-center grow py-1 flex max-h-[130px] w-full flex flex-col gap-y-1 overflow-y-auto'}>
                     {steps.map((v, i) => {
                         return <Tooltip title={v.name} arrow placement={"top"} key={i}>
                             <p style={{
