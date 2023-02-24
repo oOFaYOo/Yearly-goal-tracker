@@ -27,10 +27,9 @@ const Tile = ({
 
     return (
         <div
-            className={
-                theme === 'light'
-                    ? 'styled_scrollbar_hovered hover:bg-white cursor-pointer shadow-md flex justify-between flex-col items-center grow min-w-[335px] max-w-[500px] h-[300px] rounded-lg border-2 border-teal-500 p-4'
-                    : 'styled_scrollbar_hovered hover:bg-neutral-700/30 cursor-pointer shadow-md flex justify-between flex-col items-center grow min-w-[335px] max-w-[500px] h-[300px] rounded-lg border-teal-500 border-2 p-4'}>
+            className={`styled_scrollbar_hovered cursor-pointer shadow-md flex justify-between flex-col items-center
+             grow min-w-[335px] max-w-[500px] h-[300px] rounded-lg border-2 border-teal-500 p-4 
+             ${theme === 'light' ? 'hover:bg-white' : 'hover:bg-neutral-700/30'}`}>
             <div className='w-full flex flex-row justify-end'>
                 <Tooltip title={'Delete goal'} arrow placement={"top"}>
                     <CancelRoundedIcon onClick={async () => {

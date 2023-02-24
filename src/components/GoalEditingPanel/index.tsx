@@ -16,10 +16,10 @@ const GoalEditingPanel = ({data, setOpenState, theme}: IGoalEditingPanel) => {
         <div onClick={() => {
             setOpenState({open: false, data: undefined});
         }} className='flex justify-center items-center z-10 bg-black/70 h-full w-full'></div>
-        <form className={theme === 'light'
-            ? 'styled_scrollbar_hovered w-[35vw] absolute z-20 h-[80vh] max-h-[700px] border-r-[24px] min-w-[400px] bg-slate-100 rounded border-teal-500 shadow-md flex flex-col pb-6 pt-12 px-4 gap-y-4'
-            : 'styled_scrollbar_hovered w-[35vw] absolute z-20 h-[80vh] max-h-[700px] border-r-[24px] min-w-[400px] bg-neutral-800 text-zinc-200 rounded border-teal-500 shadow-md flex flex-col pb-6 pt-12 px-4 gap-y-4'
-        }>
+        <form
+            className='styled_scrollbar_hovered w-[35vw] absolute z-20 h-[80vh] max-h-[700px] border-r-[24px] min-w-[400px] rounded border-teal-500 shadow-md flex flex-col pb-6 pt-12 px-4 gap-y-4'
+            style={{color:theme === 'light'? 'black' : 'rgb(228 228 231)', background:theme === 'light'? 'rgb(245 245 245)' : 'rgb(38 38 38)'}}
+        >
             <div className='flex justify-between'>
                 <p className='text-lg font-semibold text-center font-sans w-full p-2'>{data?.name}</p>
             </div>
@@ -39,14 +39,13 @@ const GoalEditingPanel = ({data, setOpenState, theme}: IGoalEditingPanel) => {
                                 setSteps(newSteps);
                             }
                         }}
-                             className={theme === 'light'
-                             ? 'mr-2 hover:text-yellow-500 hover:cursor-pointer hover:scale-105 active:scale-100'
-                             : 'mr-2 hover:text-yellow-500 text-white/50 hover:cursor-pointer hover:scale-105 active:scale-100'
-                        }/>
+                             className='mr-2 hover:text-yellow-500 hover:cursor-pointer hover:scale-105 active:scale-100'
+                        />
                     </Tooltip>
                 </div>
                 <input
-                    className={theme === 'light' ? 'rounded-lg outline-none p-2 w-full' : 'rounded-lg outline-none p-2 w-full bg-neutral-700/70'}
+                    className='rounded-lg outline-none p-2 w-full'
+                    style={{background:theme === 'light' ? '' : 'rgb(64 64 64 / 0.7)'}}
                     value={newStep} type={'text'} name={'newStep'} placeholder={'New step...'}
                     onChange={(e) => setNewStep(e.target.value)}
                 />
@@ -80,10 +79,9 @@ const GoalEditingPanel = ({data, setOpenState, theme}: IGoalEditingPanel) => {
                                             newSteps[i].state = true;
                                             setSteps(newSteps);
                                         }}
-                                             className={theme === 'light'
-                                             ? 'mr-2 hover:text-green-600 text-black/20 hover:cursor-pointer hover:scale-105 active:scale-100'
-                                             : 'mr-2 hover:text-green-600 text-white/20 hover:cursor-pointer hover:scale-105 active:scale-100'
-                                        }/>
+                                             className='mr-2 hover:text-green-600 hover:cursor-pointer hover:scale-105 active:scale-100'
+                                             style={{color: theme === 'light' ? 'rgb(0 0 0 / 0.2)' : 'rgb(255 255 255 / 0.2)'}}
+                                        />
                                     </div>
                                     <input value={v.name} onChange={(e) => {
                                         const newSteps = [...steps];

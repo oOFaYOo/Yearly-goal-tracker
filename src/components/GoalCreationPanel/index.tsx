@@ -32,22 +32,19 @@ const GoalCreationPanel = ({setNeedUpdate, closeFunction, theme} : IGoalCreation
             )()
             e.preventDefault();
         }}
-              className={theme === 'light'
-                  ? 'styled_scrollbar_hovered w-[35vw] absolute z-20 h-[80vh] max-h-[700px] border-r-[24px] min-w-[400px] bg-slate-100 rounded border-teal-500 shadow-md flex flex-col pb-6 pt-12 px-4 gap-y-4'
-                  : 'styled_scrollbar_hovered w-[35vw] absolute z-20 h-[80vh] max-h-[700px] border-r-[24px] min-w-[400px] bg-neutral-800 text-zinc-200 rounded border-teal-500 shadow-md flex flex-col pb-6 pt-12 px-4 gap-y-4'
-              }>
+              className='styled_scrollbar_hovered w-[35vw] absolute z-20 h-[80vh] max-h-[700px] border-r-[24px] min-w-[400px] rounded border-teal-500 shadow-md flex flex-col pb-6 pt-12 px-4 gap-y-4'
+                  style={{color:theme === 'light'? 'black' : 'rgb(228 228 231)', background:theme === 'light'? 'rgb(245 245 245)' : 'rgb(38 38 38)'}}>
             <div className='flex justify-between'>
                 <input name={'goal'} required onInvalid={(e) => {
                     e.currentTarget.setCustomValidity("");
                     if (!e.currentTarget.validity.valid) {
                         e.currentTarget.setCustomValidity("Fill in the goal name");
                     }
-                }} className={theme === 'light'
-                    ? 'flex grow mr-2 p-2 rounded-lg'
-                    : 'flex grow mr-2 p-2 rounded-lg bg-neutral-700/70'
-                } type={'text'} placeholder={'Goal...'}/>
+                }} className='flex grow mr-2 p-2 rounded-lg'
+                 style={{background: theme === 'light' ? '' : 'rgb(64 64 64 / 0.7)'}} type={'text'} placeholder={'Goal...'}/>
                 <input name={'year'}
-                       className={theme === 'light' ? 'w-[100px] p-2 rounded-lg' : 'w-[100px] p-2 rounded-lg bg-neutral-700/70'}
+                       className='w-[100px] p-2 rounded-lg'
+                       style={{background: theme === 'light' ? '' : 'rgb(64 64 64 / 0.7)'}}
                        type={'number'} defaultValue={new Date().getFullYear()} placeholder={'Year...'}/>
             </div>
             <div className='flex justify-between items-center'>
@@ -66,14 +63,12 @@ const GoalCreationPanel = ({setNeedUpdate, closeFunction, theme} : IGoalCreation
                                 setSteps(newSteps);
                             }
                         }}
-                                              className={theme === 'light'
-                                                  ? 'mr-2 hover:text-yellow-500 hover:cursor-pointer hover:scale-105 active:scale-100'
-                                                  : 'mr-2 hover:text-yellow-500 text-white/50 hover:cursor-pointer hover:scale-105 active:scale-100'
-                                              }/>
+                        className='mr-2 hover:text-yellow-500 hover:cursor-pointer hover:scale-105 active:scale-100'/>
                     </Tooltip>
                 </div>
                 <input
-                    className={theme === 'light' ? 'rounded-lg outline-none p-2 w-full' : 'rounded-lg outline-none p-2 w-full bg-neutral-700/70'}
+                    className='rounded-lg outline-none p-2 w-full'
+                    style={{background:theme === 'light' ? '' : 'rgb(64 64 64 / 0.7)'}}
                     value={newStep} type={'text'} name={'newStep'} placeholder={'New step...'}
                     onChange={(e) => setNewStep(e.target.value)}
                 />
@@ -89,10 +84,8 @@ const GoalCreationPanel = ({setNeedUpdate, closeFunction, theme} : IGoalCreation
                                         newSteps.splice(i, 1);
                                         setSteps(newSteps);
                                     }}
-                                                       className={theme === 'light'
-                                                           ? 'mr-2 hover:text-rose-500 text-black/20 hover:cursor-pointer hover:scale-105 active:scale-100'
-                                                           : 'mr-2 hover:text-rose-500 text-white/20 hover:cursor-pointer hover:scale-105 active:scale-100'
-                                                       }/>
+                                       style={{color:theme === 'light' ? 'rgb(0 0 0 / 0.2)' : 'rgb(255 255 255 / 0.2)'}}
+                                       className='mr-2 hover:text-rose-500 hover:cursor-pointer hover:scale-105 active:scale-100'/>
                                 </div>
                                 <input required onInvalid={(e) => {
                                     e.currentTarget.setCustomValidity("");
@@ -100,7 +93,8 @@ const GoalCreationPanel = ({setNeedUpdate, closeFunction, theme} : IGoalCreation
                                         e.currentTarget.setCustomValidity("Write goal step text or delete this step");
                                     }
                                 }}
-                                       className={theme === 'light' ? 'rounded-lg outline-none p-2 w-full' : 'rounded-lg bg-neutral-700/70 outline-none p-2 w-full'}
+                                       className='rounded-lg outline-none p-2 w-full'
+                                       style={{background:theme === 'light' ? '' : 'rgb(64 64 64 / 0.7)'}}
                                        onChange={(e) => {
                                            const newSteps = [...steps];
                                            newSteps[i] = e.target.value;

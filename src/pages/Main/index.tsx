@@ -92,16 +92,14 @@ const Main = ({setIsLoggedIn}: { setIsLoggedIn: React.Dispatch<React.SetStateAct
                                             setOpenState={setStateOfEditingPanel}/>
                         : null
                 }
-                <div className={theme === 'light'
-                    ? 'bg-zinc-50 styled_scrollbar absolute overflow-y-auto h-[100vh] w-[100vw]'
-                    : 'bg-neutral-800 text-zinc-200 styled_scrollbar absolute overflow-y-auto h-[100vh] w-[100vw]'}>
-                    <header className={theme === 'light'
-                        ? 'bg-white border-teal-500 border-b-2 w-full justify-between shadow-md h-[5vh] flex items-center'
-                        : 'w-full shadow-md h-[5vh] flex justify-between items-center bg-neutral-700 border-teal-500 border-b-2'}>
-                        <p className={theme === 'light'
-                            ? 'ml-4 text-xl font-sans font-semibold'
-                            : 'ml-4 text-xl font-sans font-semibold'}>Yearly Goal Tracker</p>
-
+                <div
+                    style={{background: theme === 'light' ? 'rgb(250 250 250)' : 'rgb(38 38 38)',
+                        color: theme === 'light' ? '' : 'rgb(229 229 229)' }}
+                    className='styled_scrollbar absolute overflow-y-auto h-[100vh] w-[100vw]'>
+                    <header
+                        style={{background:theme === 'light'? 'white' : 'rgb(64 64 64)'}}
+                        className='w-full shadow-md h-[5vh] flex justify-between items-center border-teal-500 border-b-2'>
+                        <p className='ml-4 text-xl font-sans font-semibold'>Yearly Goal Tracker</p>
                         <button className='mr-4 px-2 border-teal-500 border-l-2'
                                 onClick={() => {
                                     setIsLoggedIn({state: false});
@@ -117,19 +115,15 @@ const Main = ({setIsLoggedIn}: { setIsLoggedIn: React.Dispatch<React.SetStateAct
                         </div>
                         <div className='flex grow justify-center'>
                             <button onClick={() => setOpenGoalCreationPanel(true)}
-                                    className={theme === 'light'
-                                        ? 'select-none bg-teal-500 font-mono rounded-full h-16 w-16 text-white hover:scale-105 active:scale-100 text-3xl'
-                                        : 'select-none bg-teal-500 text-zinc-200 font-mono rounded-full h-16 w-16 text-white hover:scale-105 active:scale-100 text-3xl'
-                            }>
+                                    style={{color:theme === 'light' ? '' : 'rgb(229 229 229)'}}
+                                    className='select-none bg-teal-500 font-mono rounded-full h-16 w-16 text-white hover:scale-105 active:scale-100 text-3xl'>
                                 <p className='rotate-45'>✕︎</p>
                             </button>
                         </div>
                         <div className='flex justify-center relative items-center w-[40%] h-full'>
                             <input type={'text'} placeholder={'Search...'}
-                                   className={theme === 'light'
-                                       ? 'outline-none w-[60%] h-[70%] rounded-full align-middle px-4 border-2 border-teal-500'
-                                       : 'bg-neutral-800/50 outline-none w-[60%] h-[70%] rounded-full align-middle px-4 border-2 border-teal-500'
-                                   }
+                                   style={{background:theme === 'light' ? '' : 'rgba(38,38,38,0.5)'}}
+                                   className='outline-none w-[60%] h-[70%] rounded-full align-middle px-4 border-2 border-teal-500'
                                    onChange={(e) => {
                                        setSearchValue(e.currentTarget.value)
                                    }}
