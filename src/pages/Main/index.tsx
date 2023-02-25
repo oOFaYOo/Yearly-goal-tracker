@@ -99,7 +99,7 @@ const Main = ({setIsLoggedIn}: { setIsLoggedIn: React.Dispatch<React.SetStateAct
                     <header
                         style={{background:theme === 'light'? 'white' : 'rgb(64 64 64)'}}
                         className='w-full shadow-md h-[5vh] flex justify-between items-center border-teal-500 border-b-2'>
-                        <p className='ml-4 text-xl font-sans font-semibold'>Yearly Goal Tracker</p>
+                        <h1 className='ml-4 text-xl font-sans font-semibold'>Yearly Goal Tracker</h1>
                         <button className='mr-4 px-2 border-teal-500 border-l-2'
                                 onClick={() => {
                                     setIsLoggedIn({state: false});

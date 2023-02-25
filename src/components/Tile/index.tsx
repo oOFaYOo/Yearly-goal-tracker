@@ -50,14 +50,14 @@ const Tile = ({
                 })
             }>
                 <Tooltip title={name} arrow placement={"top"}>
-                    <p style={{
+                    <h2 style={{
                         textOverflow: 'ellipsis',
                         overflow: 'hidden',
                         whiteSpace: 'nowrap',
                     }}
                        className={'max-w-[300px] text-lg font-semibold font-sans'}>
                         {name}
-                    </p>
+                    </h2>
                 </Tooltip>
                 <div className={'px-2 flex-row justify-between items-center flex h-[24px] w-full'}>
                     <div className='h-1 mr-4 w-full bg-gray-600'>

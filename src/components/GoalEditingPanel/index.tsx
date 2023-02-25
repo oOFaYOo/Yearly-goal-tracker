@@ -21,7 +21,7 @@ const GoalEditingPanel = ({data, setOpenState, theme}: IGoalEditingPanel) => {
             style={{color:theme === 'light'? 'black' : 'rgb(228 228 231)', background:theme === 'light'? 'rgb(245 245 245)' : 'rgb(38 38 38)'}}
         >
             <div className='flex justify-between'>
-                <p className='text-lg font-semibold text-center font-sans w-full p-2'>{data?.name}</p>
+                <h2 className='text-lg font-semibold text-center font-sans w-full p-2'>{data?.name}</h2>
             </div>
             <div className='flex justify-between items-center'>
                 <div className='h-[1px] w-[30%] bg-gray-500'/>
