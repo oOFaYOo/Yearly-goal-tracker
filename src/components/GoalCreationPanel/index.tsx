@@ -55,8 +55,7 @@ const GoalCreationPanel = ({setNeedUpdate, closeFunction, theme} : IGoalCreation
                 Steps to achieve
                 <div className='bg-neutral-500 border border-neutral-500 h-[1px] w-[30%]'/>
             </div>
-            <div className='flex item-center flex-row'>
-                <div className='pt-1.5'>
+            <div className='flex justify-center items-center flex-row'>
                     <Tooltip title={'Add new step'} arrow placement={'top'}>
                         <AddCircleOutlineIcon onClick={() => {
                             if (newStep !== '') {
@@ -68,7 +67,6 @@ const GoalCreationPanel = ({setNeedUpdate, closeFunction, theme} : IGoalCreation
                         }}
                         className='mr-2 hover:text-yellow-500 hover:cursor-pointer hover:scale-105 active:scale-100'/>
                     </Tooltip>
-                </div>
                 <input
                     className='rounded-lg shadow outline-none p-2 w-full'
                     style={{background:theme === 'light' ? '' : 'rgb(64 64 64 / 0.3)'}}
