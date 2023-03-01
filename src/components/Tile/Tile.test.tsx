@@ -38,7 +38,7 @@ it('Tile test', () => {
     const {container, rerender} = render(<Comp percent={100} theme={'light'} />)
     rerender(<Comp percent={80} theme={'light'} />)
     rerender(<Comp percent={30} theme={'dark'} />)
-    fireEvent.click(container.getElementsByClassName('text-gray-500/30 hover:text-rose-600 hover:scale-105 active:scale-100')[0]);
+    fireEvent.click(container.getElementsByClassName('text-neutral-500/30 hover:text-rose-600 hover:scale-105 active:scale-100')[0]);
     fireEvent.click(container.getElementsByClassName('w-full h-full flex justify-between flex-col items-center')[0]);
 
 })

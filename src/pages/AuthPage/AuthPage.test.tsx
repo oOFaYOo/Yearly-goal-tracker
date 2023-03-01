@@ -39,22 +39,22 @@ it('AuthPage test', async () => {
 
     const {container, rerender} = render(<Comp/>)
 
-    fireEvent.change(container.getElementsByClassName('rounded outline-none w-[70%] px-2 border-2 border-teal-500')[0], {target:{value:'1'}});
-    fireEvent.change(container.getElementsByClassName('rounded outline-none w-[70%] px-2 border-2 border-teal-500')[1], {target:{value:'1'}});
+    fireEvent.change(container.getElementsByClassName('rounded-md outline-none w-[70%] px-2 border-2 border-teal-500')[0], {target:{value:'1'}});
+    fireEvent.change(container.getElementsByClassName('rounded-md outline-none w-[70%] px-2 border-2 border-teal-500')[1], {target:{value:'1'}});
     fireEvent.click(screen.getByText("Log in"));
     jest.advanceTimersByTime(3000);
     fireEvent.click(screen.getByText("Sign up"));
-    fireEvent.change(container.getElementsByClassName('rounded outline-none w-[70%] px-2 border-2 border-teal-500')[0], {target:{value:'1'}});
-    fireEvent.change(container.getElementsByClassName('rounded outline-none w-[70%] px-2 border-2 border-teal-500')[1], {target:{value:'1'}});
+    fireEvent.change(container.getElementsByClassName('rounded-md outline-none w-[70%] px-2 border-2 border-teal-500')[0], {target:{value:'1'}});
+    fireEvent.change(container.getElementsByClassName('rounded-md outline-none w-[70%] px-2 border-2 border-teal-500')[1], {target:{value:'1'}});
     fireEvent.click(screen.getByText("Register"));
     jest.advanceTimersByTime(3000);
-    fireEvent.change(container.getElementsByClassName('rounded outline-none w-[70%] px-2 border-2 border-teal-500')[0], {target:{value:'1'}});
-    fireEvent.change(container.getElementsByClassName('rounded outline-none w-[70%] px-2 border-2 border-teal-500')[1], {target:{value:'1'}});
+    fireEvent.change(container.getElementsByClassName('rounded-md outline-none w-[70%] px-2 border-2 border-teal-500')[0], {target:{value:'1'}});
+    fireEvent.change(container.getElementsByClassName('rounded-md outline-none w-[70%] px-2 border-2 border-teal-500')[1], {target:{value:'1'}});
     fireEvent.click(screen.getByText("Register"));
     jest.advanceTimersByTime(3000);
     fireEvent.click(screen.getByText("Sign in"));
-    fireEvent.change(container.getElementsByClassName('rounded outline-none w-[70%] px-2 border-2 border-teal-500')[0], {target:{value:'1'}});
-    fireEvent.change(container.getElementsByClassName('rounded outline-none w-[70%] px-2 border-2 border-teal-500')[1], {target:{value:'1'}});
+    fireEvent.change(container.getElementsByClassName('rounded-md outline-none w-[70%] px-2 border-2 border-teal-500')[0], {target:{value:'1'}});
+    fireEvent.change(container.getElementsByClassName('rounded-md outline-none w-[70%] px-2 border-2 border-teal-500')[1], {target:{value:'1'}});
     fireEvent.click(screen.getByText("Log in"));
     jest.advanceTimersByTime(3000);
 
@@ -99,13 +99,13 @@ it('AuthPage test failed requests', async () => {
 
     const {container, rerender} = render(<Comp/>)
 
-    fireEvent.change(container.getElementsByClassName('rounded outline-none w-[70%] px-2 border-2 border-teal-500')[0], {target:{value:'1'}});
-    fireEvent.change(container.getElementsByClassName('rounded outline-none w-[70%] px-2 border-2 border-teal-500')[1], {target:{value:'1'}});
+    fireEvent.change(container.getElementsByClassName('rounded-md outline-none w-[70%] px-2 border-2 border-teal-500')[0], {target:{value:'1'}});
+    fireEvent.change(container.getElementsByClassName('rounded-md outline-none w-[70%] px-2 border-2 border-teal-500')[1], {target:{value:'1'}});
     fireEvent.click(screen.getByText("Log in"));
     jest.advanceTimersByTime(3000);
     fireEvent.click(screen.getByText("Sign up"));
-    fireEvent.change(container.getElementsByClassName('rounded outline-none w-[70%] px-2 border-2 border-teal-500')[0], {target:{value:'1'}});
-    fireEvent.change(container.getElementsByClassName('rounded outline-none w-[70%] px-2 border-2 border-teal-500')[1], {target:{value:'1'}});
+    fireEvent.change(container.getElementsByClassName('rounded-md outline-none w-[70%] px-2 border-2 border-teal-500')[0], {target:{value:'1'}});
+    fireEvent.change(container.getElementsByClassName('rounded-md outline-none w-[70%] px-2 border-2 border-teal-500')[1], {target:{value:'1'}});
     fireEvent.click(screen.getByText("Register"));
     jest.advanceTimersByTime(3000);
 

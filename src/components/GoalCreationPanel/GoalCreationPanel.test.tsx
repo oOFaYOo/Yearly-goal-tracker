@@ -37,13 +37,11 @@ it('GoalCreationPanel test', ()=>{
     fireEvent.change(screen.queryAllByPlaceholderText('Step...')[0], {target:{value: 'som'}});
     fireEvent.change(screen.queryAllByPlaceholderText('Step...')[0], {target:{value: ''}});
     fireEvent.invalid(screen.queryAllByPlaceholderText('Step...')[0]);
-    fireEvent.click(container.getElementsByClassName('mr-2 hover:text-rose-500 text-black/20 hover:cursor-pointer hover:scale-105 active:scale-100')[0]);
+    fireEvent.click(container.getElementsByClassName('text-neutral-300 mr-2 hover:text-rose-500 hover:cursor-pointer hover:scale-105 active:scale-100')[0]);
     fireEvent.click(screen.getByText('Add new goal'));
 
     rerender(<Comp theme={'dark'}/>)
-    fireEvent.change(screen.getByPlaceholderText('New step...'), {target:{value: 'some'}});
-    fireEvent.click(container.getElementsByClassName('mr-2 hover:text-yellow-500 hover:cursor-pointer hover:scale-105 active:scale-100')[0]);
-    fireEvent.click(container.getElementsByClassName('flex justify-center items-center z-10 bg-black/60 h-full w-full')[0]);
+    fireEvent.click(container.getElementsByClassName('flex justify-center items-center z-10 bg-black/70 h-full w-full')[0]);
 
     rerender(<Comp theme={'dark'}/>)
     fireEvent.change(screen.getByPlaceholderText('Goal...'), {target:{value: 'Goal name'}});

@@ -50,17 +50,21 @@ it('GoalEditingPanel test', ()=>{
     fireEvent.change(container.getElementsByClassName('underline p-2 w-full focus:border-teal-500 bg-white/0 outline-none rounded-lg border-2 border-teal-500/10')[0], {target:{value:'123'}});
     fireEvent.change(container.getElementsByClassName('p-2 w-full bg-white/0 focus:border-teal-500 outline-none rounded-lg border-2 border-teal-500/10')[0], {target:{value:'1234'}});
     fireEvent.click(container.getElementsByClassName('mr-2 text-green-600 text-black/20 hover:cursor-pointer hover:scale-105 active:scale-100')[0]);
-    fireEvent.click(container.getElementsByClassName('mr-2 hover:text-green-600 text-black/20 hover:cursor-pointer hover:scale-105 active:scale-100')[0]);
+    fireEvent.click(container.getElementsByClassName('mr-2 hover:text-green-600 hover:cursor-pointer hover:scale-105 active:scale-100')[0]);
     fireEvent.click(screen.getByText('Confirm'));
 
-    rerender(<Comp theme={'dark'}/>);
-    fireEvent.click(container.getElementsByClassName('flex justify-center items-center z-10 bg-black/60 h-full w-full')[0]);
+    rerender(<Comp theme={'light'}/>);
+    fireEvent.click(container.getElementsByClassName('flex justify-center items-center z-10 bg-black/70 h-full w-full')[0]);
+
+    rerender(<Comp theme={'light'}/>);
+    fireEvent.change(screen.getByPlaceholderText('New step...'), {target:{value: 'some'}});
+    fireEvent.click(container.getElementsByClassName('flex justify-center items-center z-10 bg-black/70 h-full w-full')[0]);
 
     rerender(<Comp theme={'light'}/>);
     fireEvent.change(screen.getByPlaceholderText('New step...'), {target:{value: 'some'}});
     fireEvent.click(container.getElementsByClassName('mr-2 hover:text-yellow-500 hover:cursor-pointer hover:scale-105 active:scale-100')[0]);
 
-    rerender(<Comp theme={'light'}/>);
+    rerender(<Comp theme={'dark'}/>);
     fireEvent.change(screen.getByPlaceholderText('New step...'), {target:{value: 'some'}});
     fireEvent.click(screen.getByText('Confirm'));
 

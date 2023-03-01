@@ -14,7 +14,7 @@ it('SortingPanel test', () => {
 
     fireEvent.mouseDown( getByTestId("select1").childNodes[0]);
     let listbox1 = within(getByRole('listbox'));
-    fireEvent.click(listbox1.getByText("100 ← 0"));
+    fireEvent.click(listbox1.getByText("100 → 0"));
 
     fireEvent.mouseDown( getByTestId("select2").childNodes[0]);
     let listbox2 = within(getByRole('listbox'));
@@ -23,6 +23,5 @@ it('SortingPanel test', () => {
     fireEvent.click( getByTestId("switch").childNodes[0]);
 
     rerender(<Comp theme={'dark'} />)
-
 
 })

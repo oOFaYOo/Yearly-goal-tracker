@@ -65,7 +65,7 @@ it('Main test', async () => {
 
     fireEvent.mouseDown(getByTestId("select1").childNodes[0]);
     let listbox1 = within(getByRole('listbox'));
-    fireEvent.click(listbox1.getByText("100 ← 0"));
+    fireEvent.click(listbox1.getByText("100 → 0"));
 
     fireEvent.mouseDown(getByTestId("select1").childNodes[0]);
     let listbox2 = within(getByRole('listbox'));
