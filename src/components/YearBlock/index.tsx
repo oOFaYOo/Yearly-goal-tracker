@@ -1,5 +1,5 @@
 import React from "react";
-import {IGoal, IYearBlock} from "../../types";
+import {IYearBlock} from "../../types";
 import Tile from "../Tile";
 
 function getPercent(arr: { name: string, state: boolean }[]) {
@@ -46,8 +46,6 @@ const YearBlock = (
         </>
 
     )
-
-
 }
 
 export default YearBlock;

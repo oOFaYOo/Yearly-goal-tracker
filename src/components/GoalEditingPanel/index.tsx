@@ -69,15 +69,13 @@ const GoalEditingPanel = ({data, setOpenState, theme}: IGoalEditingPanel) => {
                     {
                         steps?.map((v, i) => {
                             if (v.state) {
-                                return <div className='flex item-center flex-row'>
-                                    <div className='pt-1.5'>
+                                return <div className='flex items-center flex-row'>
                                         <CheckCircleOutlineIcon onClick={() => {
                                             const newSteps = [...steps];
                                             newSteps[i].state = false;
                                             setSteps(newSteps);
                                         }}
-                                            className='mr-2 text-green-600 text-black/20 hover:cursor-pointer hover:scale-105 active:scale-100'/>
-                                    </div>
+                                            className='mr-2 text-green-600 hover:cursor-pointer hover:scale-105 active:scale-100'/>
                                     <input value={v.name} onChange={(e) => {
                                         const newSteps = [...steps];
                                         newSteps[i].name = e.target.value;
@@ -89,17 +87,14 @@ const GoalEditingPanel = ({data, setOpenState, theme}: IGoalEditingPanel) => {
                                                underline p-2 w-full bg-white/0 outline-none rounded-lg border-2`}/>
                                 </div>
                             } else {
-                                return <div className='flex item-center flex-row'>
-                                    <div className='pt-1.5'>
+                                return <div className='flex items-center flex-row'>
                                         <PanoramaFishEyeRoundedIcon onClick={() => {
                                             const newSteps = [...steps];
                                             newSteps[i].state = true;
                                             setSteps(newSteps);
                                         }}
-                                             className='mr-2 hover:text-green-600 hover:cursor-pointer hover:scale-105 active:scale-100'
-                                             style={{color: theme === 'light' ? 'rgb(0 0 0 / 0.2)' : 'rgb(255 255 255 / 0.2)'}}
+                                             className={`${theme === 'light' ? 'text-neutral-400' : 'text-neutral-600'} mr-2 hover:text-green-600 hover:cursor-pointer hover:scale-105 active:scale-100`}
                                         />
-                                    </div>
                                     <input value={v.name} onChange={(e) => {
                                         const newSteps = [...steps];
                                         newSteps[i].name = e.target.value;

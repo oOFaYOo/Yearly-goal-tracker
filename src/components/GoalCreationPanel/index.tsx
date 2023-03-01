@@ -78,8 +78,7 @@ const GoalCreationPanel = ({setNeedUpdate, closeFunction, theme} : IGoalCreation
                 {
                     steps.map((v, i) => {
                         return (
-                            <div className='flex item-center flex-row' key={i}>
-                                <div className='pt-1.5'>
+                            <div className='flex items-center flex-row' key={i}>
                                     <DeleteOutlineIcon onClick={() => {
                                         const newSteps = [...steps];
                                         newSteps.splice(i, 1);
@@ -87,7 +86,6 @@ const GoalCreationPanel = ({setNeedUpdate, closeFunction, theme} : IGoalCreation
                                     }}
 
                                        className={`${theme === 'light' ? 'text-neutral-300' : 'text-neutral-500'} mr-2 hover:text-rose-500 hover:cursor-pointer hover:scale-105 active:scale-100`}/>
-                                </div>
                                 <input required onInvalid={(e) => {
                                     e.currentTarget.setCustomValidity("");
                                     if (!e.currentTarget.validity.valid) {
