@@ -60,7 +60,7 @@ const Tile = ({
                     </h2>
                 </Tooltip>
                 <div className={'px-2 flex-row justify-between items-center flex h-[24px] w-full'}>
-                    <div className='h-1 mr-4 w-full bg-gray-600'>
+                    <div className={`${theme === 'light' ? 'bg-neutral-300' : 'bg-neutral-700'} h-1 mr-4 w-full`}>
                         <div className={'h-full ' + percentColor(percent)} style={{width: `${percent}%`}}></div>
                     </div>
                     <p>{`${percent}%`}</p>

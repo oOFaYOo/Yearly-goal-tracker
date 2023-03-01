@@ -15,19 +15,19 @@ const AuthPage = ({setAuthState}: { setAuthState: React.Dispatch<React.SetStateA
 
     return (
         <div
-            className='bg-gray-50 styled_scrollbar flex justify-center flex-col items-center absolute overflow-y-auto h-[100vh] w-[100vw]'>
+            className='bg-neutral-100 styled_scrollbar flex justify-center flex-col items-center absolute overflow-y-auto h-[100vh] w-[100vw]'>
             <div
-                className='h-[50vh] w-[30vw] min-w-[300px] overflow-hidden min-h-[300px] max-w-[500px] max-h-[500px] shadow-md rounded-lg border-2 border-teal-500 flex flex-col items-center'>
+                className='h-[50vh] w-[30vw] bg-white/80 min-w-[300px] overflow-hidden min-h-[300px] max-w-[500px] max-h-[500px] shadow-md rounded-xl border-2 border-teal-500 flex flex-col items-center'>
                 <div className='w-full h-[36px]'>
                     <button
-                        className={action === 'auth' ? 'border-b-2 border-teal-500 w-[50%] h-full bg-teal-500' : 'border-b-2 hover:bg-white border-teal-500 w-[50%] h-full'}
+                        className={`${action === 'auth' ? 'bg-teal-500 text-white' : 'text-black hover:bg-white'} border-b-2 border-teal-500 w-[50%] h-full`}
                         onClick={() => {
                             setAction('auth');
                             setMessage({...message, text: ''})
                         }}>Sign in
                     </button>
                     <button
-                        className={action === 'reg' ? 'border-b-2 border-teal-500 w-[50%] h-full bg-teal-500' : 'border-b-2 hover:bg-white border-teal-500 w-[50%] h-full'}
+                        className={`${action === 'reg' ? 'bg-teal-500 text-white' : 'text-black hover:bg-white'} border-b-2 border-teal-500 w-[50%] h-full`}
                         onClick={() => {
                             setAction('reg');
                             setMessage({...message, text: ''})
@@ -66,20 +66,20 @@ const AuthPage = ({setAuthState}: { setAuthState: React.Dispatch<React.SetStateA
                     <div className='px-4 flex flex-row w-full justify-between'>
                         <label htmlFor={'login'}><p>Login</p></label>
                         <input id={'login'} name={'login'}
-                               className='rounded outline-none w-[70%] px-2 border-2 border-teal-500' type='text'
+                               className='rounded-md outline-none w-[70%] px-2 border-2 border-teal-500' type='text'
                                required/>
                     </div>
                     <div className='px-4 flex flex-row w-full justify-between'>
                         <label htmlFor={'password'}><p>Password</p></label>
                         <input id={'password'} name={'password'}
-                               className='rounded outline-none w-[70%] px-2 border-2 border-teal-500' type='password'
+                               className='rounded-md outline-none w-[70%] px-2 border-2 border-teal-500' type='password'
                                required/>
                     </div>
                     <button
-                        className='shadow-md hover:scale-105 active:scale-100 hover:brightness-110 rounded bg-teal-500 w-[100px] h-[36px]'
+                        className='shadow-md text-white hover:scale-105 active:scale-100 hover:brightness-110 rounded-lg bg-teal-500 w-[100px] h-[36px]'
                         type={"submit"}>{action === 'auth' ? 'Log in' : 'Register'}</button>
                 </form>
-                <button className='w-full h-[36px] border-t-2 border-teal-500 hover:bg-teal-500/30'
+                <button className='w-full h-[36px] hover:text-white border-t-2 border-teal-500 hover:bg-teal-500/60'
                         onClick={() => {
                             (
                                 async () => {

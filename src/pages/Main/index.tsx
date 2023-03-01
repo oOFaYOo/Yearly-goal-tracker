@@ -74,7 +74,7 @@ const Main = ({setIsLoggedIn}: { setIsLoggedIn: React.Dispatch<React.SetStateAct
     }
 
     if (!data) {
-        return <div className='justify-center items-center flex h-full w-full'>
+        return <div className={`${theme === 'light' ? 'bg-neutral-100' : 'bg-neutral-900'} justify-center items-center bg-neutral-100 flex h-full w-full`}>
             <CircularProgress/>
         </div>
     } else {
