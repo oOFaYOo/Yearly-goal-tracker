@@ -21,7 +21,7 @@ const Main = ({setIsLoggedIn}: { setIsLoggedIn: React.Dispatch<React.SetStateAct
     const [filtering, setFiltering] = useState<string>('not filtered');
     const [searchValue, setSearchValue] = useState('');
     const [needUpdate, setNeedUpdate] = useState(false);
-    const [theme, setTheme] = useState<'light' | 'dark'>('light')
+    const [theme, setTheme] = useState<'light' | 'dark'>(localStorage.theme ? localStorage.theme : 'light')
 
     const nav = useNavigate();
 

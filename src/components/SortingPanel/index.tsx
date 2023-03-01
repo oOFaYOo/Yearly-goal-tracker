@@ -13,9 +13,11 @@ const SortingPanel = ({
     return (
         <div className={'flex items-center justify-around relative w-full gap-2 h-full'}>
             <div className='flex flex-row items-center'><p>light</p>
-                <Switch color="default" data-testid={'switch'}
+                <Switch checked={localStorage.theme === 'dark'} color="default" data-testid={'switch'}
                         onChange={(e) => {
-                            setTheme(e.currentTarget.checked ? 'dark' : 'light');
+                            const theme = e.currentTarget.checked ? 'dark' : 'light';
+                            localStorage.setItem('theme', theme)
+                            setTheme(theme);
                         }}
                 />
                 <p>dark</p></div>
