@@ -29,9 +29,9 @@ const YearBlock = (
     return (
         <>
             <div className='my-2 flex flex-row justify-center items-center'>
-                <div className={`${theme === 'light' ? 'bg-neutral-400' : 'bg-neutral-600'} h-[1px] w-[40%]`}/>
-                <div className='mx-8'>{year}</div>
-                <div className={`${theme === 'light' ? 'bg-neutral-400' : 'bg-neutral-600'} h-[1px] w-[40%]`}/>
+                <div className={`${theme === 'light' ? 'bg-neutral-400 border-neutral-400' : 'bg-neutral-600 border-neutral-600'} h-[1px] border w-[45%]`}/>
+                <div className='text-neutral-500 mx-8'>{year}</div>
+                <div className={`${theme === 'light' ? 'bg-neutral-400 border-neutral-400' : 'bg-neutral-600 border-neutral-600'} border h-[1px] w-[45%]`}/>
             </div>
             <div className='p-6 flex flex-wrap gap-4 '>
                 {

@@ -17,15 +17,18 @@ const GoalEditingPanel = ({data, setOpenState, theme}: IGoalEditingPanel) => {
             setOpenState({open: false, data: undefined});
         }} className='flex justify-center items-center z-10 bg-black/70 h-full w-full'></div>
         <form
-            className={`${theme === 'light' ? 'bg-neutral-100 border-teal-500' : 'text-neutral-200 bg-neutral-800 border-neutral-700'} styled_scrollbar_hovered w-[35vw] absolute z-20 h-[80vh] max-h-[700px] border-r-[24px] min-w-[400px] 
-              rounded shadow-md flex flex-col pb-6 pt-12 px-4 gap-y-4`}>
+            className={`${theme === 'light'
+                ? 'bg-neutral-100 border-teal-500'
+                : 'text-neutral-200 bg-neutral-800 border-neutral-700'} 
+                  styled_scrollbar_hovered w-[35vw] absolute z-20 h-[80vh] max-h-[700px] border-r-[24px] min-w-[400px] 
+              rounded-xl shadow-md flex flex-col pb-6 pt-12 px-6 gap-y-4`}>
             <div className='flex justify-between'>
                 <h2 className='text-lg font-semibold text-center font-sans w-full p-2'>{data?.name}</h2>
             </div>
-            <div className='flex justify-between items-center'>
-                <div className='bg-neutral-500 h-[1px] w-[30%]'/>
+            <div className='flex justify-evenly items-center'>
+                <div className='bg-neutral-500 border border-neutral-500 h-[1px] w-[30%]'/>
                 Steps to achieve
-                <div className='bg-neutral-500 h-[1px] w-[30%]'/>
+                <div className='bg-neutral-500 border border-neutral-500 h-[1px] w-[30%]'/>
             </div>
             <div className='flex item-center flex-row'>
                 <div className='pt-1.5'>
@@ -43,7 +46,7 @@ const GoalEditingPanel = ({data, setOpenState, theme}: IGoalEditingPanel) => {
                     </Tooltip>
                 </div>
                 <input
-                    className='rounded-lg outline-none p-2 w-full'
+                    className='rounded-lg shadow outline-none p-2 w-full'
                     style={{background:theme === 'light' ? '' : 'rgb(64 64 64 / 0.3)'}}
                     value={newStep} type={'text'} name={'newStep'} placeholder={'New step...'}
                     onChange={(e) => setNewStep(e.target.value)}
@@ -101,8 +104,8 @@ const GoalEditingPanel = ({data, setOpenState, theme}: IGoalEditingPanel) => {
                 </div>
             }
             <div className='flex justify-center'>
-                <button className={`${theme === 'light' ? 'bg-teal-500 text-black' : 'text-neutral-200 bg-neutral-700'} 
-                hover:scale-105 active:scale-100 h-[40px] rounded w-[150px]`}
+                <button className={`${theme === 'light' ? 'bg-teal-500 text-white' : 'text-neutral-200 bg-neutral-700'} 
+                hover:scale-105 active:scale-100 h-[40px] shadow rounded-lg w-[150px]`}
                         onClick={(e) => {
                             (async () => {
                                 if (data && steps) {

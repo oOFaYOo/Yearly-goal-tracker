@@ -28,8 +28,8 @@ const SortingPanel = ({
                     data-testid="select1"
                     value={undefined}
                     label="Completed"
-                    sx={theme === 'dark' ? {color: 'rgb(156 163 175)'} : {}}
-                    className={theme === 'light' ? 'min-w-[70px]' : 'min-w-[70px] bg-neutral-700/30'}
+                    sx={theme === 'dark' ? {color: 'rgb(156 163 175)', height:'50px', borderRadius:'25px'} : {height:'50px', borderRadius:'25px'}}
+                    className={theme === 'light' ? 'min-w-[70px] bg-white shadow' : 'min-w-[70px] shadow bg-neutral-800'}
                     onChange={(e) => {
                         if (e.target.value !== undefined) setSorting(+(e.target.value))
                     }}
@@ -47,9 +47,9 @@ const SortingPanel = ({
                     id="demo-simple-select2"
                     data-testid="select2"
                     value={undefined}
-                    sx={theme === 'dark' ? {color: 'rgb(156 163 175)'} : {}}
+                    sx={theme === 'dark' ? {color: 'rgb(156 163 175)', height:'50px', borderRadius:'25px'} : {height:'50px', borderRadius:'25px'}}
                     label="Year"
-                    className={theme === 'light' ? 'min-w-[70px]' : 'min-w-[70px] bg-neutral-700/30'}
+                    className={theme === 'light' ? 'min-w-[70px] bg-white shadow' : 'min-w-[70px] bg-neutral-800 shadow'}
                     onChange={(e) => {
                         if (e.target.value !== undefined){
                             setFiltering(e.target.value)

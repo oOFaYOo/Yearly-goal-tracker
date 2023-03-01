@@ -31,3 +31,11 @@ body {
 .styled_scrollbar_hovered:hover .styled_scrollbar::-webkit-scrollbar-thumb {
     background-color: rgba(105, 105, 105, 0.5);
 }
+
+.MuiOutlinedInput-notchedOutline {
+    border: none !important;
+}
+
+.MuiSwitch-track {
+    background: #7f7f7f !important;
+}

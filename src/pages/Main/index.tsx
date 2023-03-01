@@ -93,13 +93,11 @@ const Main = ({setIsLoggedIn}: { setIsLoggedIn: React.Dispatch<React.SetStateAct
                         : null
                 }
                 <div
-                    style={{background: theme === 'light' ? 'rgb(250 250 250)' : 'rgb(19,19,19)',
-                        color: theme === 'light' ? '' : 'rgb(229 229 229)' }}
-                    className='styled_scrollbar absolute overflow-y-auto h-[100vh] w-[100vw]'>
+                    className={`${theme === 'light' ? 'bg-neutral-100' : 'text-neutral-200 bg-neutral-900'} styled_scrollbar absolute overflow-y-auto h-[100vh] w-[100vw]`}>
                     <header
-                        className={`${theme === 'light'? 'bg-white border-teal-500' : 'bg-neutral-800 border-black/0'} w-full shadow-md h-[5vh] flex justify-between items-center border-b-2`}>
+                        className={`${theme === 'light'? 'bg-white border-teal-400' : 'bg-neutral-800 border-black/0'} w-full shadow-md h-[46px] flex justify-between items-center border-b-2`}>
                         <h1 className='ml-4 text-xl font-sans font-semibold'>Yearly Goal Tracker</h1>
-                        <button className={`${theme === 'light'? 'border-teal-500' : 'border-neutral-600'} mr-4 px-2 border-l-2`}
+                        <button className={`${theme === 'light'? 'border-teal-400' : 'border-neutral-600'} mr-4 px-2 border-l-2`}
                                 onClick={() => {
                                     setIsLoggedIn({state: false});
                                     nav('/yearly_goal_tracker/auth');
@@ -114,13 +112,13 @@ const Main = ({setIsLoggedIn}: { setIsLoggedIn: React.Dispatch<React.SetStateAct
                         </div>
                         <div className='flex grow justify-center'>
                             <button onClick={() => setOpenGoalCreationPanel(true)}
-                                    className={`${theme === 'light' ? 'bg-teal-500' : 'bg-neutral-700'} shadow-md select-none font-mono rounded-full h-16 w-16 text-white hover:scale-105 active:scale-100 text-3xl`}>
+                                    className={`${theme === 'light' ? 'bg-teal-500' : 'bg-neutral-700'} shadow select-none font-mono rounded-full h-14 w-14 text-white hover:scale-105 active:scale-100 text-3xl`}>
                                 <p className='rotate-45'>✕︎</p>
                             </button>
                         </div>
                         <div className='flex justify-center relative items-center w-[40%] h-full'>
                             <input type={'text'} placeholder={'Search...'}
-                                   className={`${theme === 'light' ? 'border-teal-500' : 'border-black/0 shadow-md bg-neutral-800'} outline-none w-[60%] h-[70%] rounded-full align-middle px-4 border-2`}
+                                   className={`${theme === 'light' ? 'bg-white' : 'bg-neutral-800'} shadow outline-none w-[60%] h-[50px] rounded-full align-middle px-4`}
                                    onChange={(e) => {
                                        setSearchValue(e.currentTarget.value)
                                    }}
