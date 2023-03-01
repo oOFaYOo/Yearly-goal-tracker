@@ -13,9 +13,23 @@ const GoalEditingPanel = ({data, setOpenState, theme}: IGoalEditingPanel) => {
     const api = useContext(Api);
 
     return <div className='absolute h-[100vh] w-[100vw] flex justify-center items-center'>
-        <div onClick={() => {
-            setOpenState({open: false, data: undefined});
-        }} className='flex justify-center items-center z-10 bg-black/70 h-full w-full'></div>
+        <div
+            onClick={() => {
+                (async () => {
+                    if (data && steps) {
+                        const newSteps = [...steps!];
+                        if (newStep !== '') {
+                            newSteps.push({name: newStep, state: false});
+                        }
+                        const filteredSteps = newSteps.filter((v) => {
+                            return v.name !== ''
+                        });
+                        const response = await api.editGoal(data?.id, filteredSteps);
+                        setOpenState({open: false, data: undefined});
+                    }
+                })()
+            }}
+            className='flex justify-center items-center z-10 bg-black/70 h-full w-full'></div>
         <form
             className={`${theme === 'light'
                 ? 'bg-neutral-100 border-teal-500'
