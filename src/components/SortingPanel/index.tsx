@@ -36,7 +36,7 @@ const SortingPanel = ({
                 >
                     <MenuItem value={1}>not sorted</MenuItem>
                     <MenuItem value={2}>0 → 100</MenuItem>
-                    <MenuItem value={3}>100 ← 0</MenuItem>
+                    <MenuItem value={3}>100 → 0</MenuItem>
                 </Select>
             </FormControl>
             <FormControl className='w-[150px]'>
