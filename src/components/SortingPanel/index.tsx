@@ -1,14 +1,16 @@
 import React from "react";
 import {FormControl, InputLabel, MenuItem, Select, Switch} from "@mui/material";
 import {ISortingPanel} from "../../types";
+import {useDispatch} from "react-redux";
+import { setSorting, setFiltering } from '../../store/slice';
 
 const SortingPanel = ({
                           years,
-                          setSorting,
-                          setFiltering,
                           setTheme,
                           theme
                       }: ISortingPanel) => {
+
+    const dispatch = useDispatch();
 
     return (
         <div className={'flex items-center justify-around relative w-full gap-2 h-full'}>
@@ -33,7 +35,8 @@ const SortingPanel = ({
                     sx={theme === 'dark' ? {color: 'rgb(156 163 175)', height:'50px', borderRadius:'25px'} : {height:'50px', borderRadius:'25px'}}
                     className={theme === 'light' ? 'min-w-[70px] bg-white shadow' : 'min-w-[70px] shadow bg-neutral-800'}
                     onChange={(e) => {
-                        if (e.target.value !== undefined) setSorting(+(e.target.value))
+                        // if (e.target.value !== undefined) setSorting(+(e.target.value))
+                        if (e.target.value !== undefined) dispatch(setSorting(+(e.target.value)))
                     }}
                 >
                     <MenuItem value={1}>not sorted</MenuItem>
@@ -54,7 +57,7 @@ const SortingPanel = ({
                     className={theme === 'light' ? 'min-w-[70px] bg-white shadow' : 'min-w-[70px] bg-neutral-800 shadow'}
                     onChange={(e) => {
                         if (e.target.value !== undefined){
-                            setFiltering(e.target.value)
+                            dispatch(setFiltering(e.target.value))
                         }
                     }}
                 >

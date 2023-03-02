@@ -1,12 +1,16 @@
 import React from "react";
 import {fireEvent, render, screen, within} from "@testing-library/react";
 import SortingPanel from "./index";
+import {Provider} from "react-redux";
+import {store} from "../../store";
 
 it('SortingPanel test', () => {
 
     const Comp = ({theme}:{theme:'light'|'dark'}) => {
         return (
-            <SortingPanel theme={theme} setSorting={()=>{}} years={['2023']} setTheme={()=>{}} setFiltering={()=>{}} />
+            <Provider store={store}>
+            <SortingPanel theme={theme} years={['2023']} setTheme={()=>{}} />
+            </Provider>
         )
     }
 

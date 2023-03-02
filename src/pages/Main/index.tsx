@@ -7,23 +7,24 @@ import {IGoal} from "../../types";
 import {CircularProgress} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import YearBlock from "../../components/YearBlock";
+import {useSelector} from "react-redux";
+import {RootState} from "../../store";
 
 const Main = ({setIsLoggedIn}: { setIsLoggedIn: React.Dispatch<React.SetStateAction<{ state: boolean }>> }) => {
 
     const api = useContext(Api)
+    const nav = useNavigate();
+    const {sorting, filtering} = useSelector((state: RootState) => state.goalTracker);
+
     const [openGoalCreationPanel, setOpenGoalCreationPanel] = useState<boolean>(false);
     const [stateOfEditingPanel, setStateOfEditingPanel] = useState<{ open: boolean, data: IGoal | undefined }>({
         open: false,
         data: undefined
     });
     const [data, setData] = useState<{ dates: string[], goals: IGoal[] } | undefined>(undefined);
-    const [sorting, setSorting] = useState<number>(1);
-    const [filtering, setFiltering] = useState<string>('not filtered');
     const [searchValue, setSearchValue] = useState('');
     const [needUpdate, setNeedUpdate] = useState(false);
     const [theme, setTheme] = useState<'light' | 'dark'>(localStorage.theme ? localStorage.theme : 'light')
-
-    const nav = useNavigate();
 
     useEffect(() => {
         // if(!data) {
@@ -107,8 +108,7 @@ const Main = ({setIsLoggedIn}: { setIsLoggedIn: React.Dispatch<React.SetStateAct
                     </header>
                     <div className='flex justify-between items-center py-4 h-24'>
                         <div className='flex px-6 items-center justify-center relative w-[40%] h-full'>
-                            <SortingPanel theme={theme} setTheme={setTheme} setFiltering={setFiltering}
-                                          setSorting={setSorting} years={data.dates}/>
+                            <SortingPanel theme={theme} setTheme={setTheme} years={data.dates}/>
                         </div>
                         <div className='flex grow justify-center'>
                             <button onClick={() => setOpenGoalCreationPanel(true)}

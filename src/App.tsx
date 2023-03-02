@@ -5,6 +5,8 @@ import AuthPage from "./pages/AuthPage";
 import {Navigate, Route, Routes} from "react-router-dom";
 import {IApiClient} from "./types";
 import ApiClient from "./api/ApiClient";
+import {Provider} from "react-redux";
+import {store} from './store'
 
 const api = new FakeApiClient();
 // const api = new ApiClient();
@@ -15,6 +17,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState({state:false});
 
   return (
+      <Provider store={store}>
       <Api.Provider value={api}>
           <Routes>
               <Route path="/" element={<Navigate to={isLoggedIn.state ? "/yearly_goal_tracker/main" : "/yearly_goal_tracker/auth"}/>}/>
@@ -23,6 +26,7 @@ function App() {
               <Route path="/yearly_goal_tracker/auth" element={<AuthPage setAuthState={setIsLoggedIn} />}/>
           </Routes>
       </Api.Provider>
+      </Provider>
   );
 }
 

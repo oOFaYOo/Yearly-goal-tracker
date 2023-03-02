@@ -1,6 +1,10 @@
 import React from "react";
 import YearBlock from "./components/YearBlock";
 
+export interface IGoalTrackerState {
+    sorting: number;
+    filtering: string;
+}
 export interface IGoals {
     [key: string]:{
         [key: string]:IGoal
@@ -51,8 +55,7 @@ export interface IGoalEditingPanel  {
 
 export interface ISortingPanel  {
     years: string[],
-    setSorting: React.Dispatch<React.SetStateAction<number>>,
-    setFiltering: React.Dispatch<React.SetStateAction<string>>, theme: 'light' | 'dark',
+    theme: 'light' | 'dark',
     setTheme: React.Dispatch<React.SetStateAction<'light' | 'dark'>>
 }
 
