@@ -3,8 +3,9 @@ import {Tooltip} from "@mui/material";
 import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
 import {Api} from "../../App";
 import {ITile} from "../../types";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store";
+import {setNeedUpdate} from "../../store/slice";
 
 function percentColor(percent: number) {
     if (percent < 80) {
@@ -19,13 +20,13 @@ const Tile = ({
                   steps,
                   percent,
                   openEditingPanel,
-                  onUpdate,
                   id,
                   year,
               }: ITile) => {
 
     const api = useContext(Api);
-    const {theme} = useSelector((state: RootState) => state.goalTracker)
+    const {theme} = useSelector((state: RootState) => state.goalTracker);
+    const dispatch = useDispatch();
 
     return (
         <div
@@ -36,7 +37,7 @@ const Tile = ({
                 <Tooltip title={'Delete goal'} arrow placement={"top"}>
                     <CancelRoundedIcon onClick={async () => {
                         const response = await api.deleteGoal(id);
-                        if (response.isSuccessful) onUpdate(true);
+                        if (response.isSuccessful) dispatch(setNeedUpdate(true));
                     }
                     } className='text-neutral-500/30 hover:text-rose-600 hover:scale-105 active:scale-100'/>
                 </Tooltip>

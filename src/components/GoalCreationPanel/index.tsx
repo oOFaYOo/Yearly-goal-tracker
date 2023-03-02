@@ -4,15 +4,17 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import {Api} from "../../App";
 import {Tooltip} from "@mui/material";
 import {IGoalCreationPanel} from "../../types";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store";
+import {setNeedUpdate} from "../../store/slice";
 
-const GoalCreationPanel = ({setNeedUpdate, closeFunction} : IGoalCreationPanel) => {
+const GoalCreationPanel = ({closeFunction} : IGoalCreationPanel) => {
 
     const [steps, setSteps] = useState<string[]>([]);
     const [newStep, setNewStep] = useState<string>('');
     const api = useContext(Api);
     const {theme} = useSelector((state: RootState) => state.goalTracker)
+    const dispatch = useDispatch();
 
     return <div className='absolute h-[100vh] w-[100vw] flex justify-center items-center'>
         <div onClick={() => {
@@ -28,7 +30,7 @@ const GoalCreationPanel = ({setNeedUpdate, closeFunction} : IGoalCreationPanel) 
                         steps.push(newStepUnfinished);
                     }
                     const response = await api.addGoal(goal, year, steps);
-                    setNeedUpdate(true);
+                    dispatch(setNeedUpdate(true));
                     setSteps([]);
                     closeFunction(false);
                 }

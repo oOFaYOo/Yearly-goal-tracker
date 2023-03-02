@@ -7,14 +7,16 @@ import {IGoal} from "../../types";
 import {CircularProgress} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import YearBlock from "../../components/YearBlock";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store";
+import {setNeedUpdate, setSearch} from '../../store/slice'
 
 const Main = ({setIsLoggedIn}: { setIsLoggedIn: React.Dispatch<React.SetStateAction<{ state: boolean }>> }) => {
 
     const api = useContext(Api)
     const nav = useNavigate();
-    const {sorting, filtering, theme} = useSelector((state: RootState) => state.goalTracker);
+    const {sorting, filtering, theme, search, needUpdate} = useSelector((state: RootState) => state.goalTracker);
+    const dispatch = useDispatch();
 
     const [openGoalCreationPanel, setOpenGoalCreationPanel] = useState<boolean>(false);
     const [stateOfEditingPanel, setStateOfEditingPanel] = useState<{ open: boolean, data: IGoal | undefined }>({
@@ -22,8 +24,8 @@ const Main = ({setIsLoggedIn}: { setIsLoggedIn: React.Dispatch<React.SetStateAct
         data: undefined
     });
     const [data, setData] = useState<{ dates: string[], goals: IGoal[] } | undefined>(undefined);
-    const [searchValue, setSearchValue] = useState('');
-    const [needUpdate, setNeedUpdate] = useState(false);
+    // const [searchValue, setSearchValue] = useState('');
+    // const [needUpdate, setNeedUpdate] = useState(false);
 
     useEffect(() => {
         // if(!data) {
@@ -42,7 +44,7 @@ const Main = ({setIsLoggedIn}: { setIsLoggedIn: React.Dispatch<React.SetStateAct
                     dates[v.year] = v.year
                 })
                 setData({dates: Object.values(dates), goals: goals});
-                setNeedUpdate(false)
+                dispatch(setNeedUpdate(false));
             }
 
             setTimeout(() => setNeedUpdate(true), 300000)
@@ -58,7 +60,7 @@ const Main = ({setIsLoggedIn}: { setIsLoggedIn: React.Dispatch<React.SetStateAct
     let filteredDates: string[];
 
     if (data) {
-        filteredGoalsBySearch = data.goals.filter((goal) => goal.name.toLowerCase().includes(searchValue.toLowerCase()));
+        filteredGoalsBySearch = data.goals.filter((goal) => goal.name.toLowerCase().includes(search.toLowerCase()));
 
         if (filtering === 'not filtered') {
             filteredGoalsByYear = filteredGoalsBySearch
@@ -82,8 +84,7 @@ const Main = ({setIsLoggedIn}: { setIsLoggedIn: React.Dispatch<React.SetStateAct
             <>
                 {
                     openGoalCreationPanel
-                        ? <GoalCreationPanel setNeedUpdate={setNeedUpdate}
-                                             closeFunction={setOpenGoalCreationPanel}/>
+                        ? <GoalCreationPanel closeFunction={setOpenGoalCreationPanel}/>
                         : null
                 }
                 {
@@ -119,7 +120,7 @@ const Main = ({setIsLoggedIn}: { setIsLoggedIn: React.Dispatch<React.SetStateAct
                             <input type={'text'} placeholder={'Search...'}
                                    className={`${theme === 'light' ? 'bg-white' : 'bg-neutral-800'} shadow outline-none w-[60%] h-[50px] rounded-full align-middle px-4`}
                                    onChange={(e) => {
-                                       setSearchValue(e.currentTarget.value)
+                                       dispatch(setSearch(e.currentTarget.value))
                                    }}
                             />
                         </div>
@@ -133,7 +134,6 @@ const Main = ({setIsLoggedIn}: { setIsLoggedIn: React.Dispatch<React.SetStateAct
                                                           year={date}
                                                           sorting={sorting}
                                                           setStateOfEditingPanel={setStateOfEditingPanel}
-                                                          setNeedUpdate={setNeedUpdate}
                                                           goals={filteredGoalsByYear.filter((v) => v.year === date)}/>
                                     }) : null
                             )

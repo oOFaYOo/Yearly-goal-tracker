@@ -5,6 +5,8 @@ export interface IGoalTrackerState {
     sorting: number;
     filtering: string;
     theme: 'light' | 'dark';
+    search: string;
+    needUpdate: boolean;
 }
 export interface IGoals {
     [key: string]:{
@@ -43,7 +45,6 @@ export interface IApiClient {
 }
 
 export interface IGoalCreationPanel  {
-    setNeedUpdate: React.Dispatch<React.SetStateAction<boolean>>,
     closeFunction: React.Dispatch<React.SetStateAction<boolean>>
 }
 
@@ -57,7 +58,6 @@ export interface ISortingPanel  {
 }
 
 export interface ITile extends IGoal{
-    onUpdate: React.Dispatch<React.SetStateAction<boolean>>,
     percent: number,
     openEditingPanel: React.Dispatch<React.SetStateAction<{ open: boolean, data: IGoal | undefined }>>
 }
@@ -66,7 +66,6 @@ export interface IYearBlock {
     year: string,
     goals: IGoal[],
     sorting: number,
-    setNeedUpdate: React.Dispatch<React.SetStateAction<boolean>>,
     setStateOfEditingPanel:React.Dispatch<React.SetStateAction<{ open: boolean, data: IGoal | undefined }>>
 }
 

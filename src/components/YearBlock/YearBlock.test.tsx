@@ -13,7 +13,6 @@ it('YearBlock test', () => {
                       year={'2023'}
                       goals={[{id:'', year:'', name:'', steps:[{name:'', state:true}]},{id:'', year:'', name:'', steps:[{name:'', state:false}]}]}
                       sorting={sorting}
-                      setNeedUpdate={()=>{}}
                       setStateOfEditingPanel={()=>{}} />
             </Provider>
         )

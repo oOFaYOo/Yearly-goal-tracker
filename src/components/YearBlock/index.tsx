@@ -14,7 +14,7 @@ function getPercent(arr: { name: string, state: boolean }[]) {
 }
 
 const YearBlock = (
-    {year, goals, sorting, setNeedUpdate, setStateOfEditingPanel} : IYearBlock) => {
+    {year, goals, sorting, setStateOfEditingPanel} : IYearBlock) => {
 
     const {theme} = useSelector((state: RootState) => state.goalTracker)
     let sortedGoals;
@@ -39,7 +39,7 @@ const YearBlock = (
             <div className='p-6 flex flex-wrap gap-4 '>
                 {
                    sortedGoals.map((v, i)=>{
-                       return <Tile onUpdate={setNeedUpdate} key={i}
+                       return <Tile key={i}
                                     year={v.year} name={v.name} id={v.id}
                                     percent={getPercent(v.steps)} steps={v.steps}
                                     openEditingPanel={setStateOfEditingPanel}/>
