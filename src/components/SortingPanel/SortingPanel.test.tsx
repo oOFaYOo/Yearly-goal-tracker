@@ -9,7 +9,7 @@ it('SortingPanel test', () => {
     const Comp = ({theme}:{theme:'light'|'dark'}) => {
         return (
             <Provider store={store}>
-            <SortingPanel theme={theme} years={['2023']} setTheme={()=>{}} />
+            <SortingPanel years={['2023']} />
             </Provider>
         )
     }

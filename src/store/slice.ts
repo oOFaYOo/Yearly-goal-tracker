@@ -5,6 +5,7 @@ import {IGoalTrackerState} from "../types";
 const initialState: IGoalTrackerState = {
     sorting: 1,
     filtering: 'not filtered',
+    theme: localStorage.theme ? localStorage.theme : 'light',
 }
 
 export const goalTrackerSlice = createSlice({
@@ -17,10 +18,12 @@ export const goalTrackerSlice = createSlice({
         setFiltering: (state, action: PayloadAction<string>) => {
             state.filtering = action.payload
         },
-
+        setTheme : (state, action: PayloadAction<'light' | 'dark'>) => {
+            state.theme = action.payload
+        },
     },
 });
 
-export const { setSorting, setFiltering } = goalTrackerSlice.actions;
+export const { setSorting, setFiltering, setTheme } = goalTrackerSlice.actions;
 
 export default goalTrackerSlice.reducer;

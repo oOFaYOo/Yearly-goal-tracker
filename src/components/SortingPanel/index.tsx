@@ -1,16 +1,16 @@
 import React from "react";
 import {FormControl, InputLabel, MenuItem, Select, Switch} from "@mui/material";
 import {ISortingPanel} from "../../types";
-import {useDispatch} from "react-redux";
-import { setSorting, setFiltering } from '../../store/slice';
+import {useDispatch, useSelector} from "react-redux";
+import { setSorting, setFiltering, setTheme } from '../../store/slice';
+import {RootState} from "../../store";
 
 const SortingPanel = ({
                           years,
-                          setTheme,
-                          theme
                       }: ISortingPanel) => {
 
     const dispatch = useDispatch();
+    const {theme} = useSelector((state: RootState) => state.goalTracker)
 
     return (
         <div className={'flex items-center justify-around relative w-full gap-2 h-full'}>
@@ -19,7 +19,7 @@ const SortingPanel = ({
                         onChange={(e) => {
                             const theme = e.currentTarget.checked ? 'dark' : 'light';
                             localStorage.setItem('theme', theme)
-                            setTheme(theme);
+                            dispatch(setTheme(theme));
                         }}
                 />
                 <p>dark</p></div>

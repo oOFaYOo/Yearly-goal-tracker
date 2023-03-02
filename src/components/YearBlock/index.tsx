@@ -1,6 +1,8 @@
 import React from "react";
 import {IYearBlock} from "../../types";
 import Tile from "../Tile";
+import {useSelector} from "react-redux";
+import {RootState} from "../../store";
 
 function getPercent(arr: { name: string, state: boolean }[]) {
     if (arr.length === 0) return 0;
@@ -12,8 +14,9 @@ function getPercent(arr: { name: string, state: boolean }[]) {
 }
 
 const YearBlock = (
-    {year, goals, sorting, theme, setNeedUpdate, setStateOfEditingPanel} : IYearBlock) => {
+    {year, goals, sorting, setNeedUpdate, setStateOfEditingPanel} : IYearBlock) => {
 
+    const {theme} = useSelector((state: RootState) => state.goalTracker)
     let sortedGoals;
 
     if(sorting === 2){
@@ -36,7 +39,7 @@ const YearBlock = (
             <div className='p-6 flex flex-wrap gap-4 '>
                 {
                    sortedGoals.map((v, i)=>{
-                       return <Tile theme={theme} onUpdate={setNeedUpdate} key={i}
+                       return <Tile onUpdate={setNeedUpdate} key={i}
                                     year={v.year} name={v.name} id={v.id}
                                     percent={getPercent(v.steps)} steps={v.steps}
                                     openEditingPanel={setStateOfEditingPanel}/>

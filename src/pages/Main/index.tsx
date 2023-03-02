@@ -14,7 +14,7 @@ const Main = ({setIsLoggedIn}: { setIsLoggedIn: React.Dispatch<React.SetStateAct
 
     const api = useContext(Api)
     const nav = useNavigate();
-    const {sorting, filtering} = useSelector((state: RootState) => state.goalTracker);
+    const {sorting, filtering, theme} = useSelector((state: RootState) => state.goalTracker);
 
     const [openGoalCreationPanel, setOpenGoalCreationPanel] = useState<boolean>(false);
     const [stateOfEditingPanel, setStateOfEditingPanel] = useState<{ open: boolean, data: IGoal | undefined }>({
@@ -24,7 +24,6 @@ const Main = ({setIsLoggedIn}: { setIsLoggedIn: React.Dispatch<React.SetStateAct
     const [data, setData] = useState<{ dates: string[], goals: IGoal[] } | undefined>(undefined);
     const [searchValue, setSearchValue] = useState('');
     const [needUpdate, setNeedUpdate] = useState(false);
-    const [theme, setTheme] = useState<'light' | 'dark'>(localStorage.theme ? localStorage.theme : 'light')
 
     useEffect(() => {
         // if(!data) {
@@ -83,13 +82,13 @@ const Main = ({setIsLoggedIn}: { setIsLoggedIn: React.Dispatch<React.SetStateAct
             <>
                 {
                     openGoalCreationPanel
-                        ? <GoalCreationPanel theme={theme} setNeedUpdate={setNeedUpdate}
+                        ? <GoalCreationPanel setNeedUpdate={setNeedUpdate}
                                              closeFunction={setOpenGoalCreationPanel}/>
                         : null
                 }
                 {
                     stateOfEditingPanel.open
-                        ? <GoalEditingPanel theme={theme} data={stateOfEditingPanel.data}
+                        ? <GoalEditingPanel data={stateOfEditingPanel.data}
                                             setOpenState={setStateOfEditingPanel}/>
                         : null
                 }
@@ -108,7 +107,7 @@ const Main = ({setIsLoggedIn}: { setIsLoggedIn: React.Dispatch<React.SetStateAct
                     </header>
                     <div className='flex justify-between items-center py-4 h-24'>
                         <div className='flex px-6 items-center justify-center relative w-[40%] h-full'>
-                            <SortingPanel theme={theme} setTheme={setTheme} years={data.dates}/>
+                            <SortingPanel years={data.dates}/>
                         </div>
                         <div className='flex grow justify-center'>
                             <button onClick={() => setOpenGoalCreationPanel(true)}
@@ -133,7 +132,6 @@ const Main = ({setIsLoggedIn}: { setIsLoggedIn: React.Dispatch<React.SetStateAct
                                         return <YearBlock key={i}
                                                           year={date}
                                                           sorting={sorting}
-                                                          theme={theme}
                                                           setStateOfEditingPanel={setStateOfEditingPanel}
                                                           setNeedUpdate={setNeedUpdate}
                                                           goals={filteredGoalsByYear.filter((v) => v.year === date)}/>

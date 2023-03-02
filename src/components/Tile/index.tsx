@@ -3,6 +3,8 @@ import {Tooltip} from "@mui/material";
 import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
 import {Api} from "../../App";
 import {ITile} from "../../types";
+import {useSelector} from "react-redux";
+import {RootState} from "../../store";
 
 function percentColor(percent: number) {
     if (percent < 80) {
@@ -20,10 +22,10 @@ const Tile = ({
                   onUpdate,
                   id,
                   year,
-                  theme
               }: ITile) => {
 
     const api = useContext(Api);
+    const {theme} = useSelector((state: RootState) => state.goalTracker)
 
     return (
         <div

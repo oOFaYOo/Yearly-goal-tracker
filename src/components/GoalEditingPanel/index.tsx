@@ -5,12 +5,15 @@ import {IGoalEditingPanel} from "../../types";
 import {Api} from "../../App";
 import {Tooltip} from "@mui/material";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import {useSelector} from "react-redux";
+import {RootState} from "../../store";
 
-const GoalEditingPanel = ({data, setOpenState, theme}: IGoalEditingPanel) => {
+const GoalEditingPanel = ({data, setOpenState}: IGoalEditingPanel) => {
 
     const [steps, setSteps] = useState(data?.steps);
     const [newStep, setNewStep] = useState<string>('');
     const api = useContext(Api);
+    const {theme} = useSelector((state: RootState) => state.goalTracker)
 
     return <div className='absolute h-[100vh] w-[100vw] flex justify-center items-center'>
         <div
