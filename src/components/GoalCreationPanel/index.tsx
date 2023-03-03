@@ -3,22 +3,22 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import {Api} from "../../App";
 import {Tooltip} from "@mui/material";
-import {IGoalCreationPanel} from "../../types";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store";
-import {setNeedUpdate} from "../../store/slice";
+import {setNeedUpdate, setOpenGoalCreationPanel} from "../../store/slice";
 
-const GoalCreationPanel = ({closeFunction} : IGoalCreationPanel) => {
+const GoalCreationPanel = () => {
+
+    const dispatch = useDispatch();
+    const api = useContext(Api);
+    const {theme} = useSelector((state: RootState) => state.goalTracker);
 
     const [steps, setSteps] = useState<string[]>([]);
     const [newStep, setNewStep] = useState<string>('');
-    const api = useContext(Api);
-    const {theme} = useSelector((state: RootState) => state.goalTracker)
-    const dispatch = useDispatch();
 
-    return <div className='absolute h-[100vh] w-[100vw] flex justify-center items-center'>
+   return <div className='absolute h-[100vh] w-[100vw] flex justify-center items-center'>
         <div onClick={() => {
-            closeFunction(false)
+            dispatch(setOpenGoalCreationPanel(false))
         }} className='flex justify-center items-center z-10 bg-black/70 h-full w-full'></div>
         <form onSubmit={(e) => {
             (
@@ -32,7 +32,7 @@ const GoalCreationPanel = ({closeFunction} : IGoalCreationPanel) => {
                     const response = await api.addGoal(goal, year, steps);
                     dispatch(setNeedUpdate(true));
                     setSteps([]);
-                    closeFunction(false);
+                    dispatch(setOpenGoalCreationPanel(false));
                 }
             )()
             e.preventDefault();

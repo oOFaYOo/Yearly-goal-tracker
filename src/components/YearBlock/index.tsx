@@ -13,10 +13,10 @@ function getPercent(arr: { name: string, state: boolean }[]) {
     return Math.round((completed * 100) / arr.length);
 }
 
-const YearBlock = (
-    {year, goals, sorting, setStateOfEditingPanel} : IYearBlock) => {
+const YearBlock = ({year, goals} : IYearBlock) => {
 
-    const {theme} = useSelector((state: RootState) => state.goalTracker)
+    const {theme, sorting} = useSelector((state: RootState) => state.goalTracker)
+
     let sortedGoals;
 
     if(sorting === 2){
@@ -41,8 +41,7 @@ const YearBlock = (
                    sortedGoals.map((v, i)=>{
                        return <Tile key={i}
                                     year={v.year} name={v.name} id={v.id}
-                                    percent={getPercent(v.steps)} steps={v.steps}
-                                    openEditingPanel={setStateOfEditingPanel}/>
+                                    percent={getPercent(v.steps)} steps={v.steps}/>
                    })
                 }
             </div>

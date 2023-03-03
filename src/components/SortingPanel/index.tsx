@@ -5,9 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import { setSorting, setFiltering, setTheme } from '../../store/slice';
 import {RootState} from "../../store";
 
-const SortingPanel = ({
-                          years,
-                      }: ISortingPanel) => {
+const SortingPanel = ({ years }: ISortingPanel) => {
 
     const dispatch = useDispatch();
     const {theme} = useSelector((state: RootState) => state.goalTracker)
@@ -35,7 +33,6 @@ const SortingPanel = ({
                     sx={theme === 'dark' ? {color: 'rgb(156 163 175)', height:'50px', borderRadius:'25px'} : {height:'50px', borderRadius:'25px'}}
                     className={theme === 'light' ? 'min-w-[70px] bg-white shadow' : 'min-w-[70px] shadow bg-neutral-800'}
                     onChange={(e) => {
-                        // if (e.target.value !== undefined) setSorting(+(e.target.value))
                         if (e.target.value !== undefined) dispatch(setSorting(+(e.target.value)))
                     }}
                 >

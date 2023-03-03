@@ -1,5 +1,3 @@
-import React from "react";
-import YearBlock from "./components/YearBlock";
 
 export interface IGoalTrackerState {
     sorting: number;
@@ -7,6 +5,8 @@ export interface IGoalTrackerState {
     theme: 'light' | 'dark';
     search: string;
     needUpdate: boolean;
+    openGoalCreationPanel: boolean;
+    stateOfEditingPanel: { open: boolean, data: IGoal | undefined };
 }
 export interface IGoals {
     [key: string]:{
@@ -44,28 +44,16 @@ export interface IApiClient {
     signUp(login: string, password: string) : Promise<IApiClientResult<string>>;
 }
 
-export interface IGoalCreationPanel  {
-    closeFunction: React.Dispatch<React.SetStateAction<boolean>>
-}
-
-export interface IGoalEditingPanel  {
-    data: IGoal | undefined,
-    setOpenState: React.Dispatch<React.SetStateAction<{ open: boolean, data: IGoal | undefined }>>
-}
-
 export interface ISortingPanel  {
     years: string[]
 }
 
 export interface ITile extends IGoal{
-    percent: number,
-    openEditingPanel: React.Dispatch<React.SetStateAction<{ open: boolean, data: IGoal | undefined }>>
+    percent: number
 }
 
 export interface IYearBlock {
     year: string,
-    goals: IGoal[],
-    sorting: number,
-    setStateOfEditingPanel:React.Dispatch<React.SetStateAction<{ open: boolean, data: IGoal | undefined }>>
+    goals: IGoal[]
 }
 

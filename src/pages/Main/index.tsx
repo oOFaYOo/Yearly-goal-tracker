@@ -9,26 +9,24 @@ import {useNavigate} from "react-router-dom";
 import YearBlock from "../../components/YearBlock";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store";
-import {setNeedUpdate, setSearch} from '../../store/slice'
+import {setNeedUpdate, setSearch, setOpenGoalCreationPanel} from '../../store/slice'
 
 const Main = ({setIsLoggedIn}: { setIsLoggedIn: React.Dispatch<React.SetStateAction<{ state: boolean }>> }) => {
 
     const api = useContext(Api)
     const nav = useNavigate();
-    const {sorting, filtering, theme, search, needUpdate} = useSelector((state: RootState) => state.goalTracker);
+    const {
+        filtering,
+        theme,
+        search,
+        needUpdate,
+        openGoalCreationPanel,
+        stateOfEditingPanel} = useSelector((state: RootState) => state.goalTracker);
     const dispatch = useDispatch();
 
-    const [openGoalCreationPanel, setOpenGoalCreationPanel] = useState<boolean>(false);
-    const [stateOfEditingPanel, setStateOfEditingPanel] = useState<{ open: boolean, data: IGoal | undefined }>({
-        open: false,
-        data: undefined
-    });
     const [data, setData] = useState<{ dates: string[], goals: IGoal[] } | undefined>(undefined);
-    // const [searchValue, setSearchValue] = useState('');
-    // const [needUpdate, setNeedUpdate] = useState(false);
 
     useEffect(() => {
-        // if(!data) {
         (async () => {
             let response = await api.getGoals();
 
@@ -50,7 +48,6 @@ const Main = ({setIsLoggedIn}: { setIsLoggedIn: React.Dispatch<React.SetStateAct
             setTimeout(() => setNeedUpdate(true), 300000)
 
         })()
-        // }
     }, [needUpdate]);
 
 
@@ -84,13 +81,12 @@ const Main = ({setIsLoggedIn}: { setIsLoggedIn: React.Dispatch<React.SetStateAct
             <>
                 {
                     openGoalCreationPanel
-                        ? <GoalCreationPanel closeFunction={setOpenGoalCreationPanel}/>
+                        ? <GoalCreationPanel />
                         : null
                 }
                 {
                     stateOfEditingPanel.open
-                        ? <GoalEditingPanel data={stateOfEditingPanel.data}
-                                            setOpenState={setStateOfEditingPanel}/>
+                        ? <GoalEditingPanel />
                         : null
                 }
                 <div
@@ -111,7 +107,7 @@ const Main = ({setIsLoggedIn}: { setIsLoggedIn: React.Dispatch<React.SetStateAct
                             <SortingPanel years={data.dates}/>
                         </div>
                         <div className='flex grow justify-center'>
-                            <button onClick={() => setOpenGoalCreationPanel(true)}
+                            <button onClick={() => dispatch(setOpenGoalCreationPanel(true))}
                                     className={`${theme === 'light' ? 'bg-teal-500' : 'bg-neutral-700'} shadow select-none font-mono rounded-full h-14 w-14 text-white hover:scale-105 active:scale-100 text-3xl`}>
                                 <p className='rotate-45'>✕︎</p>
                             </button>
@@ -132,8 +128,6 @@ const Main = ({setIsLoggedIn}: { setIsLoggedIn: React.Dispatch<React.SetStateAct
                                     filteredDates!.map((date, i) => {
                                         return <YearBlock key={i}
                                                           year={date}
-                                                          sorting={sorting}
-                                                          setStateOfEditingPanel={setStateOfEditingPanel}
                                                           goals={filteredGoalsByYear.filter((v) => v.year === date)}/>
                                     }) : null
                             )

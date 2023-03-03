@@ -30,8 +30,7 @@ it('Tile test', () => {
                   year={'2023'}
                   id={'123'}
                   percent={percent}
-                  steps={[{name:'name', state:true}, {name:'name', state:false}]}
-                  openEditingPanel={()=>{}}/>
+                  steps={[{name:'name', state:true}, {name:'name', state:false}]}/>
             </Api.Provider>
             </Provider>
         )

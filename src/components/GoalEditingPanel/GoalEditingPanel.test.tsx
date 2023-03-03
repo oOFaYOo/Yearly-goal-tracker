@@ -43,7 +43,7 @@ it('GoalEditingPanel test', ()=>{
                 signUp: jest.fn(),
             }
             }>
-                 <GoalEditingPanel data={someGoal} setOpenState={()=>{}} />
+                 <GoalEditingPanel />
             </Api.Provider>
             </Provider>
         )

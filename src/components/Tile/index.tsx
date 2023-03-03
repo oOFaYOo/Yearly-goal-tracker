@@ -5,7 +5,7 @@ import {Api} from "../../App";
 import {ITile} from "../../types";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store";
-import {setNeedUpdate} from "../../store/slice";
+import {setNeedUpdate, setStateOfEditingPanel} from "../../store/slice";
 
 function percentColor(percent: number) {
     if (percent < 80) {
@@ -19,7 +19,6 @@ const Tile = ({
                   name,
                   steps,
                   percent,
-                  openEditingPanel,
                   id,
                   year,
               }: ITile) => {
@@ -43,14 +42,14 @@ const Tile = ({
                 </Tooltip>
             </div>
             <div className='w-full h-full flex justify-between flex-col items-center' onClick={
-                () => openEditingPanel({
+                () => dispatch(setStateOfEditingPanel({
                     open: true, data: {
                         id: id,
                         year: year,
                         name: name,
                         steps: steps
                     }
-                })
+                }))
             }>
                 <Tooltip title={name} arrow placement={"top"}>
                     <h2 style={{

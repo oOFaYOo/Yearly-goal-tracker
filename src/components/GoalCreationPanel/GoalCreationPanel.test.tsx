@@ -26,7 +26,7 @@ it('GoalCreationPanel test', ()=>{
                 signUp: jest.fn(),
             }
             }>
-                <GoalCreationPanel closeFunction={()=>{}} />
+                <GoalCreationPanel />
             </Api.Provider>
             </Provider>
         )
