@@ -4,6 +4,8 @@ import {Api} from "../../App";
 import {fireEvent, render, screen, within} from "@testing-library/react";
 import 'regenerator-runtime/runtime';
 import {MemoryRouter} from "react-router-dom";
+import {Provider} from "react-redux";
+import {store} from "../../store";
 
 it('Main test', async () => {
 
@@ -11,6 +13,7 @@ it('Main test', async () => {
 
     const Comp = () => {
         return (
+            <Provider store={store}>
             <MemoryRouter>
                 <Api.Provider value={{
                     getGoals: jest.fn().mockImplementation(() => {
@@ -55,6 +58,7 @@ it('Main test', async () => {
                     }}/>
                 </Api.Provider>
             </MemoryRouter>
+            </Provider>
         )
     }
 
@@ -63,23 +67,15 @@ it('Main test', async () => {
     await Promise.resolve();
     rerender(<Comp/>)
 
-    fireEvent.mouseDown(getByTestId("select1").childNodes[0]);
-    let listbox1 = within(getByRole('listbox'));
-    fireEvent.click(listbox1.getByText("100 → 0"));
-
-    fireEvent.mouseDown(getByTestId("select1").childNodes[0]);
-    let listbox2 = within(getByRole('listbox'));
-    fireEvent.click(listbox2.getByText("0 → 100"));
+    fireEvent.click(container.getElementsByClassName('bg-teal-500 shadow select-none font-mono rounded-full h-14 w-14 text-white hover:scale-105 active:scale-100 text-3xl')[0]);
+    rerender(<Comp/>)
 
     fireEvent.change(screen.getByPlaceholderText('Search...'), {target: {value: 'Some'}});
-    fireEvent.click(screen.getByText('✕︎'));
     rerender(<Comp/>)
-    fireEvent.click(container.getElementsByClassName('w-full h-full flex justify-between flex-col items-center')[0]);
-    rerender(<Comp/>)
-    fireEvent.click(getByTestId("switch").childNodes[0]);
 
-    jest.advanceTimersByTime(300000);
-    fireEvent.click(screen.getByText('Log out'));
+    fireEvent.click(container.getElementsByClassName('border-teal-400 mr-4 px-2 border-l-2')[0]);
+    rerender(<Comp/>)
+
 })
 
 it('Main test failed request', async () => {

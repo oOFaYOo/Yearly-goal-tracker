@@ -6,7 +6,7 @@ import {store} from "../../store";
 
 it('YearBlock test', () => {
 
-    const Comp = ({sorting}:{sorting: number}) => {
+    const Comp = () => {
         return (
             <Provider store={store}>
                 <YearBlock
@@ -17,7 +17,6 @@ it('YearBlock test', () => {
         )
     }
 
-    const {container, rerender} = render(<Comp sorting={1} />)
-    rerender(<Comp sorting={2} />)
-    rerender(<Comp sorting={3} />)
+    const {container, rerender} = render(<Comp />)
+
 })
