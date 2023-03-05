@@ -16,5 +16,3 @@ export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
         preloadedState
     })
 }
-
-export type AppStore = ReturnType<typeof setupStore>
