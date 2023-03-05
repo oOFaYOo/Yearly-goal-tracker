@@ -5,6 +5,8 @@ If you are too lazy to register and set goals, use the "Demo user" button on the
 Using: React, TypeScript, Tailwind, React Testing Library, Jest, Material UI.  
 Tested only on Google Chrome.
 
+First time using Redux Toolkit
+
 ### Hosted instance:
 https://yearly-goal-tracker.vercel.app/yearly_goal_tracker/auth
 
