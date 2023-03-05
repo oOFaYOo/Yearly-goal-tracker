@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import {IGoal, IGoalTrackerState} from "../types";
 
-const initialState: IGoalTrackerState = {
+export const initialState: IGoalTrackerState = {
     sorting: 1,
     filtering: 'not filtered',
     theme: localStorage.theme ? localStorage.theme : 'light',
