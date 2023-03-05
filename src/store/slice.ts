@@ -13,7 +13,7 @@ export const initialState: IGoalTrackerState = {
         open: false,
         data: undefined
     },
-}
+};
 
 export const goalTrackerSlice = createSlice({
     name: 'GoalTracker',

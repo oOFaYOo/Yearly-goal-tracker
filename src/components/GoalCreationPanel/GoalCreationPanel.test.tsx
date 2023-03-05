@@ -2,14 +2,14 @@ import React from "react";
 import GoalCreationPanel from "./index";
 import {fireEvent, render, screen} from "@testing-library/react";
 import {Api} from '../../App'
-import {Provider} from "react-redux";
-import {store} from "../../store";
+import {TestSuit} from "../../test-utils";
+import {initialState} from "../../store/slice";
 
 it('GoalCreationPanel test', ()=>{
 
-    const Comp = () => {
+    const Comp = ({theme='light'}:{theme?:'light'|'dark'}) => {
         return (
-            <Provider store={store}>
+            TestSuit(
             <Api.Provider value={{
                 getGoals: jest.fn(),
                 deleteGoal: jest.fn(),
@@ -27,8 +27,8 @@ it('GoalCreationPanel test', ()=>{
             }
             }>
                 <GoalCreationPanel />
-            </Api.Provider>
-            </Provider>
+            </Api.Provider>,
+                {goalTracker:{...initialState, theme:theme}})
         )
     }
 
@@ -52,4 +52,5 @@ it('GoalCreationPanel test', ()=>{
     fireEvent.change(screen.getByPlaceholderText('New step...'), {target:{value: 'some'}});
     fireEvent.click(screen.getByText('Add new goal'));
 
+    rerender(<Comp theme={'dark'} />)
 })
