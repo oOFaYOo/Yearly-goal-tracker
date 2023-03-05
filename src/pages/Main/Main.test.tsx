@@ -4,24 +4,25 @@ import {Api} from "../../App";
 import {fireEvent, render, screen, within} from "@testing-library/react";
 import 'regenerator-runtime/runtime';
 import {MemoryRouter} from "react-router-dom";
-import {Provider} from "react-redux";
-import {store} from "../../store";
+import {TestSuit} from "../../test-utils";
+import {initialState} from "../../store/slice";
+import {IGoal} from "../../types";
 
 it('Main test', async () => {
 
-    jest.useFakeTimers();
-
-    const Comp = ({failRequest = true}:{failRequest?:boolean}) => {
+    const Comp = (
+        {filtering = 'not filtered', theme = 'light', stateOfEditingPanel = {open:false, data:undefined}}:
+        {filtering?:string, theme?: 'light' | 'dark', stateOfEditingPanel?:{open:boolean, data: IGoal | undefined}}) => {
         return (
-            <Provider store={store}>
+            TestSuit(
             <MemoryRouter>
                 <Api.Provider value={{
                     getGoals: jest.fn().mockImplementation(() => {
                         return Promise.resolve({
-                            isSuccessful: failRequest,
-                            isAuthorized: failRequest,
-                            statusCode: failRequest ? 200 : 404,
-                            result: failRequest ? {
+                            isSuccessful: true,
+                            isAuthorized: true,
+                            statusCode: 200,
+                            result: {
                                 ghdjmf: {
                                     year: '2023',
                                     id: 'ghdjmf',
@@ -44,7 +45,7 @@ it('Main test', async () => {
                                         name: 'Some 2',
                                         steps: []
                                     }
-                            } : undefined
+                            }
                         })
                     }),
                     deleteGoal: jest.fn(),
@@ -57,25 +58,25 @@ it('Main test', async () => {
                     <Main setIsLoggedIn={() => {
                     }}/>
                 </Api.Provider>
-            </MemoryRouter>
-            </Provider>
+            </MemoryRouter>, {goalTracker: {...initialState, theme:theme, filtering:filtering, stateOfEditingPanel:stateOfEditingPanel}})
         )
     }
 
-    const {container, rerender, getByTestId, getByRole} = render(<Comp/>)
-
+    const {container, rerender} = render(<Comp />)
     await Promise.resolve();
-    rerender(<Comp/>)
+    rerender(<Comp />)
+
+    rerender(<Comp filtering={'2023'}/>)
 
     fireEvent.click(container.getElementsByClassName('bg-teal-500 shadow select-none font-mono rounded-full h-14 w-14 text-white hover:scale-105 active:scale-100 text-3xl')[0]);
-    rerender(<Comp/>)
+    rerender(<Comp theme={'dark'}/>)
 
     fireEvent.change(screen.getByPlaceholderText('Search...'), {target: {value: 'Some'}});
-    rerender(<Comp/>)
+    rerender(<Comp />)
 
     fireEvent.click(container.getElementsByClassName('border-teal-400 mr-4 px-2 border-l-2')[0]);
-    rerender(<Comp/>)
+    rerender(<Comp />)
 
-    rerender(<Comp failRequest={false}/>)
+    rerender(<Comp stateOfEditingPanel={{open: true, data: undefined}}/>)
 
 })

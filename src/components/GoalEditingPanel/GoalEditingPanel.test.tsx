@@ -2,32 +2,34 @@ import React from "react";
 import {fireEvent, render, screen} from "@testing-library/react";
 import GoalEditingPanel from "./index";
 import {Api} from '../../App'
-import {Provider} from "react-redux";
-import {store} from "../../store";
 import {TestSuit} from "../../test-utils";
+import {initialState} from "../../store/slice";
 
 let someGoal = {
     id: '123',
-    year:'2023',
-    name:'123',
-    steps:[
-        { name:'1',
+    year: '2023',
+    name: '123',
+    steps: [
+        {
+            name: '1',
             state: false
         },
-        { name:'2',
+        {
+            name: '2',
             state: false
         },
-        { name:'3',
+        {
+            name: '3',
             state: true
         }
     ]
 };
 
-it('GoalEditingPanel test', ()=>{
+it('GoalEditingPanel test', () => {
 
-    const Comp = () => {
+    const Comp = ({theme='light'}:{theme?:'light'|'dark'}) => {
         return (
-            <Api.Provider value={{
+            TestSuit(<Api.Provider value={{
                 getGoals: jest.fn(),
                 deleteGoal: jest.fn(),
                 addGoal: jest.fn(),
@@ -43,38 +45,35 @@ it('GoalEditingPanel test', ()=>{
                 signUp: jest.fn(),
             }
             }>
-                 <GoalEditingPanel />
-            </Api.Provider>
+                <GoalEditingPanel/>
+            </Api.Provider>, {
+                goalTracker: {
+                    ...initialState,
+                    theme:theme,
+                    stateOfEditingPanel:{
+                        open:true,
+                        data: someGoal
+                    }
+                }
+            })
         )
     }
 
-    const {container, rerender} = render (TestSuit(<Comp />, {
-            goalTracker: {
-                sorting: 1,
-                filtering: 'not filtered',
-                theme: localStorage.theme ? localStorage.theme : 'light',
-                search: '',
-                needUpdate: false,
-                openGoalCreationPanel: false,
-                stateOfEditingPanel: {
-                    open: false,
-                    data: undefined
-                },
-            }
-    }))
+    const {container, rerender} = render(<Comp theme={'dark'}/>)
 
-    // // const {container, rerender} = render(<Comp />)
-    //
-    // fireEvent.change(screen.getByPlaceholderText('New step...'), {target:{value: 'some'}});
-    // fireEvent.click(screen.getByText('Confirm'));
-    // rerender(<Comp />);
-    //
-    // fireEvent.click(container.getElementsByClassName('flex justify-center items-center z-10 bg-black/70 h-full w-full')[0]);
-    // rerender(<Comp />);
-    //
-    // // fireEvent.change(screen.getByPlaceholderText('New step...'), {target:{value: 'some'}});
-    // // fireEvent.click(container.getElementsByClassName('mr-2 hover:text-yellow-500 hover:cursor-pointer hover:scale-105 active:scale-100')[0]);
-    // // fireEvent.click(container.getElementsByClassName('mr-2 text-green-600 hover:cursor-pointer hover:scale-105 active:scale-100')[0]);
-    // // fireEvent.click(container.getElementsByClassName('text-neutral-400 mr-2 hover:text-green-600 hover:cursor-pointer hover:scale-105 active:scale-100')[0]);
+
+    fireEvent.change(screen.getByPlaceholderText('New step...'), {target: {value: 'some'}});
+    fireEvent.click(screen.getByText('Confirm'));
+    rerender(<Comp/>);
+
+    fireEvent.click(container.getElementsByClassName('flex justify-center items-center z-10 bg-black/70 h-full w-full')[0]);
+    rerender(<Comp/>);
+
+    fireEvent.change(screen.getByPlaceholderText('New step...'), {target:{value: 'some'}});
+    fireEvent.click(container.getElementsByClassName('mr-2 hover:text-yellow-500 hover:cursor-pointer hover:scale-105 active:scale-100')[0]);
+    fireEvent.change(container.getElementsByClassName('focus:border-teal-500 border-teal-500/10 p-2 w-full bg-white/0 outline-none rounded-lg border-2')[0],{target:{value:'som'}});
+    fireEvent.click(container.getElementsByClassName('text-neutral-400 mr-2 hover:text-green-600 hover:cursor-pointer hover:scale-105 active:scale-100')[0]);
+    fireEvent.change(container.getElementsByClassName('focus:border-teal-500 border-teal-500/10 underline p-2 w-full bg-white/0 outline-none rounded-lg border-2')[0],{target:{value:'so'}});
+    fireEvent.click(container.getElementsByClassName('mr-2 text-green-600 hover:cursor-pointer hover:scale-105 active:scale-100')[0]);
 
 })
