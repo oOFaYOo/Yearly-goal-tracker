@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useMemo} from "react";
 import {IYearBlock} from "../../types";
 import Tile from "../Tile";
 import {useSelector} from "react-redux";
@@ -17,17 +17,17 @@ const YearBlock = ({year, goals} : IYearBlock) => {
 
     const {theme, sorting} = useSelector((state: RootState) => state.goalTracker)
 
-    let sortedGoals;
-
-    if(sorting === 2){
-        sortedGoals = goals.slice(0).sort((a, b) => {
-            return getPercent(a.steps) - getPercent(b.steps)
-        });
-    } else if(sorting === 3){
-        sortedGoals = goals.slice(0).sort((a, b) => {
-            return getPercent(b.steps) - getPercent(a.steps)
-        })
-    } else sortedGoals = goals;
+    const sortedGoals = useMemo(()=>{
+        if(sorting === 2){
+            return goals.slice(0).sort((a, b) => {
+                return getPercent(a.steps) - getPercent(b.steps)
+            });
+        } else if(sorting === 3){
+            return goals.slice(0).sort((a, b) => {
+                return getPercent(b.steps) - getPercent(a.steps)
+            })
+        } else return goals;
+    }, [sorting, goals]);
 
     return (
         <>

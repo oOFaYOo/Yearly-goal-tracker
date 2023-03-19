@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useMemo, useState} from 'react';
 import SortingPanel from "../../components/SortingPanel";
 import GoalCreationPanel from "../../components/GoalCreationPanel";
 import GoalEditingPanel from "../../components/GoalEditingPanel";
@@ -11,7 +11,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store";
 import {setNeedUpdate, setSearch, setOpenGoalCreationPanel} from '../../store/slice'
 
-const Main = ({setIsLoggedIn}: { setIsLoggedIn: React.Dispatch<React.SetStateAction<{ state: boolean }>> }) => {
+const Main = ({setIsLoggedIn}: { setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>> }) => {
 
     const api = useContext(Api)
     const nav = useNavigate();
@@ -31,7 +31,7 @@ const Main = ({setIsLoggedIn}: { setIsLoggedIn: React.Dispatch<React.SetStateAct
             let response = await api.getGoals();
 
             if (!response.isAuthorized) {
-                setIsLoggedIn({state: false});
+                setIsLoggedIn(false);
                 return;
             }
 
@@ -50,27 +50,37 @@ const Main = ({setIsLoggedIn}: { setIsLoggedIn: React.Dispatch<React.SetStateAct
         })()
     }, [needUpdate]);
 
-
-    let filteredGoalsBySearch: IGoal[];
-    let filteredGoalsByYear: IGoal[];
-    let datesOfFilteredGoalsByYear: { [key: string]: string } = {};
-    let filteredDates: string[];
-
-    if (data) {
-        filteredGoalsBySearch = data.goals.filter((goal) => goal.name.toLowerCase().includes(search.toLowerCase()));
-
-        if (filtering === 'not filtered') {
-            filteredGoalsByYear = filteredGoalsBySearch
-        } else {
-            filteredGoalsByYear = filteredGoalsBySearch.filter((v) => filtering === v.year);
+    const filteredGoalsBySearch = useMemo(()=>{
+        if (data) {
+            return data.goals.filter((goal) => goal.name.toLowerCase().includes(search.toLowerCase()));
         }
+    }, [search, data]);
 
-        filteredGoalsByYear.forEach((v) => {
-            datesOfFilteredGoalsByYear[v.year] = v.year
-        });
+    const filteredGoalsByYear = useMemo(()=>{
+        if(data){
+            if (filtering === 'not filtered') {
+                return filteredGoalsBySearch
+            } else {
+                return filteredGoalsBySearch!.filter((v) => filtering === v.year);
+            }
+        }
+    }, [filtering, filteredGoalsBySearch]);
 
-        filteredDates = Object.values(datesOfFilteredGoalsByYear).sort((a, b) => +b - (+a));
-    }
+    const datesOfFilteredGoalsByYear = useMemo(()=>{
+        const obj:{ [key: string]: string } = {};
+        if (data) {
+            filteredGoalsByYear!.forEach((v) => {
+                obj[v.year] = v.year
+            });
+        }
+        return obj;
+    }, [filteredGoalsByYear]);
+
+    const filteredDates = useMemo(()=>{
+        if (data) {
+            return Object.values(datesOfFilteredGoalsByYear).sort((a, b) => +b - (+a));
+        }
+    }, [datesOfFilteredGoalsByYear]);
 
     if (!data) {
         return <div className={`${theme === 'light' ? 'bg-neutral-100' : 'bg-neutral-900'} justify-center items-center bg-neutral-100 flex h-full w-full`}>
@@ -96,7 +106,7 @@ const Main = ({setIsLoggedIn}: { setIsLoggedIn: React.Dispatch<React.SetStateAct
                         <h1 className='ml-4 text-xl font-sans font-semibold'>Yearly Goal Tracker</h1>
                         <button className={`${theme === 'light'? 'border-teal-400' : 'border-neutral-600'} mr-4 px-2 border-l-2`}
                                 onClick={() => {
-                                    setIsLoggedIn({state: false});
+                                    setIsLoggedIn(false);
                                     nav('/yearly_goal_tracker/auth');
                                 }}
                         >Log out
@@ -128,7 +138,7 @@ const Main = ({setIsLoggedIn}: { setIsLoggedIn: React.Dispatch<React.SetStateAct
                                     filteredDates!.map((date, i) => {
                                         return <YearBlock key={i}
                                                           year={date}
-                                                          goals={filteredGoalsByYear.filter((v) => v.year === date)}/>
+                                                          goals={filteredGoalsByYear!.filter((v) => v.year === date)}/>
                                     }) : null
                             )
                             : null

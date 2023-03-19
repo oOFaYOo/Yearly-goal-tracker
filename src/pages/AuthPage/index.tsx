@@ -1,7 +1,7 @@
 import React, {useContext, useState} from "react";
 import {Api} from "../../App";
 
-const AuthPage = ({setAuthState}: { setAuthState: React.Dispatch<React.SetStateAction<{ state: boolean }>> }) => {
+const AuthPage = ({setAuthState}: { setAuthState: React.Dispatch<React.SetStateAction<boolean>> }) => {
 
     const [action, setAction] = useState<'auth' | 'reg'>('auth');
     const [message, setMessage] = useState<{ text: string, color?: 'red' | 'green' }>({text: '', color: 'red'});
@@ -43,10 +43,10 @@ const AuthPage = ({setAuthState}: { setAuthState: React.Dispatch<React.SetStateA
                                   const response = await api.signIn(login, password);
                                   if (response.isSuccessful && response.isAuthorized) {
                                       document.cookie = `session=${response.result}`;
-                                      setAuthState({state: true});
+                                      setAuthState(true);
                                   } else {
                                       setMessage({...message, text: response.result ?? ''});
-                                      setAuthState({state: false})
+                                      setAuthState(false)
                                   }
                               } else {
                                   const response = await api.signUp(login, password);
@@ -54,7 +54,7 @@ const AuthPage = ({setAuthState}: { setAuthState: React.Dispatch<React.SetStateA
                                       setMessage({text: 'Successfully registered', color: 'green'})
                                   } else {
                                       setMessage({...message, text: response.result ?? ''});
-                                      setAuthState({state: false})
+                                      setAuthState(false)
                                   }
                               }
                           })()
@@ -86,7 +86,7 @@ const AuthPage = ({setAuthState}: { setAuthState: React.Dispatch<React.SetStateA
                                     const response = await api.signIn('123', '123');
                                     if (response.isSuccessful && response.isAuthorized) {
                                         document.cookie = `session=${response.result}`;
-                                        setAuthState({state: true});
+                                        setAuthState(true);
                                     }
                                 }
                             )()
