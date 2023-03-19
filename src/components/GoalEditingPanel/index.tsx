@@ -1,12 +1,15 @@
 import React, {useContext, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import PanoramaFishEyeRoundedIcon from '@mui/icons-material/PanoramaFishEyeRounded';
-import {Api} from "../../App";
-import {Tooltip} from "@mui/material";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import {useDispatch, useSelector} from "react-redux";
+import {Tooltip} from "@mui/material";
+
 import {RootState} from "../../store";
 import {setStateOfEditingPanel} from "../../store/slice";
+
+import {Api} from "../../App";
 
 const GoalEditingPanel = () => {
 

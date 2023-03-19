@@ -1,8 +1,10 @@
 import React from "react";
-import {fireEvent, render, screen, within} from "@testing-library/react";
-import SortingPanel from "./index";
 import {Provider} from "react-redux";
+
+import {fireEvent, render, within} from "@testing-library/react";
+
 import {store} from "../../store";
+import SortingPanel from "./index";
 
 it('SortingPanel test', () => {
 
@@ -14,7 +16,7 @@ it('SortingPanel test', () => {
         )
     }
 
-    const {container, rerender, getByRole, getByTestId} = render(<Comp />)
+    const {getByRole, getByTestId} = render(<Comp />)
 
     fireEvent.mouseDown( getByTestId("select1").childNodes[0]);
     let listbox1 = within(getByRole('listbox'));

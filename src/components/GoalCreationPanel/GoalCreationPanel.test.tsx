@@ -1,9 +1,12 @@
 import React from "react";
-import GoalCreationPanel from "./index";
+
 import {fireEvent, render, screen} from "@testing-library/react";
-import {Api} from '../../App'
-import {TestSuit} from "../../test-utils";
+
 import {initialState} from "../../store/slice";
+
+import {TestSuit} from "../../test-utils";
+import {Api} from '../../App'
+import GoalCreationPanel from "./index";
 
 it('GoalCreationPanel test', ()=>{
 

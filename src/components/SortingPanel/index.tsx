@@ -1,9 +1,12 @@
 import React from "react";
-import {FormControl, InputLabel, MenuItem, Select, Switch} from "@mui/material";
-import {ISortingPanel} from "../../types";
 import {useDispatch, useSelector} from "react-redux";
+
+import {FormControl, InputLabel, MenuItem, Select, Switch} from "@mui/material";
+
 import { setSorting, setFiltering, setTheme } from '../../store/slice';
 import {RootState} from "../../store";
+
+import {ISortingPanel} from "../../types";
 
 const SortingPanel = ({ years }: ISortingPanel) => {
 

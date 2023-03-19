@@ -1,8 +1,10 @@
 import React from "react";
+
 import {render} from "@testing-library/react";
-import YearBlock from "./index";
-import {TestSuit} from "../../test-utils";
+
 import {initialState} from "../../store/slice";
+import {TestSuit} from "../../test-utils";
+import YearBlock from "./index";
 
 it('YearBlock test', () => {
 
@@ -22,7 +24,7 @@ it('YearBlock test', () => {
         )
     }
 
-    const {container, rerender} = render(<Comp sorting={1} />)
+    const {rerender} = render(<Comp sorting={1} />)
     rerender(<Comp sorting={2} theme={'dark'}/>)
     rerender(<Comp sorting={3}/>)
 })

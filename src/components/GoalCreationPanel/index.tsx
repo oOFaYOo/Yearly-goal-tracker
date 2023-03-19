@@ -1,11 +1,14 @@
 import React, {useContext, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import {Api} from "../../App";
 import {Tooltip} from "@mui/material";
-import {useDispatch, useSelector} from "react-redux";
+
 import {RootState} from "../../store";
 import {setNeedUpdate, setOpenGoalCreationPanel} from "../../store/slice";
+
+import {Api} from "../../App";
 
 const GoalCreationPanel = () => {
 

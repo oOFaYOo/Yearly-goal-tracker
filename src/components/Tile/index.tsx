@@ -1,11 +1,14 @@
 import React, {useContext} from "react";
+import {useDispatch, useSelector} from "react-redux";
+
 import {Tooltip} from "@mui/material";
 import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
-import {Api} from "../../App";
-import {ITile} from "../../types";
-import {useDispatch, useSelector} from "react-redux";
+
 import {RootState} from "../../store";
 import {setNeedUpdate, setStateOfEditingPanel} from "../../store/slice";
+
+import {Api} from "../../App";
+import {ITile} from "../../types";
 
 function percentColor(percent: number) {
     if (percent < 80) {

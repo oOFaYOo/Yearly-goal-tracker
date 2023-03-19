@@ -1,8 +1,10 @@
 import React, {useMemo} from "react";
+import {useSelector} from "react-redux";
+
+import {RootState} from "../../store";
+
 import {IYearBlock} from "../../types";
 import Tile from "../Tile";
-import {useSelector} from "react-redux";
-import {RootState} from "../../store";
 
 function getPercent(arr: { name: string, state: boolean }[]) {
     if (arr.length === 0) return 0;

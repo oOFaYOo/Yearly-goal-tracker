@@ -1,12 +1,14 @@
 import React from "react";
-import Main from "./index";
-import {Api} from "../../App";
-import {fireEvent, render, screen, within} from "@testing-library/react";
-import 'regenerator-runtime/runtime';
 import {MemoryRouter} from "react-router-dom";
-import {TestSuit} from "../../test-utils";
+import {fireEvent, render, screen} from "@testing-library/react";
+import 'regenerator-runtime/runtime';
+
 import {initialState} from "../../store/slice";
+import {TestSuit} from "../../test-utils";
+import {Api} from "../../App";
 import {IGoal} from "../../types";
+
+import Main from "./index";
 
 it('Main test', async () => {
 

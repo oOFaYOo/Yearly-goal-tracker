@@ -1,9 +1,11 @@
 import React from "react";
-import {fireEvent, render} from "@testing-library/react";
-import Tile from "./index";
-import {Api} from '../../App'
 import {Provider} from "react-redux";
+
+import {fireEvent, render} from "@testing-library/react";
+
+import {Api} from '../../App'
 import {store} from "../../store";
+import Tile from "./index";
 
 it('Tile test', () => {
 

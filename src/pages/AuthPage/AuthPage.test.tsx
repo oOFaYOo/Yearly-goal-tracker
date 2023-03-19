@@ -1,7 +1,8 @@
 import React from "react";
-import AuthPage from "./index";
 import {fireEvent, screen, render} from "@testing-library/react";
+
 import {Api} from "../../App";
+import AuthPage from "./index";
 
 it('AuthPage test', async () => {
 
@@ -97,7 +98,7 @@ it('AuthPage test failed requests', async () => {
         )
     }
 
-    const {container, rerender} = render(<Comp/>)
+    const {container} = render(<Comp/>)
 
     fireEvent.change(container.getElementsByClassName('rounded-md outline-none w-[70%] px-2 border-2 border-teal-500')[0], {target:{value:'1'}});
     fireEvent.change(container.getElementsByClassName('rounded-md outline-none w-[70%] px-2 border-2 border-teal-500')[1], {target:{value:'1'}});

@@ -1,15 +1,19 @@
 import React, {useContext, useEffect, useMemo, useState} from 'react';
+import {useNavigate} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+
+import {CircularProgress} from "@mui/material";
+
+import {RootState} from "../../store";
+import {setNeedUpdate, setSearch, setOpenGoalCreationPanel} from '../../store/slice'
+
+import {IGoal} from "../../types";
+import {Api} from "../../App";
+
 import SortingPanel from "../../components/SortingPanel";
 import GoalCreationPanel from "../../components/GoalCreationPanel";
 import GoalEditingPanel from "../../components/GoalEditingPanel";
-import {Api} from "../../App";
-import {IGoal} from "../../types";
-import {CircularProgress} from "@mui/material";
-import {useNavigate} from "react-router-dom";
 import YearBlock from "../../components/YearBlock";
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../store";
-import {setNeedUpdate, setSearch, setOpenGoalCreationPanel} from '../../store/slice'
 
 const Main = ({setIsLoggedIn}: { setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>> }) => {
 
