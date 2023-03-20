@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useCallback, useContext, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
@@ -20,7 +20,7 @@ const GoalEditingPanel = () => {
     const [steps, setSteps] = useState(stateOfEditingPanel.data?.steps);
     const [newStep, setNewStep] = useState<string>('');
 
-    const updateGoal = async () => {
+    const updateGoal = useCallback(async () => {
         if (stateOfEditingPanel.data && steps) {
             const newSteps = [...steps!];
             if (newStep !== '') {
@@ -32,7 +32,7 @@ const GoalEditingPanel = () => {
             const response = await api.editGoal(stateOfEditingPanel.data?.id, filteredSteps);
             dispatch(setStateOfEditingPanel({open: false, data: undefined}));
         }
-    };
+    }, [steps, newStep]) ;
 
     return <div className='absolute h-[100vh] w-[100vw] flex justify-center items-center'>
         <div

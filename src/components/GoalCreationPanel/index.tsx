@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {FormEvent, useCallback, useContext, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
@@ -19,25 +19,25 @@ const GoalCreationPanel = () => {
     const [steps, setSteps] = useState<string[]>([]);
     const [newStep, setNewStep] = useState<string>('');
 
+    const submit = useCallback(async (e:FormEvent<HTMLFormElement>) => {
+        const goal = (e.currentTarget.elements.namedItem('goal') as HTMLInputElement).value;
+        const year = (e.currentTarget.elements.namedItem('year') as HTMLInputElement).value;
+        const newStepUnfinished = (e.currentTarget.elements.namedItem('newStep') as HTMLInputElement).value;
+        if (newStepUnfinished !== '') {
+            steps.push(newStepUnfinished);
+        }
+        const response = await api.addGoal(goal, year, steps);
+        dispatch(setNeedUpdate(true));
+        setSteps([]);
+        dispatch(setOpenGoalCreationPanel(false));
+    },[steps]);
+
    return <div className='absolute h-[100vh] w-[100vw] flex justify-center items-center'>
         <div onClick={() => {
             dispatch(setOpenGoalCreationPanel(false))
         }} className='flex justify-center items-center z-10 bg-black/70 h-full w-full'></div>
         <form onSubmit={(e) => {
-            (
-                async () => {
-                    const goal = (e.currentTarget.elements.namedItem('goal') as HTMLInputElement).value;
-                    const year = (e.currentTarget.elements.namedItem('year') as HTMLInputElement).value;
-                    const newStepUnfinished = (e.currentTarget.elements.namedItem('newStep') as HTMLInputElement).value;
-                    if (newStepUnfinished !== '') {
-                        steps.push(newStepUnfinished);
-                    }
-                    const response = await api.addGoal(goal, year, steps);
-                    dispatch(setNeedUpdate(true));
-                    setSteps([]);
-                    dispatch(setOpenGoalCreationPanel(false));
-                }
-            )()
+            submit(e);
             e.preventDefault();
         }}
               className={`${theme === 'light' 
