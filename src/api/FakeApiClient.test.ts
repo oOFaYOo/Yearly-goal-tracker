@@ -12,7 +12,7 @@ it('FakeApiClient class test', async ()=>{
     const response7 = await api.signIn('123', '0');
     const response8 = await api.signUp('', '');
     const response9 = await api.signUp('123', '123');
-    document.cookie = 'session=; Max-Age=0';
+    document.cookie = 'session=demouser; max-age=0';
 })
 
 export {}

@@ -42,7 +42,7 @@ const AuthPage = ({setAuthState}: { setAuthState: React.Dispatch<React.SetStateA
                               if (action === 'auth') {
                                   const response = await api.signIn(login, password);
                                   if (response.isSuccessful && response.isAuthorized) {
-                                      document.cookie = `session=${response.result}`;
+                                      document.cookie = `session=${response.result}; max-age=3600000`;
                                       setAuthState(true);
                                   } else {
                                       setMessage({...message, text: response.result ?? ''});
@@ -85,7 +85,7 @@ const AuthPage = ({setAuthState}: { setAuthState: React.Dispatch<React.SetStateA
                                 async () => {
                                     const response = await api.signIn('123', '123');
                                     if (response.isSuccessful && response.isAuthorized) {
-                                        document.cookie = `session=${response.result}`;
+                                        document.cookie = `session=${response.result}; max-age=3600000`;
                                         setAuthState(true);
                                     }
                                 }
